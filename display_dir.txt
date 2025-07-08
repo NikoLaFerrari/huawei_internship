@@ -1,0 +1,1897 @@
+Directory tree for: /data/jagan
+├── Megatron-LM/
+│   ├── .git/
+│   │   ├── branches/
+│   │   ├── hooks/
+│   │   ├── info/
+│   │   ├── logs/
+│   │   │   ├── refs/
+│   │   │   │   ├── heads/
+│   │   │   │   ├── remotes/
+│   │   │   │   │   ├── origin/
+│   │   ├── objects/
+│   │   │   ├── info/
+│   │   │   ├── pack/
+│   │   ├── refs/
+│   │   │   ├── heads/
+│   │   │   ├── remotes/
+│   │   │   │   ├── origin/
+│   │   │   ├── tags/
+│   ├── .github/
+│   │   ├── ISSUE_TEMPLATE/
+│   │   ├── workflows/
+│   ├── docs/
+│   │   ├── source/
+│   │   │   ├── api-guide/
+│   │   │   ├── images/
+│   │   │   │   ├── context_parallel/
+│   │   │   │   ├── distrib_optimizer/
+│   │   │   ├── user-guide/
+│   ├── examples/
+│   │   ├── academic_paper_scripts/
+│   │   │   ├── detxoify_lm/
+│   │   │   │   ├── annotations/
+│   │   │   │   ├── self_generation/
+│   │   │   ├── msdp/
+│   │   │   ├── sc21/
+│   │   ├── bert/
+│   │   ├── gpt3/
+│   │   ├── inference/
+│   │   │   ├── gpt/
+│   │   │   ├── quantization/
+│   │   ├── mamba/
+│   │   ├── mixtral/
+│   │   ├── multimodal/
+│   │   │   ├── assets/
+│   │   ├── retro/
+│   │   ├── t5/
+│   ├── images/
+│   ├── tasks/
+│   │   ├── glue/
+│   │   ├── msdp/
+│   │   ├── orqa/
+│   │   │   ├── supervised/
+│   │   │   ├── unsupervised/
+│   │   ├── race/
+│   │   ├── vision/
+│   │   │   ├── classification/
+│   │   │   ├── segmentation/
+│   │   ├── zeroshot_gpt/
+│   ├── tests/
+│   │   ├── functional_tests/
+│   │   │   ├── jet_recipes/
+│   │   │   ├── python_test_utils/
+│   │   │   ├── shell_test_utils/
+│   │   │   ├── test_results/
+│   │   │   │   ├── jet/
+│   │   │   ├── test_scripts/
+│   │   │   │   ├── bert/
+│   │   │   │   ├── gpt3/
+│   │   │   │   ├── multimodal/
+│   │   │   │   ├── retro/
+│   │   │   │   ├── t5/
+│   │   ├── unit_tests/
+│   │   │   ├── data/
+│   │   │   ├── dist_checkpointing/
+│   │   │   │   ├── models/
+│   │   │   ├── distributed/
+│   │   │   ├── fusions/
+│   │   │   ├── inference/
+│   │   │   │   ├── engines/
+│   │   │   │   ├── model_inference_wrappers/
+│   │   │   │   │   ├── gpt/
+│   │   │   │   ├── text_generation_controllers/
+│   │   │   ├── models/
+│   │   │   ├── pipeline_parallel/
+│   │   │   ├── tensor_parallel/
+│   │   │   ├── transformer/
+│   │   │   │   ├── moe/
+│   ├── tools/
+│   │   ├── bert_embedding/
+│   │   ├── checkpoint/
+│   │   ├── openwebtext/
+│   │   ├── retro/
+│   │   │   ├── cli/
+│   │   │   ├── docker/
+│   │   │   ├── sft/
+│   │   │   ├── text_generation/
+├── MindSpeed/
+│   ├── .git/
+│   │   ├── branches/
+│   │   ├── hooks/
+│   │   ├── info/
+│   │   ├── logs/
+│   │   │   ├── refs/
+│   │   │   │   ├── heads/
+│   │   │   │   ├── remotes/
+│   │   │   │   │   ├── origin/
+│   │   ├── objects/
+│   │   │   ├── info/
+│   │   │   ├── pack/
+│   │   ├── refs/
+│   │   │   ├── heads/
+│   │   │   ├── remotes/
+│   │   │   │   ├── origin/
+│   │   │   ├── tags/
+│   ├── ci/
+│   ├── docs/
+│   │   ├── faq/
+│   │   ├── features/
+│   │   │   ├── deepspeed_moe/
+│   │   │   ├── megatron_moe/
+│   │   ├── ops/
+│   ├── mindspeed/
+│   │   ├── auto_tuning/
+│   │   │   ├── config/
+│   │   │   ├── module/
+│   │   │   │   ├── communication/
+│   │   │   │   ├── memory/
+│   │   │   │   ├── operator/
+│   │   │   │   ├── parse/
+│   │   │   │   │   ├── profiling_parse/
+│   │   │   │   ├── search/
+│   │   │   ├── utils/
+│   │   │   │   ├── runner/
+│   │   ├── core/
+│   │   │   ├── auto_parallel/
+│   │   │   │   ├── noise_predict_ckpt/
+│   │   │   ├── context_parallel/
+│   │   │   │   ├── unaligned_cp/
+│   │   │   ├── data_parallel/
+│   │   │   ├── datasets/
+│   │   │   ├── distributed/
+│   │   │   │   ├── layerzero/
+│   │   │   │   │   ├── comm/
+│   │   │   │   │   ├── debug/
+│   │   │   │   │   ├── megatron_adaptor/
+│   │   │   │   │   │   ├── optimizer/
+│   │   │   │   │   ├── runtime/
+│   │   │   │   │   ├── state/
+│   │   │   │   │   │   ├── scripts/
+│   │   │   │   │   ├── zero3/
+│   │   │   ├── fusions/
+│   │   │   ├── memory/
+│   │   │   │   ├── adaptive_memory/
+│   │   │   │   ├── adaptive_recomputing/
+│   │   │   │   ├── auto_pipeline/
+│   │   │   │   ├── memory_fragmentation/
+│   │   │   │   ├── smart_swap/
+│   │   │   ├── models/
+│   │   │   │   ├── common/
+│   │   │   │   │   ├── embeddings/
+│   │   │   │   ├── gpt/
+│   │   │   ├── performance/
+│   │   │   │   ├── auto_pipeline_perf/
+│   │   │   ├── pipeline_parallel/
+│   │   │   ├── tensor_parallel/
+│   │   │   │   ├── ascend_turbo/
+│   │   │   │   ├── lcal_coc/
+│   │   │   │   ├── tp_2d/
+│   │   │   │   ├── unaligned_layers/
+│   │   │   ├── transformer/
+│   │   │   │   ├── custom_layers/
+│   │   │   │   ├── moe/
+│   │   │   │   │   ├── tp_2d/
+│   │   ├── features_manager/
+│   │   │   ├── functional/
+│   │   │   ├── tensor_parallel/
+│   │   ├── functional/
+│   │   │   ├── profiler/
+│   │   ├── model/
+│   │   ├── moe/
+│   │   │   ├── ampipe/
+│   │   ├── multi_modal/
+│   │   │   ├── conv3d/
+│   │   ├── op_builder/
+│   │   ├── ops/
+│   │   │   ├── csrc/
+│   │   │   │   ├── algorithm/
+│   │   │   │   │   ├── adaptive_cp/
+│   │   │   │   ├── atb/
+│   │   │   │   │   ├── inc/
+│   │   │   │   │   ├── utils/
+│   │   │   │   ├── cann/
+│   │   │   │   │   ├── inc/
+│   │   │   │   ├── flop_counter/
+│   │   │   │   ├── pluggable_allocator/
+│   │   │   │   │   ├── adaptive_recomputing/
+│   │   │   │   │   ├── memory_fragmentation/
+│   │   │   │   │   ├── smart_swap/
+│   │   ├── optimizer/
+│   │   ├── run/
+│   │   ├── tokenizer/
+│   ├── sources/
+│   │   ├── images/
+│   ├── tests_extend/
+│   │   ├── model_tests/
+│   │   │   ├── benchmark_model/
+│   │   │   │   ├── gpt_175b/
+│   │   │   │   ├── gpt_moe/
+│   │   │   │   ├── llama2/
+│   │   │   ├── mfu_model/
+│   │   │   ├── perf_model/
+│   │   │   │   ├── gpt_175b/
+│   │   │   │   ├── gpt_moe/
+│   │   │   │   ├── llama2/
+│   │   ├── system_tests/
+│   │   │   ├── core_model/
+│   │   │   ├── feature_precision_guarding/
+│   │   │   ├── feature_tests/
+│   │   │   ├── gpt/
+│   │   │   ├── llama2/
+│   │   │   ├── llama3/
+│   │   │   ├── mixtral/
+│   │   │   ├── multi_modal/
+│   │   │   │   ├── multi_parameter_pipeline/
+│   │   │   ├── opensora1.0/
+│   │   │   ├── yaml_args_example/
+│   │   ├── tools/
+│   │   ├── unit_tests/
+│   │   │   ├── features/
+│   │   │   │   ├── activation_function_recomputing/
+│   │   │   │   ├── adaptive_memory/
+│   │   │   │   ├── adaptive_recomputing/
+│   │   │   │   ├── algorithm/
+│   │   │   │   ├── ampipe/
+│   │   │   │   ├── mc2/
+│   │   │   │   ├── memory_fragmentation/
+│   │   │   │   ├── moe/
+│   │   │   │   ├── multi_model/
+│   │   │   │   ├── recompute_independent_pipelining/
+│   │   │   │   ├── smart_swap/
+│   │   │   │   ├── swap_attention/
+│   │   │   │   ├── unaligned_linear/
+│   │   │   ├── megatron/
+│   │   │   ├── mindspeed/
+│   │   │   │   ├── core/
+│   │   │   │   │   ├── context_parallel/
+│   │   │   │   │   ├── tensor_parallel/
+│   │   │   ├── ops/
+│   │   │   │   ├── atb/
+│   │   │   │   ├── cann/
+├── MindSpeed-LLM/
+│   ├── .git/
+│   │   ├── branches/
+│   │   ├── hooks/
+│   │   ├── info/
+│   │   ├── logs/
+│   │   │   ├── refs/
+│   │   │   │   ├── heads/
+│   │   │   │   ├── remotes/
+│   │   │   │   │   ├── origin/
+│   │   ├── objects/
+│   │   │   ├── info/
+│   │   │   ├── pack/
+│   │   ├── refs/
+│   │   │   ├── heads/
+│   │   │   ├── remotes/
+│   │   │   │   ├── origin/
+│   │   │   ├── tags/
+│   ├── ci/
+│   ├── configs/
+│   │   ├── checkpoint/
+│   │   ├── evaluate/
+│   │   ├── finetune/
+│   │   ├── rlxf/
+│   │   │   ├── model/
+│   ├── docs/
+│   │   ├── evaluation/
+│   │   ├── features/
+│   │   ├── models/
+│   ├── examples/
+│   │   ├── legacy/
+│   │   │   ├── aquila/
+│   │   │   ├── aquila2/
+│   │   │   ├── baichuan/
+│   │   │   ├── baichuan2/
+│   │   │   ├── bloom/
+│   │   │   ├── chatglm3/
+│   │   │   ├── codellama/
+│   │   │   ├── gemma/
+│   │   │   ├── gpt3/
+│   │   │   ├── intern/
+│   │   │   ├── llama/
+│   │   │   ├── llama2/
+│   │   │   ├── llama3/
+│   │   │   ├── mistral/
+│   │   │   ├── qwen/
+│   │   │   ├── qwen15/
+│   │   │   ├── yi/
+│   │   ├── mcore/
+│   │   │   ├── baichuan2/
+│   │   │   ├── chatglm3/
+│   │   │   ├── codellama/
+│   │   │   ├── deepseek2/
+│   │   │   ├── deepseek25/
+│   │   │   ├── deepseek2_coder/
+│   │   │   ├── deepseek2_lite/
+│   │   │   ├── deepseek3/
+│   │   │   ├── deepseek_math/
+│   │   │   ├── deepseek_r1_distill_llama/
+│   │   │   ├── deepseek_r1_distill_qwen/
+│   │   │   ├── deepseek_r1_recipes/
+│   │   │   │   ├── r1/
+│   │   │   │   │   ├── rejection_sampling/
+│   │   │   │   │   ├── rl_all/
+│   │   │   │   │   ├── rl_reason/
+│   │   │   │   │   ├── sft/
+│   │   │   │   ├── r1_zero/
+│   │   │   ├── gemma/
+│   │   │   ├── gemma2/
+│   │   │   ├── glm4/
+│   │   │   ├── gpt4/
+│   │   │   ├── grok1/
+│   │   │   ├── hunyuanLarge/
+│   │   │   ├── internlm2/
+│   │   │   ├── internlm25/
+│   │   │   ├── internlm3/
+│   │   │   ├── llama2/
+│   │   │   ├── llama3/
+│   │   │   ├── llama31/
+│   │   │   ├── llama32/
+│   │   │   ├── llama33/
+│   │   │   ├── minicpm/
+│   │   │   ├── minicpm3/
+│   │   │   ├── mistral/
+│   │   │   ├── mixtral/
+│   │   │   ├── phi35/
+│   │   │   ├── qwen15/
+│   │   │   ├── qwen2/
+│   │   │   ├── qwen25/
+│   │   │   ├── qwen25_coder/
+│   │   │   ├── qwen25_math/
+│   │   │   ├── qwen2_moe/
+│   │   │   ├── yi/
+│   │   │   ├── yi15/
+│   ├── sources/
+│   │   ├── images/
+│   │   │   ├── dpo/
+│   │   │   ├── instruction_finetune/
+│   │   │   ├── lora_finetune/
+│   │   │   ├── multi_sample_pack_fine_tuning/
+│   │   │   ├── online_dpo/
+│   │   │   ├── process_reward_model/
+│   │   │   ├── qlora/
+│   │   │   ├── r1/
+│   │   │   ├── ray_grpo/
+│   │   │   ├── ray_ppo/
+│   │   │   ├── readme/
+│   │   │   ├── reward_model/
+│   │   │   ├── trl_ppo/
+│   │   │   ├── variable_length_flash_attention/
+│   │   │   ├── yarn/
+│   ├── tests/
+│   │   ├── pipeline/
+│   │   │   ├── baichuan2-13B/
+│   │   │   ├── baseline/
+│   │   │   ├── bloom-7B/
+│   │   │   ├── chatglm3-6B/
+│   │   │   ├── common/
+│   │   │   ├── configs/
+│   │   │   ├── context_parallel/
+│   │   │   ├── deepseek/
+│   │   │   ├── deepseek_lite/
+│   │   │   ├── gemma-7B/
+│   │   │   ├── gpt4/
+│   │   │   ├── llama2/
+│   │   │   ├── mixtral/
+│   │   │   ├── model_module/
+│   │   │   ├── phi35-moe/
+│   │   │   ├── qwen15-7B/
+│   │   │   ├── rlxf/
+│   │   ├── poc/
+│   │   │   ├── deepseek3/
+│   │   │   ├── deepseek_500b/
+│   │   │   ├── gpt_moe_2t/
+│   │   │   ├── llama2_70b/
+│   │   │   ├── llama2_moe_500b/
+│   │   │   ├── llama3_405b/
+│   │   │   ├── qwen2_moe/
+│   │   ├── st/
+│   │   │   ├── baseline_results/
+│   │   │   ├── configs/
+│   │   │   │   ├── model/
+│   │   │   ├── shell_scripts/
+│   │   ├── test_tools/
+│   │   ├── ut/
+│   │   │   ├── checkpoint/
+│   │   │   ├── evaluation/
+│   │   │   ├── inference/
+│   │   │   ├── process_data/
+├── MindSpeed-RL/
+│   ├── .git/
+│   │   ├── branches/
+│   │   ├── hooks/
+│   │   ├── info/
+│   │   ├── logs/
+│   │   │   ├── refs/
+│   │   │   │   ├── heads/
+│   │   │   │   ├── remotes/
+│   │   │   │   │   ├── origin/
+│   │   ├── objects/
+│   │   │   ├── info/
+│   │   │   ├── pack/
+│   │   ├── refs/
+│   │   │   ├── heads/
+│   │   │   ├── remotes/
+│   │   │   │   ├── origin/
+│   │   │   ├── tags/
+│   ├── ci/
+│   ├── cli/
+│   ├── configs/
+│   │   ├── checkpoint/
+│   │   ├── datasets/
+│   │   ├── envs/
+│   │   ├── model/
+│   ├── docs/
+│   │   ├── algorithms/
+│   │   ├── features/
+│   │   ├── solutions/
+│   ├── examples/
+│   │   ├── dapo/
+│   │   ├── data/
+│   │   ├── grpo/
+│   ├── megatron/
+│   │   ├── core/
+│   │   │   ├── datasets/
+│   │   │   │   ├── retro/
+│   │   │   │   │   ├── config/
+│   │   │   │   │   ├── db/
+│   │   │   │   │   ├── index/
+│   │   │   │   │   │   ├── indexes/
+│   │   │   │   │   ├── query/
+│   │   │   ├── dist_checkpointing/
+│   │   │   │   ├── strategies/
+│   │   │   ├── distributed/
+│   │   │   ├── fusions/
+│   │   │   ├── inference/
+│   │   │   │   ├── ammo_support/
+│   │   │   │   │   ├── gpt/
+│   │   │   │   ├── engines/
+│   │   │   │   ├── model_inference_wrappers/
+│   │   │   │   │   ├── gpt/
+│   │   │   │   ├── text_generation_controllers/
+│   │   │   ├── models/
+│   │   │   │   ├── T5/
+│   │   │   │   ├── bert/
+│   │   │   │   ├── common/
+│   │   │   │   │   ├── embeddings/
+│   │   │   │   │   ├── language_module/
+│   │   │   │   │   ├── vision_module/
+│   │   │   │   ├── gpt/
+│   │   │   │   ├── mamba/
+│   │   │   │   ├── multimodal/
+│   │   │   │   ├── retro/
+│   │   │   │   ├── vision/
+│   │   │   ├── optimizer/
+│   │   │   ├── pipeline_parallel/
+│   │   │   ├── ssm/
+│   │   │   ├── tensor_parallel/
+│   │   │   ├── transformer/
+│   │   │   │   ├── custom_layers/
+│   │   │   │   ├── moe/
+│   │   ├── inference/
+│   │   │   ├── gpt/
+│   │   │   ├── static/
+│   │   │   ├── text_generation/
+│   │   ├── legacy/
+│   │   │   ├── data/
+│   │   │   ├── fp16_deprecated/
+│   │   │   ├── fused_kernels/
+│   │   │   │   ├── tests/
+│   │   │   ├── model/
+│   │   │   │   ├── vision/
+│   │   │   ├── mpu/
+│   │   │   │   ├── tests/
+│   │   ├── training/
+│   │   │   ├── tokenizer/
+│   ├── mindspeed/
+│   │   ├── auto_tuning/
+│   │   │   ├── config/
+│   │   │   ├── module/
+│   │   │   │   ├── communication/
+│   │   │   │   ├── memory/
+│   │   │   │   ├── operator/
+│   │   │   │   ├── parse/
+│   │   │   │   │   ├── profiling_parse/
+│   │   │   │   ├── search/
+│   │   │   ├── utils/
+│   │   │   │   ├── runner/
+│   │   ├── core/
+│   │   │   ├── auto_parallel/
+│   │   │   │   ├── noise_predict_ckpt/
+│   │   │   ├── context_parallel/
+│   │   │   │   ├── unaligned_cp/
+│   │   │   ├── data_parallel/
+│   │   │   ├── datasets/
+│   │   │   ├── distributed/
+│   │   │   │   ├── layerzero/
+│   │   │   │   │   ├── comm/
+│   │   │   │   │   ├── debug/
+│   │   │   │   │   ├── megatron_adaptor/
+│   │   │   │   │   │   ├── optimizer/
+│   │   │   │   │   ├── runtime/
+│   │   │   │   │   ├── state/
+│   │   │   │   │   │   ├── scripts/
+│   │   │   │   │   ├── zero3/
+│   │   │   ├── fusions/
+│   │   │   ├── memory/
+│   │   │   │   ├── adaptive_memory/
+│   │   │   │   ├── adaptive_recomputing/
+│   │   │   │   ├── auto_pipeline/
+│   │   │   │   ├── memory_fragmentation/
+│   │   │   │   ├── smart_swap/
+│   │   │   ├── models/
+│   │   │   │   ├── common/
+│   │   │   │   │   ├── embeddings/
+│   │   │   │   ├── gpt/
+│   │   │   ├── performance/
+│   │   │   │   ├── auto_pipeline_perf/
+│   │   │   ├── pipeline_parallel/
+│   │   │   ├── tensor_parallel/
+│   │   │   │   ├── ascend_turbo/
+│   │   │   │   ├── lcal_coc/
+│   │   │   │   ├── tp_2d/
+│   │   │   │   ├── unaligned_layers/
+│   │   │   ├── transformer/
+│   │   │   │   ├── custom_layers/
+│   │   │   │   ├── moe/
+│   │   │   │   │   ├── tp_2d/
+│   │   ├── features_manager/
+│   │   │   ├── functional/
+│   │   │   ├── tensor_parallel/
+│   │   ├── functional/
+│   │   │   ├── profiler/
+│   │   ├── model/
+│   │   ├── moe/
+│   │   │   ├── ampipe/
+│   │   ├── multi_modal/
+│   │   │   ├── conv3d/
+│   │   ├── op_builder/
+│   │   ├── ops/
+│   │   │   ├── csrc/
+│   │   │   │   ├── algorithm/
+│   │   │   │   │   ├── adaptive_cp/
+│   │   │   │   ├── atb/
+│   │   │   │   │   ├── inc/
+│   │   │   │   │   ├── utils/
+│   │   │   │   ├── cann/
+│   │   │   │   │   ├── inc/
+│   │   │   │   ├── flop_counter/
+│   │   │   │   ├── pluggable_allocator/
+│   │   │   │   │   ├── adaptive_recomputing/
+│   │   │   │   │   ├── memory_fragmentation/
+│   │   │   │   │   ├── smart_swap/
+│   │   ├── optimizer/
+│   │   ├── run/
+│   │   ├── tokenizer/
+│   ├── mindspeed_llm/
+│   │   ├── core/
+│   │   │   ├── datasets/
+│   │   │   ├── distributed/
+│   │   │   ├── models/
+│   │   │   │   ├── common/
+│   │   │   │   │   ├── embeddings/
+│   │   │   │   ├── gpt/
+│   │   │   ├── optimizer/
+│   │   │   ├── pipeline_parallel/
+│   │   │   ├── tensor_parallel/
+│   │   │   │   ├── tp_2d/
+│   │   │   ├── transformer/
+│   │   │   │   ├── custom_layers/
+│   │   │   │   ├── moe/
+│   │   ├── inference/
+│   │   │   ├── text_generation/
+│   │   ├── legacy/
+│   │   │   ├── data/
+│   │   │   ├── model/
+│   │   ├── tasks/
+│   │   │   ├── checkpoint/
+│   │   │   ├── evaluation/
+│   │   │   │   ├── eval_api/
+│   │   │   │   ├── eval_impl/
+│   │   │   │   │   ├── fewshot_template/
+│   │   │   │   ├── eval_utils/
+│   │   │   ├── inference/
+│   │   │   ├── models/
+│   │   │   │   ├── common/
+│   │   │   │   ├── spec/
+│   │   │   │   ├── transformer/
+│   │   │   ├── posttrain/
+│   │   │   │   ├── base/
+│   │   │   │   ├── dpo/
+│   │   │   │   ├── lora/
+│   │   │   │   ├── orm/
+│   │   │   │   ├── prm/
+│   │   │   │   ├── rejection_sampling/
+│   │   │   │   ├── rlxf/
+│   │   │   │   │   ├── ray_trainer/
+│   │   │   │   │   ├── single_controller/
+│   │   │   │   │   │   ├── base/
+│   │   │   │   │   │   │   ├── megatron/
+│   │   │   │   │   │   │   ├── register_center/
+│   │   │   │   │   │   ├── ray/
+│   │   │   │   │   ├── training/
+│   │   │   │   │   ├── utils/
+│   │   │   │   │   ├── workers/
+│   │   │   │   ├── sft/
+│   │   │   │   ├── trl_ppo/
+│   │   │   │   ├── verifier/
+│   │   │   │   │   ├── math_eval_toolkit/
+│   │   │   ├── preprocess/
+│   │   │   ├── utils/
+│   │   ├── training/
+│   │   │   ├── tokenizer/
+│   ├── mindspeed_rl/
+│   │   ├── config_cls/
+│   │   ├── datasets/
+│   │   ├── models/
+│   │   │   ├── base/
+│   │   │   ├── loss/
+│   │   │   ├── rollout/
+│   │   │   │   ├── vllm_adapter/
+│   │   │   │   │   ├── patch/
+│   │   ├── trainer/
+│   │   │   ├── utils/
+│   │   ├── utils/
+│   │   │   ├── math_eval_toolkit/
+│   │   ├── workers/
+│   │   │   ├── resharding/
+│   │   │   ├── scheduler/
+│   ├── sources/
+│   │   ├── images/
+│   │   │   ├── data_module/
+│   │   │   ├── deterministic_computation/
+│   │   │   ├── instruction_finetune/
+│   │   │   ├── integrated_worker/
+│   │   │   ├── logging/
+│   │   │   ├── r1_zero/
+│   │   │   ├── remove_padding/
+│   │   │   ├── resharding/
+│   ├── tests/
+│   │   ├── st/
+│   │   │   ├── configs/
+│   │   │   │   ├── model/
+│   │   │   ├── datasets/
+│   │   │   ├── mindstudio/
+│   │   │   ├── resharding/
+│   │   │   ├── train_engine/
+│   │   ├── test_tools/
+│   │   ├── ut/
+│   │   │   ├── config/
+│   │   │   ├── datasets/
+│   │   │   ├── models/
+│   │   │   │   ├── loss/
+│   │   │   ├── utils/
+│   │   │   ├── workers/
+│   │   │   │   ├── scheduler/
+├── MindSpeed-RL-master/
+│   ├── ci/
+│   ├── cli/
+│   ├── configs/
+│   │   ├── checkpoint/
+│   │   ├── datasets/
+│   │   ├── envs/
+│   │   ├── model/
+│   ├── dataset/
+│   ├── docs/
+│   │   ├── algorithms/
+│   │   ├── features/
+│   │   ├── solutions/
+│   │   ├── vllm/
+│   │   │   ├── .buildkite/
+│   │   │   │   ├── lm-eval-harness/
+│   │   │   │   │   ├── configs/
+│   │   │   │   ├── nightly-benchmarks/
+│   │   │   │   │   ├── scripts/
+│   │   │   │   │   ├── tests/
+│   │   │   │   ├── scripts/
+│   │   │   │   │   ├── hardware_ci/
+│   │   │   ├── .git/
+│   │   │   │   ├── branches/
+│   │   │   │   ├── hooks/
+│   │   │   │   ├── info/
+│   │   │   │   ├── logs/
+│   │   │   │   │   ├── refs/
+│   │   │   │   │   │   ├── heads/
+│   │   │   │   │   │   ├── remotes/
+│   │   │   │   │   │   │   ├── origin/
+│   │   │   │   ├── objects/
+│   │   │   │   │   ├── info/
+│   │   │   │   │   ├── pack/
+│   │   │   │   ├── refs/
+│   │   │   │   │   ├── heads/
+│   │   │   │   │   ├── remotes/
+│   │   │   │   │   │   ├── origin/
+│   │   │   │   │   ├── tags/
+│   │   │   ├── .github/
+│   │   │   │   ├── ISSUE_TEMPLATE/
+│   │   │   │   ├── scripts/
+│   │   │   │   ├── workflows/
+│   │   │   │   │   ├── matchers/
+│   │   │   │   │   ├── scripts/
+│   │   │   ├── benchmarks/
+│   │   │   │   ├── cutlass_benchmarks/
+│   │   │   │   ├── disagg_benchmarks/
+│   │   │   │   ├── fused_kernels/
+│   │   │   │   ├── kernels/
+│   │   │   │   │   ├── deepgemm/
+│   │   │   │   ├── overheads/
+│   │   │   │   ├── structured_schemas/
+│   │   │   ├── build/
+│   │   │   │   ├── bdist.linux-aarch64/
+│   │   │   │   ├── lib/
+│   │   │   │   │   ├── vllm/
+│   │   │   │   │   │   ├── adapter_commons/
+│   │   │   │   │   │   ├── assets/
+│   │   │   │   │   │   ├── attention/
+│   │   │   │   │   │   │   ├── backends/
+│   │   │   │   │   │   │   │   ├── mla/
+│   │   │   │   │   │   │   ├── ops/
+│   │   │   │   │   │   │   │   ├── blocksparse_attention/
+│   │   │   │   │   │   │   ├── utils/
+│   │   │   │   │   │   ├── benchmarks/
+│   │   │   │   │   │   ├── compilation/
+│   │   │   │   │   │   ├── core/
+│   │   │   │   │   │   │   ├── block/
+│   │   │   │   │   │   ├── device_allocator/
+│   │   │   │   │   │   ├── distributed/
+│   │   │   │   │   │   │   ├── device_communicators/
+│   │   │   │   │   │   │   ├── kv_transfer/
+│   │   │   │   │   │   │   │   ├── kv_connector/
+│   │   │   │   │   │   │   │   │   ├── v1/
+│   │   │   │   │   │   │   │   ├── kv_lookup_buffer/
+│   │   │   │   │   │   │   │   ├── kv_pipe/
+│   │   │   │   │   │   ├── engine/
+│   │   │   │   │   │   │   ├── multiprocessing/
+│   │   │   │   │   │   │   ├── output_processor/
+│   │   │   │   │   │   ├── entrypoints/
+│   │   │   │   │   │   │   ├── cli/
+│   │   │   │   │   │   │   │   ├── benchmark/
+│   │   │   │   │   │   │   ├── openai/
+│   │   │   │   │   │   │   │   ├── tool_parsers/
+│   │   │   │   │   │   ├── executor/
+│   │   │   │   │   │   ├── inputs/
+│   │   │   │   │   │   ├── logging_utils/
+│   │   │   │   │   │   ├── lora/
+│   │   │   │   │   │   │   ├── ops/
+│   │   │   │   │   │   │   │   ├── torch_ops/
+│   │   │   │   │   │   │   │   ├── triton_ops/
+│   │   │   │   │   │   │   │   ├── xla_ops/
+│   │   │   │   │   │   │   ├── punica_wrapper/
+│   │   │   │   │   │   ├── model_executor/
+│   │   │   │   │   │   │   ├── guided_decoding/
+│   │   │   │   │   │   │   ├── layers/
+│   │   │   │   │   │   │   │   ├── fused_moe/
+│   │   │   │   │   │   │   │   │   ├── configs/
+│   │   │   │   │   │   │   │   ├── mamba/
+│   │   │   │   │   │   │   │   │   ├── ops/
+│   │   │   │   │   │   │   │   ├── quantization/
+│   │   │   │   │   │   │   │   │   ├── compressed_tensors/
+│   │   │   │   │   │   │   │   │   │   ├── schemes/
+│   │   │   │   │   │   │   │   │   ├── kernels/
+│   │   │   │   │   │   │   │   │   │   ├── mixed_precision/
+│   │   │   │   │   │   │   │   │   │   ├── scaled_mm/
+│   │   │   │   │   │   │   │   │   ├── quark/
+│   │   │   │   │   │   │   │   │   │   ├── schemes/
+│   │   │   │   │   │   │   │   │   ├── utils/
+│   │   │   │   │   │   │   │   │   │   ├── configs/
+│   │   │   │   │   │   │   ├── model_loader/
+│   │   │   │   │   │   │   ├── models/
+│   │   │   │   │   │   ├── multimodal/
+│   │   │   │   │   │   ├── platforms/
+│   │   │   │   │   │   ├── plugins/
+│   │   │   │   │   │   │   ├── lora_resolvers/
+│   │   │   │   │   │   ├── profiler/
+│   │   │   │   │   │   ├── prompt_adapter/
+│   │   │   │   │   │   ├── reasoning/
+│   │   │   │   │   │   ├── spec_decode/
+│   │   │   │   │   │   ├── third_party/
+│   │   │   │   │   │   ├── transformers_utils/
+│   │   │   │   │   │   │   ├── chat_templates/
+│   │   │   │   │   │   │   ├── configs/
+│   │   │   │   │   │   │   ├── processors/
+│   │   │   │   │   │   │   ├── tokenizers/
+│   │   │   │   │   │   ├── triton_utils/
+│   │   │   │   │   │   ├── usage/
+│   │   │   │   │   │   ├── v1/
+│   │   │   │   │   │   │   ├── attention/
+│   │   │   │   │   │   │   │   ├── backends/
+│   │   │   │   │   │   │   │   │   ├── mla/
+│   │   │   │   │   │   │   ├── core/
+│   │   │   │   │   │   │   │   ├── sched/
+│   │   │   │   │   │   │   ├── engine/
+│   │   │   │   │   │   │   ├── executor/
+│   │   │   │   │   │   │   ├── metrics/
+│   │   │   │   │   │   │   ├── sample/
+│   │   │   │   │   │   │   │   ├── ops/
+│   │   │   │   │   │   │   │   ├── tpu/
+│   │   │   │   │   │   │   ├── spec_decode/
+│   │   │   │   │   │   │   ├── structured_output/
+│   │   │   │   │   │   │   ├── worker/
+│   │   │   │   │   │   ├── vllm_flash_attn/
+│   │   │   │   │   │   ├── worker/
+│   │   │   ├── cmake/
+│   │   │   │   ├── external_projects/
+│   │   │   ├── csrc/
+│   │   │   │   ├── attention/
+│   │   │   │   │   ├── mla/
+│   │   │   │   ├── core/
+│   │   │   │   ├── cpu/
+│   │   │   │   ├── cutlass_extensions/
+│   │   │   │   │   ├── epilogue/
+│   │   │   │   │   ├── gemm/
+│   │   │   │   │   │   ├── collective/
+│   │   │   │   ├── mamba/
+│   │   │   │   │   ├── causal_conv1d/
+│   │   │   │   │   ├── mamba_ssm/
+│   │   │   │   ├── moe/
+│   │   │   │   │   ├── marlin_moe_wna16/
+│   │   │   │   │   ├── permute_unpermute_kernels/
+│   │   │   │   ├── prepare_inputs/
+│   │   │   │   ├── quantization/
+│   │   │   │   │   ├── aqlm/
+│   │   │   │   │   ├── awq/
+│   │   │   │   │   ├── compressed_tensors/
+│   │   │   │   │   ├── cutlass_w8a8/
+│   │   │   │   │   │   ├── c3x/
+│   │   │   │   │   │   ├── moe/
+│   │   │   │   │   ├── fp4/
+│   │   │   │   │   ├── fp8/
+│   │   │   │   │   │   ├── amd/
+│   │   │   │   │   │   ├── nvidia/
+│   │   │   │   │   ├── fused_kernels/
+│   │   │   │   │   ├── gguf/
+│   │   │   │   │   ├── gptq/
+│   │   │   │   │   ├── gptq_allspark/
+│   │   │   │   │   ├── gptq_marlin/
+│   │   │   │   │   ├── machete/
+│   │   │   │   │   ├── marlin/
+│   │   │   │   │   │   ├── dense/
+│   │   │   │   │   │   │   ├── common/
+│   │   │   │   │   │   ├── qqq/
+│   │   │   │   │   │   ├── sparse/
+│   │   │   │   │   │   │   ├── common/
+│   │   │   │   ├── rocm/
+│   │   │   │   ├── sparse/
+│   │   │   │   │   ├── cutlass/
+│   │   │   ├── docker/
+│   │   │   ├── docs/
+│   │   │   │   ├── api/
+│   │   │   │   │   ├── vllm/
+│   │   │   │   ├── assets/
+│   │   │   │   │   ├── contributing/
+│   │   │   │   │   ├── deployment/
+│   │   │   │   │   ├── design/
+│   │   │   │   │   │   ├── arch_overview/
+│   │   │   │   │   │   ├── v1/
+│   │   │   │   │   │   │   ├── metrics/
+│   │   │   │   │   │   │   ├── prefix_caching/
+│   │   │   │   │   ├── features/
+│   │   │   │   │   │   ├── disagg_prefill/
+│   │   │   │   │   ├── kernel/
+│   │   │   │   │   ├── logos/
+│   │   │   │   ├── cli/
+│   │   │   │   ├── community/
+│   │   │   │   ├── configuration/
+│   │   │   │   ├── contributing/
+│   │   │   │   │   ├── dockerfile/
+│   │   │   │   │   ├── model/
+│   │   │   │   ├── deployment/
+│   │   │   │   │   ├── frameworks/
+│   │   │   │   │   ├── integrations/
+│   │   │   │   ├── design/
+│   │   │   │   │   ├── kernel/
+│   │   │   │   │   ├── v1/
+│   │   │   │   ├── features/
+│   │   │   │   │   ├── quantization/
+│   │   │   │   ├── getting_started/
+│   │   │   │   │   ├── installation/
+│   │   │   │   │   │   ├── ai_accelerator/
+│   │   │   │   │   │   ├── cpu/
+│   │   │   │   │   │   ├── gpu/
+│   │   │   │   ├── mkdocs/
+│   │   │   │   │   ├── hooks/
+│   │   │   │   │   ├── javascript/
+│   │   │   │   │   ├── overrides/
+│   │   │   │   │   ├── stylesheets/
+│   │   │   │   ├── models/
+│   │   │   │   │   ├── extensions/
+│   │   │   │   ├── serving/
+│   │   │   │   │   ├── integrations/
+│   │   │   │   ├── training/
+│   │   │   │   ├── usage/
+│   │   │   ├── examples/
+│   │   │   │   ├── offline_inference/
+│   │   │   │   │   ├── basic/
+│   │   │   │   │   ├── disaggregated-prefill-v1/
+│   │   │   │   │   ├── openai_batch/
+│   │   │   │   │   ├── profiling_tpu/
+│   │   │   │   │   ├── qwen2_5_omni/
+│   │   │   │   ├── online_serving/
+│   │   │   │   │   ├── chart-helm/
+│   │   │   │   │   │   ├── templates/
+│   │   │   │   │   ├── disaggregated_serving/
+│   │   │   │   │   ├── opentelemetry/
+│   │   │   │   │   ├── prometheus_grafana/
+│   │   │   │   ├── others/
+│   │   │   │   │   ├── lmcache/
+│   │   │   │   │   │   ├── disagg_prefill_lmcache_v1/
+│   │   │   │   │   │   │   ├── configs/
+│   │   │   ├── requirements/
+│   │   │   ├── tests/
+│   │   │   │   ├── async_engine/
+│   │   │   │   ├── basic_correctness/
+│   │   │   │   ├── benchmarks/
+│   │   │   │   ├── compile/
+│   │   │   │   │   ├── piecewise/
+│   │   │   │   ├── config/
+│   │   │   │   ├── core/
+│   │   │   │   │   ├── block/
+│   │   │   │   │   │   ├── e2e/
+│   │   │   │   ├── detokenizer/
+│   │   │   │   ├── distributed/
+│   │   │   │   ├── encoder_decoder/
+│   │   │   │   ├── engine/
+│   │   │   │   ├── entrypoints/
+│   │   │   │   │   ├── llm/
+│   │   │   │   │   ├── offline_mode/
+│   │   │   │   │   ├── openai/
+│   │   │   │   │   │   ├── correctness/
+│   │   │   │   │   │   ├── tool_parsers/
+│   │   │   │   ├── fastsafetensors_loader/
+│   │   │   │   ├── kernels/
+│   │   │   │   │   ├── attention/
+│   │   │   │   │   ├── core/
+│   │   │   │   │   ├── mamba/
+│   │   │   │   │   ├── moe/
+│   │   │   │   │   ├── quantization/
+│   │   │   │   ├── kv_transfer/
+│   │   │   │   ├── lora/
+│   │   │   │   ├── metrics/
+│   │   │   │   ├── mistral_tool_use/
+│   │   │   │   ├── model_executor/
+│   │   │   │   ├── models/
+│   │   │   │   │   ├── fixtures/
+│   │   │   │   │   ├── language/
+│   │   │   │   │   │   ├── generation/
+│   │   │   │   │   │   ├── pooling/
+│   │   │   │   │   ├── multimodal/
+│   │   │   │   │   │   ├── generation/
+│   │   │   │   │   │   │   ├── vlm_utils/
+│   │   │   │   │   │   ├── pooling/
+│   │   │   │   │   │   ├── processing/
+│   │   │   │   │   ├── quantization/
+│   │   │   │   ├── mq_llm_engine/
+│   │   │   │   ├── multi_step/
+│   │   │   │   ├── multimodal/
+│   │   │   │   │   ├── assets/
+│   │   │   │   ├── neuron/
+│   │   │   │   │   ├── 1_core/
+│   │   │   │   │   ├── 2_core/
+│   │   │   │   ├── plugins/
+│   │   │   │   │   ├── lora_resolvers/
+│   │   │   │   │   ├── vllm_add_dummy_model/
+│   │   │   │   │   │   ├── vllm_add_dummy_model/
+│   │   │   │   │   ├── vllm_add_dummy_platform/
+│   │   │   │   │   │   ├── vllm_add_dummy_platform/
+│   │   │   │   ├── plugins_tests/
+│   │   │   │   ├── prefix_caching/
+│   │   │   │   ├── prompt_adapter/
+│   │   │   │   ├── prompts/
+│   │   │   │   ├── quantization/
+│   │   │   │   ├── reasoning/
+│   │   │   │   ├── runai_model_streamer_test/
+│   │   │   │   ├── samplers/
+│   │   │   │   ├── spec_decode/
+│   │   │   │   │   ├── e2e/
+│   │   │   │   ├── standalone_tests/
+│   │   │   │   ├── system_messages/
+│   │   │   │   ├── tensorizer_loader/
+│   │   │   │   ├── tokenization/
+│   │   │   │   ├── tool_use/
+│   │   │   │   ├── tpu/
+│   │   │   │   │   ├── lora/
+│   │   │   │   ├── tracing/
+│   │   │   │   ├── v1/
+│   │   │   │   │   ├── core/
+│   │   │   │   │   ├── e2e/
+│   │   │   │   │   ├── engine/
+│   │   │   │   │   ├── entrypoints/
+│   │   │   │   │   │   ├── llm/
+│   │   │   │   │   │   ├── openai/
+│   │   │   │   │   ├── kv_connector/
+│   │   │   │   │   │   ├── nixl_integration/
+│   │   │   │   │   │   ├── unit/
+│   │   │   │   │   ├── metrics/
+│   │   │   │   │   ├── sample/
+│   │   │   │   │   ├── shutdown/
+│   │   │   │   │   ├── spec_decode/
+│   │   │   │   │   ├── structured_output/
+│   │   │   │   │   ├── tpu/
+│   │   │   │   │   │   ├── worker/
+│   │   │   │   │   ├── worker/
+│   │   │   │   ├── vllm_test_utils/
+│   │   │   │   │   ├── vllm_test_utils/
+│   │   │   │   ├── weight_loading/
+│   │   │   │   ├── worker/
+│   │   │   ├── tools/
+│   │   │   │   ├── ep_kernels/
+│   │   │   │   ├── profiler/
+│   │   │   ├── vllm/
+│   │   │   │   ├── __pycache__/
+│   │   │   │   ├── adapter_commons/
+│   │   │   │   ├── assets/
+│   │   │   │   ├── attention/
+│   │   │   │   │   ├── backends/
+│   │   │   │   │   │   ├── mla/
+│   │   │   │   │   ├── ops/
+│   │   │   │   │   │   ├── blocksparse_attention/
+│   │   │   │   │   ├── utils/
+│   │   │   │   ├── benchmarks/
+│   │   │   │   ├── compilation/
+│   │   │   │   ├── core/
+│   │   │   │   │   ├── block/
+│   │   │   │   ├── device_allocator/
+│   │   │   │   ├── distributed/
+│   │   │   │   │   ├── device_communicators/
+│   │   │   │   │   ├── kv_transfer/
+│   │   │   │   │   │   ├── kv_connector/
+│   │   │   │   │   │   │   ├── v1/
+│   │   │   │   │   │   ├── kv_lookup_buffer/
+│   │   │   │   │   │   ├── kv_pipe/
+│   │   │   │   ├── engine/
+│   │   │   │   │   ├── multiprocessing/
+│   │   │   │   │   ├── output_processor/
+│   │   │   │   ├── entrypoints/
+│   │   │   │   │   ├── cli/
+│   │   │   │   │   │   ├── benchmark/
+│   │   │   │   │   ├── openai/
+│   │   │   │   │   │   ├── tool_parsers/
+│   │   │   │   ├── executor/
+│   │   │   │   ├── inputs/
+│   │   │   │   ├── logging_utils/
+│   │   │   │   ├── lora/
+│   │   │   │   │   ├── ops/
+│   │   │   │   │   │   ├── torch_ops/
+│   │   │   │   │   │   ├── triton_ops/
+│   │   │   │   │   │   ├── xla_ops/
+│   │   │   │   │   ├── punica_wrapper/
+│   │   │   │   ├── model_executor/
+│   │   │   │   │   ├── guided_decoding/
+│   │   │   │   │   ├── layers/
+│   │   │   │   │   │   ├── fused_moe/
+│   │   │   │   │   │   │   ├── configs/
+│   │   │   │   │   │   ├── mamba/
+│   │   │   │   │   │   │   ├── ops/
+│   │   │   │   │   │   ├── quantization/
+│   │   │   │   │   │   │   ├── compressed_tensors/
+│   │   │   │   │   │   │   │   ├── schemes/
+│   │   │   │   │   │   │   ├── kernels/
+│   │   │   │   │   │   │   │   ├── mixed_precision/
+│   │   │   │   │   │   │   │   ├── scaled_mm/
+│   │   │   │   │   │   │   ├── quark/
+│   │   │   │   │   │   │   │   ├── schemes/
+│   │   │   │   │   │   │   ├── utils/
+│   │   │   │   │   │   │   │   ├── configs/
+│   │   │   │   │   ├── model_loader/
+│   │   │   │   │   ├── models/
+│   │   │   │   ├── multimodal/
+│   │   │   │   ├── platforms/
+│   │   │   │   ├── plugins/
+│   │   │   │   │   ├── lora_resolvers/
+│   │   │   │   ├── profiler/
+│   │   │   │   ├── prompt_adapter/
+│   │   │   │   ├── reasoning/
+│   │   │   │   ├── spec_decode/
+│   │   │   │   ├── third_party/
+│   │   │   │   ├── transformers_utils/
+│   │   │   │   │   ├── chat_templates/
+│   │   │   │   │   ├── configs/
+│   │   │   │   │   ├── processors/
+│   │   │   │   │   ├── tokenizers/
+│   │   │   │   ├── triton_utils/
+│   │   │   │   ├── usage/
+│   │   │   │   ├── v1/
+│   │   │   │   │   ├── attention/
+│   │   │   │   │   │   ├── backends/
+│   │   │   │   │   │   │   ├── mla/
+│   │   │   │   │   ├── core/
+│   │   │   │   │   │   ├── sched/
+│   │   │   │   │   ├── engine/
+│   │   │   │   │   ├── executor/
+│   │   │   │   │   ├── metrics/
+│   │   │   │   │   ├── sample/
+│   │   │   │   │   │   ├── ops/
+│   │   │   │   │   │   ├── tpu/
+│   │   │   │   │   ├── spec_decode/
+│   │   │   │   │   ├── structured_output/
+│   │   │   │   │   ├── worker/
+│   │   │   │   ├── vllm_flash_attn/
+│   │   │   │   ├── worker/
+│   │   │   ├── vllm.egg-info/
+│   │   ├── vllm-ascend/
+│   │   │   ├── .git/
+│   │   │   │   ├── branches/
+│   │   │   │   ├── hooks/
+│   │   │   │   ├── info/
+│   │   │   │   ├── logs/
+│   │   │   │   │   ├── refs/
+│   │   │   │   │   │   ├── heads/
+│   │   │   │   │   │   ├── remotes/
+│   │   │   │   │   │   │   ├── origin/
+│   │   │   │   ├── objects/
+│   │   │   │   │   ├── info/
+│   │   │   │   │   ├── pack/
+│   │   │   │   ├── refs/
+│   │   │   │   │   ├── heads/
+│   │   │   │   │   ├── remotes/
+│   │   │   │   │   │   ├── origin/
+│   │   │   │   │   ├── tags/
+│   │   │   ├── .github/
+│   │   │   │   ├── ISSUE_TEMPLATE/
+│   │   │   │   ├── workflows/
+│   │   │   │   │   ├── matchers/
+│   │   │   ├── docs/
+│   │   │   │   ├── source/
+│   │   │   │   │   ├── developer_guide/
+│   │   │   │   │   ├── logos/
+│   │   │   │   │   ├── tutorials/
+│   │   │   │   │   ├── user_guide/
+│   │   │   ├── examples/
+│   │   │   ├── tests/
+│   │   │   ├── tools/
+│   │   │   ├── vllm_ascend/
+│   │   │   │   ├── __pycache__/
+│   │   │   │   ├── models/
+│   │   │   │   ├── ops/
+│   │   │   │   ├── patch/
+│   │   │   │   ├── quantization/
+│   │   │   │   ├── worker/
+│   │   │   ├── vllm_ascend.egg-info/
+│   ├── examples/
+│   │   ├── dapo/
+│   │   ├── data/
+│   │   ├── grpo/
+│   ├── kernel_meta/
+│   │   ├── kernel_meta_temp_10003116755842561274/
+│   │   ├── kernel_meta_temp_10019383830813933073/
+│   │   ├── kernel_meta_temp_10082205755697797156/
+│   │   ├── kernel_meta_temp_10082586252929071632/
+│   │   ├── kernel_meta_temp_10097716396412750018/
+│   │   ├── kernel_meta_temp_10200811680327405754/
+│   │   ├── kernel_meta_temp_1026787484652169431/
+│   │   ├── kernel_meta_temp_10425874796111115197/
+│   │   ├── kernel_meta_temp_10910002457553999378/
+│   │   ├── kernel_meta_temp_10967751591347137609/
+│   │   ├── kernel_meta_temp_11180443345880219377/
+│   │   ├── kernel_meta_temp_11197630089436770839/
+│   │   ├── kernel_meta_temp_112437972370873946/
+│   │   ├── kernel_meta_temp_1135517573603681078/
+│   │   ├── kernel_meta_temp_11432782607420908927/
+│   │   ├── kernel_meta_temp_1150987741245895252/
+│   │   ├── kernel_meta_temp_11509970739693628775/
+│   │   ├── kernel_meta_temp_116085392301489420/
+│   │   ├── kernel_meta_temp_11804130448414520198/
+│   │   ├── kernel_meta_temp_12042206150244374547/
+│   │   ├── kernel_meta_temp_12081812749919912892/
+│   │   ├── kernel_meta_temp_12103162963070295279/
+│   │   ├── kernel_meta_temp_12122165994407441398/
+│   │   ├── kernel_meta_temp_12163665947515446775/
+│   │   ├── kernel_meta_temp_12178194070397862469/
+│   │   ├── kernel_meta_temp_12181608951457804876/
+│   │   ├── kernel_meta_temp_12259085955370970239/
+│   │   ├── kernel_meta_temp_12436579594938572088/
+│   │   ├── kernel_meta_temp_12526783884794232097/
+│   │   ├── kernel_meta_temp_12639076490221683562/
+│   │   ├── kernel_meta_temp_12645768171188239551/
+│   │   ├── kernel_meta_temp_12808222394653523257/
+│   │   ├── kernel_meta_temp_12846902339837553681/
+│   │   ├── kernel_meta_temp_12895468944591418512/
+│   │   ├── kernel_meta_temp_12950929029434538182/
+│   │   ├── kernel_meta_temp_13390060003711328348/
+│   │   ├── kernel_meta_temp_13427546465050797724/
+│   │   ├── kernel_meta_temp_13434912307052218677/
+│   │   ├── kernel_meta_temp_13524421594403456820/
+│   │   ├── kernel_meta_temp_13769610419784571332/
+│   │   ├── kernel_meta_temp_13832939380400087090/
+│   │   ├── kernel_meta_temp_13970187641128565211/
+│   │   ├── kernel_meta_temp_13973323604686627853/
+│   │   ├── kernel_meta_temp_14185940227015978926/
+│   │   ├── kernel_meta_temp_14297573681478197416/
+│   │   ├── kernel_meta_temp_14639873558964186851/
+│   │   ├── kernel_meta_temp_14673860981086947748/
+│   │   ├── kernel_meta_temp_15015900717283479777/
+│   │   ├── kernel_meta_temp_15166590056374994257/
+│   │   ├── kernel_meta_temp_1526154332739242592/
+│   │   ├── kernel_meta_temp_1527559650521612452/
+│   │   ├── kernel_meta_temp_15449231005476480151/
+│   │   ├── kernel_meta_temp_15522820321019555535/
+│   │   ├── kernel_meta_temp_15561956070461794222/
+│   │   ├── kernel_meta_temp_15726027173553730182/
+│   │   ├── kernel_meta_temp_15744240605138759496/
+│   │   ├── kernel_meta_temp_15825111064830685728/
+│   │   ├── kernel_meta_temp_15843723014170045199/
+│   │   ├── kernel_meta_temp_15939717050622298802/
+│   │   ├── kernel_meta_temp_15963079814885790579/
+│   │   ├── kernel_meta_temp_15998910563471507653/
+│   │   ├── kernel_meta_temp_16113552018326414093/
+│   │   ├── kernel_meta_temp_16174588773917344950/
+│   │   ├── kernel_meta_temp_16197136796695578685/
+│   │   ├── kernel_meta_temp_16275217973542498196/
+│   │   ├── kernel_meta_temp_16578335582912396036/
+│   │   ├── kernel_meta_temp_16595074253508909310/
+│   │   ├── kernel_meta_temp_16654831451808341239/
+│   │   ├── kernel_meta_temp_16664769424499795208/
+│   │   ├── kernel_meta_temp_16673853120168232912/
+│   │   ├── kernel_meta_temp_17236937926777515914/
+│   │   ├── kernel_meta_temp_17292019802987933862/
+│   │   ├── kernel_meta_temp_1737832807628074181/
+│   │   ├── kernel_meta_temp_17413985782328467500/
+│   │   ├── kernel_meta_temp_17534456552317527007/
+│   │   ├── kernel_meta_temp_17714560554662826085/
+│   │   ├── kernel_meta_temp_17757015954024070239/
+│   │   ├── kernel_meta_temp_17799930184367860502/
+│   │   ├── kernel_meta_temp_17946272127465697017/
+│   │   ├── kernel_meta_temp_18002354030125465252/
+│   │   ├── kernel_meta_temp_18071071484567078272/
+│   │   ├── kernel_meta_temp_18128251222487983683/
+│   │   ├── kernel_meta_temp_181439544489034289/
+│   │   ├── kernel_meta_temp_18333131897200715777/
+│   │   ├── kernel_meta_temp_18371354276869624359/
+│   │   ├── kernel_meta_temp_1936912685095517646/
+│   │   ├── kernel_meta_temp_212587808781847182/
+│   │   ├── kernel_meta_temp_2211884212780669317/
+│   │   ├── kernel_meta_temp_2270003088426419723/
+│   │   ├── kernel_meta_temp_2478666342145008403/
+│   │   ├── kernel_meta_temp_2556460027953534956/
+│   │   ├── kernel_meta_temp_261561554318054246/
+│   │   ├── kernel_meta_temp_2645439321251994876/
+│   │   ├── kernel_meta_temp_2793001902102018837/
+│   │   ├── kernel_meta_temp_2806417761339571311/
+│   │   ├── kernel_meta_temp_2954054199994525361/
+│   │   ├── kernel_meta_temp_3052290534048938486/
+│   │   ├── kernel_meta_temp_3099599265443776340/
+│   │   ├── kernel_meta_temp_3390315611494970720/
+│   │   ├── kernel_meta_temp_339107706125302738/
+│   │   ├── kernel_meta_temp_3608491007369769885/
+│   │   ├── kernel_meta_temp_3746729361986550424/
+│   │   ├── kernel_meta_temp_3754124568310656974/
+│   │   ├── kernel_meta_temp_3786290302639823673/
+│   │   ├── kernel_meta_temp_3922868570112403188/
+│   │   ├── kernel_meta_temp_4103508871524258319/
+│   │   ├── kernel_meta_temp_4261927089266346423/
+│   │   ├── kernel_meta_temp_4280108969805054056/
+│   │   ├── kernel_meta_temp_4504227709246355395/
+│   │   ├── kernel_meta_temp_4519214649409887061/
+│   │   ├── kernel_meta_temp_4522554718767102138/
+│   │   ├── kernel_meta_temp_4588139669723421333/
+│   │   ├── kernel_meta_temp_4730386581734436070/
+│   │   ├── kernel_meta_temp_4791001864812390348/
+│   │   ├── kernel_meta_temp_4833989637237215294/
+│   │   ├── kernel_meta_temp_4856972628096772197/
+│   │   ├── kernel_meta_temp_4939277341560589068/
+│   │   ├── kernel_meta_temp_4940524778229239608/
+│   │   ├── kernel_meta_temp_4980124960111491619/
+│   │   ├── kernel_meta_temp_5184029038276524150/
+│   │   ├── kernel_meta_temp_528096597135893290/
+│   │   ├── kernel_meta_temp_5451041902929486447/
+│   │   ├── kernel_meta_temp_551742071537651428/
+│   │   ├── kernel_meta_temp_5682032687841559839/
+│   │   ├── kernel_meta_temp_5705544423924560324/
+│   │   ├── kernel_meta_temp_5718237537189554518/
+│   │   ├── kernel_meta_temp_5772629973571146081/
+│   │   ├── kernel_meta_temp_5875431689861011112/
+│   │   ├── kernel_meta_temp_6171492173129536700/
+│   │   ├── kernel_meta_temp_619788483406770070/
+│   │   ├── kernel_meta_temp_6256913341726221757/
+│   │   ├── kernel_meta_temp_6363081064024410736/
+│   │   ├── kernel_meta_temp_6391981829379895461/
+│   │   ├── kernel_meta_temp_6397527528386863483/
+│   │   ├── kernel_meta_temp_6829122402955179817/
+│   │   ├── kernel_meta_temp_6858648982149766793/
+│   │   ├── kernel_meta_temp_6871378708805551149/
+│   │   ├── kernel_meta_temp_7041228490161245703/
+│   │   ├── kernel_meta_temp_7052584833996492062/
+│   │   ├── kernel_meta_temp_7061522159583291305/
+│   │   ├── kernel_meta_temp_7096218729343613454/
+│   │   ├── kernel_meta_temp_7148439724208497697/
+│   │   ├── kernel_meta_temp_7385653545599420318/
+│   │   ├── kernel_meta_temp_7466208288993011944/
+│   │   ├── kernel_meta_temp_7505537565854104455/
+│   │   ├── kernel_meta_temp_7600054044625650338/
+│   │   ├── kernel_meta_temp_7631465465812380123/
+│   │   ├── kernel_meta_temp_8008667646907147185/
+│   │   ├── kernel_meta_temp_8019459691545778209/
+│   │   ├── kernel_meta_temp_8172950171566668859/
+│   │   ├── kernel_meta_temp_8416534452358809674/
+│   │   ├── kernel_meta_temp_8574281031196415663/
+│   │   ├── kernel_meta_temp_8579120764725180612/
+│   │   ├── kernel_meta_temp_8582310033720541650/
+│   │   ├── kernel_meta_temp_8612902136506619383/
+│   │   ├── kernel_meta_temp_8730284447360422890/
+│   │   ├── kernel_meta_temp_8758345844586751616/
+│   │   ├── kernel_meta_temp_8852587044325830931/
+│   │   ├── kernel_meta_temp_8884246577499246619/
+│   │   ├── kernel_meta_temp_8919284210790761254/
+│   │   ├── kernel_meta_temp_8999466241540878532/
+│   │   ├── kernel_meta_temp_9259233714927910260/
+│   │   ├── kernel_meta_temp_9263642039049665000/
+│   │   ├── kernel_meta_temp_9371496534018180799/
+│   │   ├── kernel_meta_temp_9631559214541834596/
+│   │   ├── kernel_meta_temp_9685503374236579113/
+│   │   ├── kernel_meta_temp_9687199586235792250/
+│   │   ├── kernel_meta_temp_99243757800029652/
+│   ├── logs/
+│   ├── megatron/
+│   │   ├── core/
+│   │   │   ├── __pycache__/
+│   │   │   ├── datasets/
+│   │   │   │   ├── __pycache__/
+│   │   │   │   ├── retro/
+│   │   │   │   │   ├── config/
+│   │   │   │   │   ├── db/
+│   │   │   │   │   ├── index/
+│   │   │   │   │   │   ├── indexes/
+│   │   │   │   │   ├── query/
+│   │   │   ├── dist_checkpointing/
+│   │   │   │   ├── __pycache__/
+│   │   │   │   ├── strategies/
+│   │   │   │   │   ├── __pycache__/
+│   │   │   ├── distributed/
+│   │   │   │   ├── __pycache__/
+│   │   │   ├── fusions/
+│   │   │   │   ├── __pycache__/
+│   │   │   ├── inference/
+│   │   │   │   ├── ammo_support/
+│   │   │   │   │   ├── gpt/
+│   │   │   │   ├── engines/
+│   │   │   │   ├── model_inference_wrappers/
+│   │   │   │   │   ├── gpt/
+│   │   │   │   ├── text_generation_controllers/
+│   │   │   ├── models/
+│   │   │   │   ├── T5/
+│   │   │   │   ├── __pycache__/
+│   │   │   │   ├── bert/
+│   │   │   │   ├── common/
+│   │   │   │   │   ├── __pycache__/
+│   │   │   │   │   ├── embeddings/
+│   │   │   │   │   │   ├── __pycache__/
+│   │   │   │   │   ├── language_module/
+│   │   │   │   │   │   ├── __pycache__/
+│   │   │   │   │   ├── vision_module/
+│   │   │   │   ├── gpt/
+│   │   │   │   │   ├── __pycache__/
+│   │   │   │   ├── mamba/
+│   │   │   │   ├── multimodal/
+│   │   │   │   ├── retro/
+│   │   │   │   │   ├── __pycache__/
+│   │   │   │   ├── vision/
+│   │   │   ├── optimizer/
+│   │   │   │   ├── __pycache__/
+│   │   │   ├── pipeline_parallel/
+│   │   │   │   ├── __pycache__/
+│   │   │   ├── ssm/
+│   │   │   ├── tensor_parallel/
+│   │   │   │   ├── __pycache__/
+│   │   │   ├── transformer/
+│   │   │   │   ├── __pycache__/
+│   │   │   │   ├── custom_layers/
+│   │   │   │   │   ├── __pycache__/
+│   │   │   │   ├── moe/
+│   │   │   │   │   ├── __pycache__/
+│   │   ├── inference/
+│   │   │   ├── __pycache__/
+│   │   │   ├── gpt/
+│   │   │   ├── static/
+│   │   │   ├── text_generation/
+│   │   │   │   ├── __pycache__/
+│   │   ├── legacy/
+│   │   │   ├── data/
+│   │   │   │   ├── __pycache__/
+│   │   │   ├── fp16_deprecated/
+│   │   │   ├── fused_kernels/
+│   │   │   │   ├── __pycache__/
+│   │   │   │   ├── tests/
+│   │   │   ├── model/
+│   │   │   │   ├── __pycache__/
+│   │   │   │   ├── vision/
+│   │   │   ├── mpu/
+│   │   │   │   ├── tests/
+│   │   ├── training/
+│   │   │   ├── __pycache__/
+│   │   │   ├── tokenizer/
+│   │   │   │   ├── __pycache__/
+│   ├── mindspeed/
+│   │   ├── __pycache__/
+│   │   ├── auto_tuning/
+│   │   │   ├── config/
+│   │   │   ├── module/
+│   │   │   │   ├── communication/
+│   │   │   │   ├── memory/
+│   │   │   │   ├── operator/
+│   │   │   │   ├── parse/
+│   │   │   │   │   ├── profiling_parse/
+│   │   │   │   ├── search/
+│   │   │   ├── utils/
+│   │   │   │   ├── runner/
+│   │   ├── core/
+│   │   │   ├── __pycache__/
+│   │   │   ├── auto_parallel/
+│   │   │   │   ├── noise_predict_ckpt/
+│   │   │   ├── context_parallel/
+│   │   │   │   ├── __pycache__/
+│   │   │   │   ├── unaligned_cp/
+│   │   │   ├── data_parallel/
+│   │   │   │   ├── __pycache__/
+│   │   │   ├── datasets/
+│   │   │   ├── distributed/
+│   │   │   │   ├── layerzero/
+│   │   │   │   │   ├── comm/
+│   │   │   │   │   ├── debug/
+│   │   │   │   │   ├── megatron_adaptor/
+│   │   │   │   │   │   ├── optimizer/
+│   │   │   │   │   ├── runtime/
+│   │   │   │   │   ├── state/
+│   │   │   │   │   │   ├── scripts/
+│   │   │   │   │   ├── zero3/
+│   │   │   ├── fusions/
+│   │   │   │   ├── __pycache__/
+│   │   │   ├── memory/
+│   │   │   │   ├── adaptive_memory/
+│   │   │   │   ├── adaptive_recomputing/
+│   │   │   │   ├── auto_pipeline/
+│   │   │   │   ├── memory_fragmentation/
+│   │   │   │   ├── smart_swap/
+│   │   │   ├── models/
+│   │   │   │   ├── common/
+│   │   │   │   │   ├── embeddings/
+│   │   │   │   │   │   ├── __pycache__/
+│   │   │   │   ├── gpt/
+│   │   │   ├── performance/
+│   │   │   │   ├── auto_pipeline_perf/
+│   │   │   ├── pipeline_parallel/
+│   │   │   │   ├── __pycache__/
+│   │   │   ├── tensor_parallel/
+│   │   │   │   ├── __pycache__/
+│   │   │   │   ├── ascend_turbo/
+│   │   │   │   │   ├── __pycache__/
+│   │   │   │   ├── lcal_coc/
+│   │   │   │   │   ├── __pycache__/
+│   │   │   │   ├── tp_2d/
+│   │   │   │   │   ├── __pycache__/
+│   │   │   │   ├── unaligned_layers/
+│   │   │   ├── transformer/
+│   │   │   │   ├── __pycache__/
+│   │   │   │   ├── custom_layers/
+│   │   │   │   ├── moe/
+│   │   │   │   │   ├── __pycache__/
+│   │   │   │   │   ├── tp_2d/
+│   │   ├── features_manager/
+│   │   │   ├── __pycache__/
+│   │   │   ├── functional/
+│   │   │   │   ├── __pycache__/
+│   │   │   ├── tensor_parallel/
+│   │   │   │   ├── __pycache__/
+│   │   ├── functional/
+│   │   │   ├── profiler/
+│   │   ├── model/
+│   │   │   ├── __pycache__/
+│   │   ├── moe/
+│   │   │   ├── __pycache__/
+│   │   │   ├── ampipe/
+│   │   │   │   ├── __pycache__/
+│   │   ├── multi_modal/
+│   │   │   ├── conv3d/
+│   │   ├── op_builder/
+│   │   │   ├── __pycache__/
+│   │   ├── ops/
+│   │   │   ├── __pycache__/
+│   │   │   ├── csrc/
+│   │   │   │   ├── algorithm/
+│   │   │   │   │   ├── adaptive_cp/
+│   │   │   │   ├── atb/
+│   │   │   │   │   ├── inc/
+│   │   │   │   │   ├── utils/
+│   │   │   │   ├── cann/
+│   │   │   │   │   ├── inc/
+│   │   │   │   ├── flop_counter/
+│   │   │   │   ├── pluggable_allocator/
+│   │   │   │   │   ├── adaptive_recomputing/
+│   │   │   │   │   ├── memory_fragmentation/
+│   │   │   │   │   ├── smart_swap/
+│   │   ├── optimizer/
+│   │   │   ├── __pycache__/
+│   │   ├── run/
+│   │   ├── tokenizer/
+│   ├── mindspeed_llm/
+│   │   ├── __pycache__/
+│   │   ├── core/
+│   │   │   ├── __pycache__/
+│   │   │   ├── datasets/
+│   │   │   │   ├── __pycache__/
+│   │   │   ├── distributed/
+│   │   │   │   ├── __pycache__/
+│   │   │   ├── models/
+│   │   │   │   ├── __pycache__/
+│   │   │   │   ├── common/
+│   │   │   │   │   ├── __pycache__/
+│   │   │   │   │   ├── embeddings/
+│   │   │   │   │   │   ├── __pycache__/
+│   │   │   │   ├── gpt/
+│   │   │   │   │   ├── __pycache__/
+│   │   │   ├── optimizer/
+│   │   │   │   ├── __pycache__/
+│   │   │   ├── pipeline_parallel/
+│   │   │   │   ├── __pycache__/
+│   │   │   ├── tensor_parallel/
+│   │   │   │   ├── __pycache__/
+│   │   │   │   ├── tp_2d/
+│   │   │   ├── transformer/
+│   │   │   │   ├── __pycache__/
+│   │   │   │   ├── custom_layers/
+│   │   │   │   │   ├── __pycache__/
+│   │   │   │   ├── moe/
+│   │   │   │   │   ├── __pycache__/
+│   │   ├── inference/
+│   │   │   ├── __pycache__/
+│   │   │   ├── text_generation/
+│   │   │   │   ├── __pycache__/
+│   │   ├── legacy/
+│   │   │   ├── __pycache__/
+│   │   │   ├── data/
+│   │   │   │   ├── __pycache__/
+│   │   │   ├── model/
+│   │   │   │   ├── __pycache__/
+│   │   ├── tasks/
+│   │   │   ├── __pycache__/
+│   │   │   ├── checkpoint/
+│   │   │   ├── evaluation/
+│   │   │   │   ├── eval_api/
+│   │   │   │   ├── eval_impl/
+│   │   │   │   │   ├── fewshot_template/
+│   │   │   │   ├── eval_utils/
+│   │   │   ├── inference/
+│   │   │   │   ├── __pycache__/
+│   │   │   ├── models/
+│   │   │   │   ├── __pycache__/
+│   │   │   │   ├── common/
+│   │   │   │   │   ├── __pycache__/
+│   │   │   │   ├── spec/
+│   │   │   │   │   ├── __pycache__/
+│   │   │   │   ├── transformer/
+│   │   │   │   │   ├── __pycache__/
+│   │   │   ├── posttrain/
+│   │   │   │   ├── __pycache__/
+│   │   │   │   ├── base/
+│   │   │   │   ├── dpo/
+│   │   │   │   ├── lora/
+│   │   │   │   │   ├── __pycache__/
+│   │   │   │   ├── orm/
+│   │   │   │   ├── prm/
+│   │   │   │   ├── rejection_sampling/
+│   │   │   │   ├── rlxf/
+│   │   │   │   │   ├── ray_trainer/
+│   │   │   │   │   ├── single_controller/
+│   │   │   │   │   │   ├── base/
+│   │   │   │   │   │   │   ├── megatron/
+│   │   │   │   │   │   │   ├── register_center/
+│   │   │   │   │   │   ├── ray/
+│   │   │   │   │   ├── training/
+│   │   │   │   │   ├── utils/
+│   │   │   │   │   ├── workers/
+│   │   │   │   ├── sft/
+│   │   │   │   ├── trl_ppo/
+│   │   │   │   ├── verifier/
+│   │   │   │   │   ├── math_eval_toolkit/
+│   │   │   ├── preprocess/
+│   │   │   │   ├── __pycache__/
+│   │   │   ├── utils/
+│   │   │   │   ├── __pycache__/
+│   │   ├── training/
+│   │   │   ├── __pycache__/
+│   │   │   ├── tokenizer/
+│   │   │   │   ├── __pycache__/
+│   ├── mindspeed_rl/
+│   │   ├── __pycache__/
+│   │   ├── config_cls/
+│   │   │   ├── __pycache__/
+│   │   ├── datasets/
+│   │   │   ├── __pycache__/
+│   │   ├── models/
+│   │   │   ├── __pycache__/
+│   │   │   ├── base/
+│   │   │   │   ├── __pycache__/
+│   │   │   ├── loss/
+│   │   │   │   ├── __pycache__/
+│   │   │   ├── rollout/
+│   │   │   │   ├── __pycache__/
+│   │   │   │   ├── vllm_adapter/
+│   │   │   │   │   ├── __pycache__/
+│   │   │   │   │   ├── patch/
+│   │   │   │   │   │   ├── __pycache__/
+│   │   ├── trainer/
+│   │   │   ├── __pycache__/
+│   │   │   ├── utils/
+│   │   │   │   ├── __pycache__/
+│   │   ├── utils/
+│   │   │   ├── __pycache__/
+│   │   │   ├── math_eval_toolkit/
+│   │   │   │   ├── __pycache__/
+│   │   ├── workers/
+│   │   │   ├── __pycache__/
+│   │   │   ├── resharding/
+│   │   │   │   ├── __pycache__/
+│   │   │   ├── scheduler/
+│   │   │   │   ├── __pycache__/
+│   ├── model_from_hf/
+│   │   ├── qwen25-7b/
+│   ├── outputs/
+│   │   ├── 2025-07-03/
+│   │   │   ├── 15-36-07/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 15-44-35/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 15-48-03/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 16-39-58/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 16-40-45/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 16-41-26/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 16-42-02/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 18-03-21/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 18-07-18/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 18-15-12/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 18-58-41/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 19-17-57/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 19-20-47/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 19-23-57/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 19-26-20/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 19-42-32/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 19-59-51/
+│   │   │   │   ├── .hydra/
+│   │   ├── 2025-07-04/
+│   │   │   ├── 08-56-02/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 09-06-08/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 09-08-15/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 09-30-40/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 09-46-54/
+│   │   │   │   ├── .hydra/
+│   │   ├── 2025-07-07/
+│   │   │   ├── 09-31-40/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 09-34-07/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 09-44-34/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 09-56-35/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 10-03-31/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 10-06-46/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 10-11-44/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 10-13-46/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 10-25-41/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 10-34-49/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 10-42-19/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 10-50-06/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 10-57-24/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 11-01-39/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 11-08-27/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 11-15-38/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 11-47-46/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 11-52-31/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 13-33-48/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 13-36-13/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 13-38-50/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 13-40-45/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 15-08-38/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 15-11-32/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 15-17-52/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 15-22-19/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 15-48-11/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 16-03-46/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 16-09-06/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 16-29-43/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 16-31-32/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 16-34-29/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 16-45-13/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 16-55-27/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 17-05-13/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 17-24-26/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 17-25-51/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 17-36-56/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 17-39-53/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 17-42-12/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 17-48-29/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 17-50-58/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 17-52-24/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 17-54-34/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 19-58-42/
+│   │   │   │   ├── .hydra/
+│   │   ├── 2025-07-08/
+│   │   │   ├── 08-54-56/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 09-01-51/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 09-07-48/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 09-26-06/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 09-28-48/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 09-29-49/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 09-40-48/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 09-43-47/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 09-44-45/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 09-46-54/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 09-49-06/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 09-54-49/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 10-14-59/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 10-16-15/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 10-32-02/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 10-41-31/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 10-46-04/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 10-52-15/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 11-01-57/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 11-30-05/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 11-36-05/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 11-42-53/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 11-48-30/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 11-54-04/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 12-01-48/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 13-08-39/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 14-03-00/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 14-12-01/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 14-19-58/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 14-27-12/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 14-37-03/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 14-38-21/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 14-39-22/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 14-41-13/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 14-49-05/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 14-50-06/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 14-51-15/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 14-53-56/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 14-56-43/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 15-20-21/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 15-22-07/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 15-25-12/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 15-41-48/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 15-46-28/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 15-50-43/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 19-17-19/
+│   │   │   │   ├── .hydra/
+│   │   │   ├── 19-18-34/
+│   │   │   │   ├── .hydra/
+│   ├── sources/
+│   │   ├── images/
+│   │   │   ├── data_module/
+│   │   │   ├── deterministic_computation/
+│   │   │   ├── instruction_finetune/
+│   │   │   ├── integrated_worker/
+│   │   │   ├── logging/
+│   │   │   ├── r1_zero/
+│   │   │   ├── remove_padding/
+│   │   │   ├── resharding/
+│   ├── tests/
+│   │   ├── st/
+│   │   │   ├── configs/
+│   │   │   │   ├── model/
+│   │   │   ├── datasets/
+│   │   │   ├── mindstudio/
+│   │   │   ├── resharding/
+│   │   │   ├── train_engine/
+│   │   ├── test_tools/
+│   │   ├── ut/
+│   │   │   ├── config/
+│   │   │   ├── datasets/
+│   │   │   ├── models/
+│   │   │   │   ├── loss/
+│   │   │   ├── utils/
+│   │   │   ├── workers/
+│   │   │   │   ├── scheduler/
+├── datasets/
+│   ├── qn/
+│   ├── qn1/
+│   ├── training_responses/
+│   ├── training_responses1/
+│   │   ├── training_responses/
+├── qwen3_32b_dataset/
+│   ├── qwen3_32b/
+├── zipped/
