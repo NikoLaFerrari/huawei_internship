@@ -30,46 +30,15 @@ Traceback (most recent call last):
     values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
   File "/usr/local/python3.10.16/lib/python3.10/site-packages/ray/_private/worker.py", line 919, in get_objects
     raise value.as_instanceof_cause()
-ray.exceptions.RayTaskError(TypeError): ray::train() (pid=61720, ip=172.16.4.110)
-  File "/models/k0050048751/MindSpeed-RL-master/cli/train_grpo.py", line 159, in train
-    actor_worker.wait_all_ref_objs_run_over()
-  File "/models/k0050048751/MindSpeed-RL-master/mindspeed_rl/workers/scheduler/launcher.py", line 268, in wait_all_ref_objs_run_over
-    ray.get(self.temp_actor_ref_objs)
-ray.exceptions.RayTaskError(TypeError): ray::IntegratedWorker.initialize() (pid=62339, ip=172.16.4.110, actor_id=c2a04fea2513e64d28b61bbe04000000, repr=<mindspeed_rl.workers.integrated_worker.IntegratedWorker object at 0xffd0a6006260>)
-  File "/models/k0050048751/MindSpeed-RL-master/mindspeed_rl/workers/integrated_worker.py", line 84, in initialize
-    ActorHybridWorkerBase.initialize(self)
-  File "/models/k0050048751/MindSpeed-RL-master/mindspeed_rl/workers/actor_hybrid_worker.py", line 98, in initialize
-    self.inference_model = self._build_rollout()
-  File "/models/k0050048751/MindSpeed-RL-master/mindspeed_rl/workers/actor_hybrid_worker.py", line 460, in _build_rollout
-    rollout = VLLMInferEngine(
-  File "/models/k0050048751/MindSpeed-RL-master/mindspeed_rl/models/rollout/vllm_engine.py", line 178, in __init__
-    self.llm = LLM(
-  File "/usr/local/python3.10.16/lib/python3.10/site-packages/vllm/entrypoints/llm.py", line 243, in __init__
-    self.llm_engine = LLMEngine.from_engine_args(
-  File "/usr/local/python3.10.16/lib/python3.10/site-packages/vllm/v1/engine/llm_engine.py", line 150, in from_engine_args
-    return cls(vllm_config=vllm_config,
-  File "/usr/local/python3.10.16/lib/python3.10/site-packages/vllm/v1/engine/llm_engine.py", line 101, in __init__
-    self.engine_core = EngineCoreClient.make_client(
-  File "/usr/local/python3.10.16/lib/python3.10/site-packages/vllm/v1/engine/core_client.py", line 77, in make_client
-    return InprocClient(vllm_config, executor_class, log_stats)
-  File "/usr/local/python3.10.16/lib/python3.10/site-packages/vllm/v1/engine/core_client.py", line 223, in __init__
-    self.engine_core = EngineCore(*args, **kwargs)
-  File "/usr/local/python3.10.16/lib/python3.10/site-packages/vllm/v1/engine/core.py", line 83, in __init__
-    self._initialize_kv_caches(vllm_config)
-  File "/usr/local/python3.10.16/lib/python3.10/site-packages/vllm/v1/engine/core.py", line 168, in _initialize_kv_caches
-    self.model_executor.initialize_from_config(kv_cache_configs)
-  File "/usr/local/python3.10.16/lib/python3.10/site-packages/vllm/v1/executor/abstract.py", line 64, in initialize_from_config
-    self.collective_rpc("initialize_from_config",
-  File "/usr/local/python3.10.16/lib/python3.10/site-packages/vllm/executor/uniproc_executor.py", line 57, in collective_rpc
-    answer = run_method(self.driver_worker, method, args, kwargs)
-  File "/usr/local/python3.10.16/lib/python3.10/site-packages/vllm/utils.py", line 2671, in run_method
-    return func(*args, **kwargs)
-  File "/usr/local/python3.10.16/lib/python3.10/site-packages/vllm/worker/worker_base.py", line 601, in initialize_from_config
-    self.worker.initialize_from_config(kv_cache_config)  # type: ignore
-  File "/usr/local/python3.10.16/lib/python3.10/site-packages/vllm-ascend-main/vllm_ascend/worker/worker_v1.py", line 227, in initialize_from_config
-    self.model_runner.initialize_kv_cache(kv_cache_config)
-  File "/usr/local/python3.10.16/lib/python3.10/site-packages/vllm-ascend-main/vllm_ascend/worker/model_runner_v1.py", line 1600, in initialize_kv_cache
-    self.input_batch = InputBatch(
-TypeError: InputBatch.__init__() got an unexpected keyword argument 'block_size'
-/usr/local/python3.10.16/lib/python3.10/tempfile.py:869: ResourceWarning: Implicitly cleaning up <TemporaryDirectory '/tmp/tmp7868a3nf'>
+ray.exceptions.RayTaskError(KeyError): ray::train() (pid=2182, ip=172.16.4.110)
+  File "/models/k0050048751/MindSpeed-RL-master/cli/train_grpo.py", line 146, in train
+    train_ds, _, _ = build_train_valid_test_datasets(
+  File "/models/k0050048751/MindSpeed-RL-master/mindspeed_rl/datasets/build_dataset.py", line 70, in build_train_valid_test_datasets
+    all_train_datasets, all_valid_datasets, all_test_datasets = _build_train_valid_test_datasets(
+  File "/models/k0050048751/MindSpeed-RL-master/mindspeed_rl/datasets/build_dataset.py", line 116, in _build_train_valid_test_datasets
+    packed_indexed_dataset = get_packed_indexed_dataset(data_prefix=data_prefix,
+  File "/models/k0050048751/MindSpeed-RL-master/mindspeed_rl/datasets/indexed_dataset.py", line 39, in get_packed_indexed_dataset
+    filter_mask = packed_dataset['input_ids'].get_filter_mask()
+KeyError: 'input_ids'
+/usr/local/python3.10.16/lib/python3.10/tempfile.py:869: ResourceWarning: Implicitly cleaning up <TemporaryDirectory '/tmp/tmpv40n0lke'>
   _warnings.warn(warn_message, ResourceWarning)
