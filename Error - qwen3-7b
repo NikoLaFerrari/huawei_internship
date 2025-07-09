@@ -30,63 +30,76 @@ Traceback (most recent call last):
     values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
   File "/usr/local/python3.10.16/lib/python3.10/site-packages/ray/_private/worker.py", line 919, in get_objects
     raise value.as_instanceof_cause()
-ray.exceptions.RayTaskError(AssertionError): ray::train() (pid=36675, ip=71.72.2.231)
+ray.exceptions.RayTaskError(RuntimeError): ray::train() (pid=39406, ip=71.72.2.231)
   File "/data/jagan/MindSpeed-RL-master/cli/train_grpo.py", line 160, in train
     actor_worker.wait_all_ref_objs_run_over()
   File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/scheduler/launcher.py", line 268, in wait_all_ref_objs_run_over
     ray.get(self.temp_actor_ref_objs)
-ray.exceptions.RayTaskError(AssertionError): ray::IntegratedWorker.initialize() (pid=37009, ip=71.72.2.231, actor_id=b5ea74747cda0164c219e59b2a000000, repr=<mindspeed_rl.workers.integrated_worker.IntegratedWorker object at 0xffd0a00f9600>)
+ray.exceptions.RayTaskError(RuntimeError): ray::IntegratedWorker.initialize() (pid=39740, ip=71.72.2.231, actor_id=ec415ec6c1d5003ccb6367642b000000, repr=<mindspeed_rl.workers.integrated_worker.IntegratedWorker object at 0xffd0a72cd720>)
   File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/integrated_worker.py", line 84, in initialize
     ActorHybridWorkerBase.initialize(self)
-  File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/actor_hybrid_worker.py", line 87, in initialize
-    self.setup_distributed_rank()
-  File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/base_worker.py", line 214, in setup_distributed_rank
-    self.initialize_func(config=config)
-  File "/data/jagan/MindSpeed-RL-master/cli/train_grpo.py", line 444, in initialize_megatron
-    validate_args(args, args_defaults)
-  File "/data/jagan/MindSpeed-RL-master/mindspeed_llm/training/arguments.py", line 1492, in wrapper
-    megatron_validate_args(args, defaults)
-  File "/data/jagan/MindSpeed-RL-master/megatron/training/arguments.py", line 280, in validate_args
-    assert args.use_distributed_optimizer, \
-AssertionError: --overlap-param-gather only supported with distributed optimizer
-/usr/local/python3.10.16/lib/python3.10/tempfile.py:869: ResourceWarning: Implicitly cleaning up <TemporaryDirectory '/tmp/tmp3_jfqs1g'>
+  File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/actor_hybrid_worker.py", line 88, in initialize
+    self.model, self.optimizer, self.opt_param_scheduler = self._build_model_optimizer()
+  File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/actor_hybrid_worker.py", line 445, in _build_model_optimizer
+    actor_module, optimizer, opt_param_scheduler = self.setup_model_and_optimizer(
+  File "/data/jagan/MindSpeed-RL-master/megatron/training/training.py", line 552, in setup_model_and_optimizer
+    timers('load-checkpoint', log_level=0).start(barrier=True)
+  File "/data/jagan/MindSpeed-RL-master/megatron/core/timers.py", line 92, in start
+    torch.distributed.barrier(group=self._barrier_group)
+  File "/usr/local/python3.10.16/lib/python3.10/site-packages/torch/distributed/c10d_logger.py", line 83, in wrapper
+    return func(*args, **kwargs)
+  File "/usr/local/python3.10.16/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py", line 4159, in barrier
+    work = group.barrier(opts=opts)
+RuntimeError: create_config:build/CMakeFiles/torch_npu.dir/compiler_depend.ts:102 HCCL function error: hcclCommInitRootInfoConfig(numRanks, &rootInfo, rank, config, &(comm->hcclComm_)), error code is 1
+[ERROR] 2025-07-09-14:41:23 (PID:39740, Device:0, RankID:0) ERR02200 DIST call hccl api failed.
+/usr/local/python3.10.16/lib/python3.10/tempfile.py:869: ResourceWarning: Implicitly cleaning up <TemporaryDirectory '/tmp/tmpkai2a9ug'>
   _warnings.warn(warn_message, ResourceWarning)
-(IntegratedWorker pid=37009) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=37009) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=37009) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=37009) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=37009) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=37009) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=37009) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=37009) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=37009) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=37009) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=37009) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=37009) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=37009) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=37009) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=37009) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=37009) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=37009) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=37009) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=37009) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=37009) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=37009) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=37009) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=37009) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=37009) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=37009) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=37009) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=37009) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=37009) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=37009) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=37009) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=37009) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=37009) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-[ERROR] 2025-07-09-14:32:48 (PID:31869, Device:-1, RankID:-1) ERR99999 UNKNOWN applicaiton exception
-(IntegratedWorker pid=37009) using world size: 16, data-parallel size: 4, context-parallel size: 1 tensor-model-parallel size: 2, pipeline-model-parallel size: 2 
-(IntegratedWorker pid=37009) WARNING: Setting args.overlap_p2p_comm to False since non-interleaved schedule does not support overlapping p2p communication
-(IntegratedWorker pid=37009) using world size: 16, data-parallel size: 4, context-parallel size: 1 tensor-model-parallel size: 2, pipeline-model-parallel size: 2 
-(IntegratedWorker pid=37009) WARNING: Setting args.overlap_p2p_comm to False since non-interleaved schedule does not support overlapping p2p communication
-(IntegratedWorker pid=37009) using world size: 16, data-parallel size: 4, context-parallel size: 1 tensor-model-parallel size: 2, pipeline-model-parallel size: 2 
-(IntegratedWorker pid=37009) WARNING: Setting args.overlap_p2p_comm to False since non-interleaved schedule does not support overlapping p2p communication
+(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
+(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
+(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
+(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
+(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
+(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
+(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
+(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
+(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
+(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
+(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
+(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
+(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
+(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
+(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
+(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
+(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
+(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
+(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
+(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
+(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
+(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
+(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
+(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
+(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
+(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
+(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
+(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
+(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
+(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
+(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
+(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
+(train pid=39406) Unhandled error (suppress with 'RAY_IGNORE_UNHANDLED_ERRORS=1'): ray::IntegratedWorker.initialize() (pid=40158, ip=71.72.2.231, actor_id=a8c1acc606fc0cc52b5865f32b000000, repr=<mindspeed_rl.workers.integrated_worker.IntegratedWorker object at 0xffd08fee1540>)
+(train pid=39406)   File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/integrated_worker.py", line 84, in initialize
+(train pid=39406)     ActorHybridWorkerBase.initialize(self)
+(train pid=39406)   File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/actor_hybrid_worker.py", line 88, in initialize
+(train pid=39406)     self.model, self.optimizer, self.opt_param_scheduler = self._build_model_optimizer()
+(train pid=39406)   File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/actor_hybrid_worker.py", line 445, in _build_model_optimizer
+(train pid=39406)     actor_module, optimizer, opt_param_scheduler = self.setup_model_and_optimizer(
+(train pid=39406)   File "/data/jagan/MindSpeed-RL-master/megatron/training/training.py", line 552, in setup_model_and_optimizer
+(train pid=39406)     timers('load-checkpoint', log_level=0).start(barrier=True)
+(train pid=39406)   File "/data/jagan/MindSpeed-RL-master/megatron/core/timers.py", line 92, in start
+(train pid=39406)     torch.distributed.barrier(group=self._barrier_group)
+(train pid=39406)   File "/usr/local/python3.10.16/lib/python3.10/site-packages/torch/distributed/c10d_logger.py", line 83, in wrapper
+(train pid=39406)     return func(*args, **kwargs)
+(train pid=39406)   File "/usr/local/python3.10.16/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py", line 4159, in barrier
+(train pid=39406)     work = group.barrier(opts=opts)
+(train pid=39406) RuntimeError: create_config:build/CMakeFiles/torch_npu.dir/compiler_depend.ts:102 HCCL function error: hcclCommInitRootInfoConfig(numRanks, &rootInfo, rank, config, &(comm->hcclComm_)), error code is 1
+(train pid=39406) [ERROR] 2025-07-09-14:41:24 (PID:40158, Device:0, RankID:8) ERR02200 DIST call hccl api failed.
