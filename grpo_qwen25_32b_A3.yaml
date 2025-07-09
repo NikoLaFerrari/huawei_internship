@@ -1,3 +1,5 @@
+# This is the grpo config file which contains the values of attributes which are passed 
+# to the megatron core when training is started
 defaults:
   - model:
       - qwen25_7b
