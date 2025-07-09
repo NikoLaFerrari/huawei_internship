@@ -1,6 +1,6 @@
 Error executing job with overrides: []
 Traceback (most recent call last):
-  File "/data/jagan/MindSpeed-RL-master/cli/train_grpo.py", line 576, in <module>
+  File "/models/k0050048751/MindSpeed-RL-master/cli/train_grpo.py", line 574, in <module>
     main()
   File "/usr/local/python3.10.16/lib/python3.10/site-packages/hydra/main.py", line 94, in decorated_main
     _run_hydra(
@@ -20,7 +20,7 @@ Traceback (most recent call last):
     raise self._return_value
   File "/usr/local/python3.10.16/lib/python3.10/site-packages/hydra/core/utils.py", line 186, in run_job
     ret.return_value = task_function(task_cfg)
-  File "/data/jagan/MindSpeed-RL-master/cli/train_grpo.py", line 572, in main
+  File "/models/k0050048751/MindSpeed-RL-master/cli/train_grpo.py", line 570, in main
     ray.get(train.remote(config))
   File "/usr/local/python3.10.16/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
     return fn(*args, **kwargs)
@@ -30,76 +30,46 @@ Traceback (most recent call last):
     values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
   File "/usr/local/python3.10.16/lib/python3.10/site-packages/ray/_private/worker.py", line 919, in get_objects
     raise value.as_instanceof_cause()
-ray.exceptions.RayTaskError(RuntimeError): ray::train() (pid=39406, ip=71.72.2.231)
-  File "/data/jagan/MindSpeed-RL-master/cli/train_grpo.py", line 160, in train
+ray.exceptions.RayTaskError(TypeError): ray::train() (pid=61720, ip=172.16.4.110)
+  File "/models/k0050048751/MindSpeed-RL-master/cli/train_grpo.py", line 159, in train
     actor_worker.wait_all_ref_objs_run_over()
-  File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/scheduler/launcher.py", line 268, in wait_all_ref_objs_run_over
+  File "/models/k0050048751/MindSpeed-RL-master/mindspeed_rl/workers/scheduler/launcher.py", line 268, in wait_all_ref_objs_run_over
     ray.get(self.temp_actor_ref_objs)
-ray.exceptions.RayTaskError(RuntimeError): ray::IntegratedWorker.initialize() (pid=39740, ip=71.72.2.231, actor_id=ec415ec6c1d5003ccb6367642b000000, repr=<mindspeed_rl.workers.integrated_worker.IntegratedWorker object at 0xffd0a72cd720>)
-  File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/integrated_worker.py", line 84, in initialize
+ray.exceptions.RayTaskError(TypeError): ray::IntegratedWorker.initialize() (pid=62339, ip=172.16.4.110, actor_id=c2a04fea2513e64d28b61bbe04000000, repr=<mindspeed_rl.workers.integrated_worker.IntegratedWorker object at 0xffd0a6006260>)
+  File "/models/k0050048751/MindSpeed-RL-master/mindspeed_rl/workers/integrated_worker.py", line 84, in initialize
     ActorHybridWorkerBase.initialize(self)
-  File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/actor_hybrid_worker.py", line 88, in initialize
-    self.model, self.optimizer, self.opt_param_scheduler = self._build_model_optimizer()
-  File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/actor_hybrid_worker.py", line 445, in _build_model_optimizer
-    actor_module, optimizer, opt_param_scheduler = self.setup_model_and_optimizer(
-  File "/data/jagan/MindSpeed-RL-master/megatron/training/training.py", line 552, in setup_model_and_optimizer
-    timers('load-checkpoint', log_level=0).start(barrier=True)
-  File "/data/jagan/MindSpeed-RL-master/megatron/core/timers.py", line 92, in start
-    torch.distributed.barrier(group=self._barrier_group)
-  File "/usr/local/python3.10.16/lib/python3.10/site-packages/torch/distributed/c10d_logger.py", line 83, in wrapper
+  File "/models/k0050048751/MindSpeed-RL-master/mindspeed_rl/workers/actor_hybrid_worker.py", line 98, in initialize
+    self.inference_model = self._build_rollout()
+  File "/models/k0050048751/MindSpeed-RL-master/mindspeed_rl/workers/actor_hybrid_worker.py", line 460, in _build_rollout
+    rollout = VLLMInferEngine(
+  File "/models/k0050048751/MindSpeed-RL-master/mindspeed_rl/models/rollout/vllm_engine.py", line 178, in __init__
+    self.llm = LLM(
+  File "/usr/local/python3.10.16/lib/python3.10/site-packages/vllm/entrypoints/llm.py", line 243, in __init__
+    self.llm_engine = LLMEngine.from_engine_args(
+  File "/usr/local/python3.10.16/lib/python3.10/site-packages/vllm/v1/engine/llm_engine.py", line 150, in from_engine_args
+    return cls(vllm_config=vllm_config,
+  File "/usr/local/python3.10.16/lib/python3.10/site-packages/vllm/v1/engine/llm_engine.py", line 101, in __init__
+    self.engine_core = EngineCoreClient.make_client(
+  File "/usr/local/python3.10.16/lib/python3.10/site-packages/vllm/v1/engine/core_client.py", line 77, in make_client
+    return InprocClient(vllm_config, executor_class, log_stats)
+  File "/usr/local/python3.10.16/lib/python3.10/site-packages/vllm/v1/engine/core_client.py", line 223, in __init__
+    self.engine_core = EngineCore(*args, **kwargs)
+  File "/usr/local/python3.10.16/lib/python3.10/site-packages/vllm/v1/engine/core.py", line 83, in __init__
+    self._initialize_kv_caches(vllm_config)
+  File "/usr/local/python3.10.16/lib/python3.10/site-packages/vllm/v1/engine/core.py", line 168, in _initialize_kv_caches
+    self.model_executor.initialize_from_config(kv_cache_configs)
+  File "/usr/local/python3.10.16/lib/python3.10/site-packages/vllm/v1/executor/abstract.py", line 64, in initialize_from_config
+    self.collective_rpc("initialize_from_config",
+  File "/usr/local/python3.10.16/lib/python3.10/site-packages/vllm/executor/uniproc_executor.py", line 57, in collective_rpc
+    answer = run_method(self.driver_worker, method, args, kwargs)
+  File "/usr/local/python3.10.16/lib/python3.10/site-packages/vllm/utils.py", line 2671, in run_method
     return func(*args, **kwargs)
-  File "/usr/local/python3.10.16/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py", line 4159, in barrier
-    work = group.barrier(opts=opts)
-RuntimeError: create_config:build/CMakeFiles/torch_npu.dir/compiler_depend.ts:102 HCCL function error: hcclCommInitRootInfoConfig(numRanks, &rootInfo, rank, config, &(comm->hcclComm_)), error code is 1
-[ERROR] 2025-07-09-14:41:23 (PID:39740, Device:0, RankID:0) ERR02200 DIST call hccl api failed.
-/usr/local/python3.10.16/lib/python3.10/tempfile.py:869: ResourceWarning: Implicitly cleaning up <TemporaryDirectory '/tmp/tmpkai2a9ug'>
+  File "/usr/local/python3.10.16/lib/python3.10/site-packages/vllm/worker/worker_base.py", line 601, in initialize_from_config
+    self.worker.initialize_from_config(kv_cache_config)  # type: ignore
+  File "/usr/local/python3.10.16/lib/python3.10/site-packages/vllm-ascend-main/vllm_ascend/worker/worker_v1.py", line 227, in initialize_from_config
+    self.model_runner.initialize_kv_cache(kv_cache_config)
+  File "/usr/local/python3.10.16/lib/python3.10/site-packages/vllm-ascend-main/vllm_ascend/worker/model_runner_v1.py", line 1600, in initialize_kv_cache
+    self.input_batch = InputBatch(
+TypeError: InputBatch.__init__() got an unexpected keyword argument 'block_size'
+/usr/local/python3.10.16/lib/python3.10/tempfile.py:869: ResourceWarning: Implicitly cleaning up <TemporaryDirectory '/tmp/tmp7868a3nf'>
   _warnings.warn(warn_message, ResourceWarning)
-(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(IntegratedWorker pid=39740) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
-(train pid=39406) Unhandled error (suppress with 'RAY_IGNORE_UNHANDLED_ERRORS=1'): ray::IntegratedWorker.initialize() (pid=40158, ip=71.72.2.231, actor_id=a8c1acc606fc0cc52b5865f32b000000, repr=<mindspeed_rl.workers.integrated_worker.IntegratedWorker object at 0xffd08fee1540>)
-(train pid=39406)   File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/integrated_worker.py", line 84, in initialize
-(train pid=39406)     ActorHybridWorkerBase.initialize(self)
-(train pid=39406)   File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/actor_hybrid_worker.py", line 88, in initialize
-(train pid=39406)     self.model, self.optimizer, self.opt_param_scheduler = self._build_model_optimizer()
-(train pid=39406)   File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/actor_hybrid_worker.py", line 445, in _build_model_optimizer
-(train pid=39406)     actor_module, optimizer, opt_param_scheduler = self.setup_model_and_optimizer(
-(train pid=39406)   File "/data/jagan/MindSpeed-RL-master/megatron/training/training.py", line 552, in setup_model_and_optimizer
-(train pid=39406)     timers('load-checkpoint', log_level=0).start(barrier=True)
-(train pid=39406)   File "/data/jagan/MindSpeed-RL-master/megatron/core/timers.py", line 92, in start
-(train pid=39406)     torch.distributed.barrier(group=self._barrier_group)
-(train pid=39406)   File "/usr/local/python3.10.16/lib/python3.10/site-packages/torch/distributed/c10d_logger.py", line 83, in wrapper
-(train pid=39406)     return func(*args, **kwargs)
-(train pid=39406)   File "/usr/local/python3.10.16/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py", line 4159, in barrier
-(train pid=39406)     work = group.barrier(opts=opts)
-(train pid=39406) RuntimeError: create_config:build/CMakeFiles/torch_npu.dir/compiler_depend.ts:102 HCCL function error: hcclCommInitRootInfoConfig(numRanks, &rootInfo, rank, config, &(comm->hcclComm_)), error code is 1
-(train pid=39406) [ERROR] 2025-07-09-14:41:24 (PID:40158, Device:0, RankID:8) ERR02200 DIST call hccl api failed.
