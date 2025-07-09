@@ -1,80 +1,3 @@
-[root@lvqu_103 MindSpeed-RL-master]# ./run
-/usr/local/python3.10.16/lib/python3.10/site-packages/torch_npu/contrib/transfer_to_npu.py:292: ImportWarning: 
-    *************************************************************************************************************
-    The torch.Tensor.cuda and torch.nn.Module.cuda are replaced with torch.Tensor.npu and torch.nn.Module.npu now..
-    The torch.cuda.DoubleTensor is replaced with torch.npu.FloatTensor cause the double type is not supported now..
-    The backend in torch.distributed.init_process_group set to hccl now..
-    The torch.cuda.* and torch.cuda.amp.* are replaced with torch.npu.* and torch.npu.amp.* now..
-    The device parameters have been replaced with npu in the function below:
-    torch.logspace, torch.randint, torch.hann_window, torch.rand, torch.full_like, torch.ones_like, torch.rand_like, torch.randperm, torch.arange, torch.frombuffer, torch.normal, torch._empty_per_channel_affine_quantized, torch.empty_strided, torch.empty_like, torch.scalar_tensor, torch.tril_indices, torch.bartlett_window, torch.ones, torch.sparse_coo_tensor, torch.randn, torch.kaiser_window, torch.tensor, torch.triu_indices, torch.as_tensor, torch.zeros, torch.randint_like, torch.full, torch.eye, torch._sparse_csr_tensor_unsafe, torch.empty, torch._sparse_coo_tensor_unsafe, torch.blackman_window, torch.zeros_like, torch.range, torch.sparse_csr_tensor, torch.randn_like, torch.from_file, torch._cudnn_init_dropout_state, torch._empty_affine_quantized, torch.linspace, torch.hamming_window, torch.empty_quantized, torch._pin_memory, torch.autocast, torch.load, torch.Generator, torch.set_default_device, torch.Tensor.new_empty, torch.Tensor.new_empty_strided, torch.Tensor.new_full, torch.Tensor.new_ones, torch.Tensor.new_tensor, torch.Tensor.new_zeros, torch.Tensor.to, torch.Tensor.pin_memory, torch.nn.Module.to, torch.nn.Module.to_empty
-    *************************************************************************************************************
-    
-  warnings.warn(msg, ImportWarning)
-/usr/local/python3.10.16/lib/python3.10/site-packages/torch_npu/contrib/transfer_to_npu.py:247: RuntimeWarning: torch.jit.script and torch.jit.script_method will be disabled by transfer_to_npu, which currently does not support them, if you need to enable them, please do not use transfer_to_npu.
-  warnings.warn(msg, RuntimeWarning)
-[2025-07-08 14:39:15,645] [INFO] [real_accelerator.py:222:get_accelerator] Setting ds_accelerator to npu (auto detect)
-INFO 07-08 14:39:16 [importing.py:16] Triton not installed or not compatible; certain GPU-related functions will not be available.
-WARNING 07-08 14:39:16 [importing.py:28] Triton is not installed. Using dummy decorators. Install it via `pip install triton` to enable kernel compilation.
-INFO 07-08 14:39:16 [__init__.py:31] Available plugins for group vllm.platform_plugins:
-INFO 07-08 14:39:16 [__init__.py:33] - ascend -> vllm_ascend:register
-INFO 07-08 14:39:16 [__init__.py:36] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
-INFO 07-08 14:39:16 [__init__.py:234] Platform plugin ascend is activated
-WARNING 07-08 14:39:19 [_custom_ops.py:21] Failed to import from vllm._C with ImportError('/usr/local/python3.10.16/lib/python3.10/site-packages/vllm/_C.abi3.so: undefined symbol: _ZN3c108ListType3getERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEENS_4Type24SingletonOrSharedTypePtrIS9_EE')
-Initialized ProcessPoolExecutor with 16 workers
-/usr/local/python3.10.16/lib/python3.10/site-packages/hydra/_internal/defaults_list.py:251: UserWarning: In 'grpo_qwen25_7b_A3.yaml': Defaults list is missing `_self_`. See https://hydra.cc/docs/1.2/upgrades/1.0_to_1.1/default_composition_order for more information
-  warnings.warn(msg, UserWarning)
-ANTLR runtime and generated code versions disagree: 4.7.2!=4.9.3
-ANTLR runtime and generated code versions disagree: 4.7.2!=4.9.3
-ANTLR runtime and generated code versions disagree: 4.7.2!=4.9.3
-ANTLR runtime and generated code versions disagree: 4.7.2!=4.9.3
-2025-07-08 14:39:22,335 - INFO - [2025-07-08 06:39:22] INFO start initializing local ray cluster
-2025-07-08 14:39:22,341 - INFO - [2025-07-08 06:39:22] INFO ray init with runtime_env: {'env_vars': {'RAY_EXPERIMENTAL_NOSET_ASCEND_RT_VISIBLE_DEVICES': 'true', 'TOKENIZERS_PARALLELISM': 'true', 'NCCL_DEBUG': 'WARN', 'PYTORCH_NPU_ALLOC_CONF': 'expandable_segments:True', 'HCCL_CONNECT_TIMEOUT': '1800', 'HCCL_EXEC_TIMEOUT': '3600', 'HCCL_IF_BASE_PORT': '48000', 'CUDA_DEVICE_MAX_CONNECTIONS': '1', 'HYDRA_FULL_ERROR': '1', 'VLLM_DP_SIZE': '1', 'USING_LCCL_COM': '0', 'HCCL_BUFFSIZE': '256', 'VLLM_USE_V1': '1', 'VLLM_VERSION': '0.9.0', 'VLLM_ENABLE_GRAPH_MODE': '0', 'VLLM_ENABLE_MC2': '0', 'VLLM_ASCEND_ENABLE_TOPK_OPTIMZE': '1', 'TASK_QUEUE_ENABLE': '2', 'CPU_AFFINITY_CONF': '1', 'LCAL_COMM_ID': '127.0.0.1:27001', 'IS_MULTIMODAL': 'False'}}
-2025-07-08 14:39:22,366	INFO worker.py:1654 -- Connecting to existing Ray cluster at address: 71.72.2.231:6344...
-2025-07-08 14:39:22,378	INFO worker.py:1841 -- Connected to Ray cluster.
-(pid=9338) /usr/local/python3.10.16/lib/python3.10/site-packages/torch_npu/contrib/transfer_to_npu.py:292: ImportWarning: 
-(pid=9338)     *************************************************************************************************************
-(pid=9338)     The torch.Tensor.cuda and torch.nn.Module.cuda are replaced with torch.Tensor.npu and torch.nn.Module.npu now..
-(pid=9338)     The torch.cuda.DoubleTensor is replaced with torch.npu.FloatTensor cause the double type is not supported now..
-(pid=9338)     The backend in torch.distributed.init_process_group set to hccl now..
-(pid=9338)     The torch.cuda.* and torch.cuda.amp.* are replaced with torch.npu.* and torch.npu.amp.* now..
-(pid=9338)     The device parameters have been replaced with npu in the function below:
-(pid=9338)     torch.logspace, torch.randint, torch.hann_window, torch.rand, torch.full_like, torch.ones_like, torch.rand_like, torch.randperm, torch.arange, torch.frombuffer, torch.normal, torch._empty_per_channel_affine_quantized, torch.empty_strided, torch.empty_like, torch.scalar_tensor, torch.tril_indices, torch.bartlett_window, torch.ones, torch.sparse_coo_tensor, torch.randn, torch.kaiser_window, torch.tensor, torch.triu_indices, torch.as_tensor, torch.zeros, torch.randint_like, torch.full, torch.eye, torch._sparse_csr_tensor_unsafe, torch.empty, torch._sparse_coo_tensor_unsafe, torch.blackman_window, torch.zeros_like, torch.range, torch.sparse_csr_tensor, torch.randn_like, torch.from_file, torch._cudnn_init_dropout_state, torch._empty_affine_quantized, torch.linspace, torch.hamming_window, torch.empty_quantized, torch._pin_memory, torch.autocast, torch.load, torch.Generator, torch.set_default_device, torch.Tensor.new_empty, torch.Tensor.new_empty_strided, torch.Tensor.new_full, torch.Tensor.new_ones, torch.Tensor.new_tensor, torch.Tensor.new_zeros, torch.Tensor.to, torch.Tensor.pin_memory, torch.nn.Module.to, torch.nn.Module.to_empty
-(pid=9338)     *************************************************************************************************************
-(pid=9338)     
-(pid=9338)   warnings.warn(msg, ImportWarning)
-(pid=9338) /usr/local/python3.10.16/lib/python3.10/site-packages/torch_npu/contrib/transfer_to_npu.py:247: RuntimeWarning: torch.jit.script and torch.jit.script_method will be disabled by transfer_to_npu, which currently does not support them, if you need to enable them, please do not use transfer_to_npu.
-(pid=9338)   warnings.warn(msg, RuntimeWarning)
-(pid=9338) /usr/local/python3.10.16/lib/python3.10/site-packages/torch_npu/contrib/transfer_to_npu.py:292: ImportWarning: 
-(pid=9338)     *************************************************************************************************************
-(pid=9338)     The torch.Tensor.cuda and torch.nn.Module.cuda are replaced with torch.Tensor.npu and torch.nn.Module.npu now..
-(pid=9338)     The torch.cuda.DoubleTensor is replaced with torch.npu.FloatTensor cause the double type is not supported now..
-(pid=9338)     The backend in torch.distributed.init_process_group set to hccl now..
-(pid=9338)     The torch.cuda.* and torch.cuda.amp.* are replaced with torch.npu.* and torch.npu.amp.* now..
-(pid=9338)     The device parameters have been replaced with npu in the function below:
-(pid=9338)     torch.logspace, torch.randint, torch.hann_window, torch.rand, torch.full_like, torch.ones_like, torch.rand_like, torch.randperm, torch.arange, torch.frombuffer, torch.normal, torch._empty_per_channel_affine_quantized, torch.empty_strided, torch.empty_like, torch.scalar_tensor, torch.tril_indices, torch.bartlett_window, torch.ones, torch.sparse_coo_tensor, torch.randn, torch.kaiser_window, torch.tensor, torch.triu_indices, torch.as_tensor, torch.zeros, torch.randint_like, torch.full, torch.eye, torch._sparse_csr_tensor_unsafe, torch.empty, torch._sparse_coo_tensor_unsafe, torch.blackman_window, torch.zeros_like, torch.range, torch.sparse_csr_tensor, torch.randn_like, torch.from_file, torch._cudnn_init_dropout_state, torch._empty_affine_quantized, torch.linspace, torch.hamming_window, torch.empty_quantized, torch._pin_memory, torch.autocast, torch.load, torch.Generator, torch.set_default_device, torch.Tensor.new_empty, torch.Tensor.new_empty_strided, torch.Tensor.new_full, torch.Tensor.new_ones, torch.Tensor.new_tensor, torch.Tensor.new_zeros, torch.Tensor.to, torch.Tensor.pin_memory, torch.nn.Module.to, torch.nn.Module.to_empty
-(pid=9338)     *************************************************************************************************************
-(pid=9338)     
-(pid=9338)   warnings.warn(msg, ImportWarning)
-(pid=9338) /usr/local/python3.10.16/lib/python3.10/site-packages/torch_npu/contrib/transfer_to_npu.py:247: RuntimeWarning: torch.jit.script and torch.jit.script_method will be disabled by transfer_to_npu, which currently does not support them, if you need to enable them, please do not use transfer_to_npu.
-(pid=9338)   warnings.warn(msg, RuntimeWarning)
-(pid=9338) Initialized ProcessPoolExecutor with 16 workers
-(pid=9338) Initialized ProcessPoolExecutor with 16 workers
-(pid=9338) [2025-07-08 14:39:33,364] [INFO] [real_accelerator.py:222:get_accelerator] Setting ds_accelerator to npu (auto detect)
-(pid=9338) [2025-07-08 14:39:33,364] [INFO] [real_accelerator.py:222:get_accelerator] Setting ds_accelerator to npu (auto detect)
-(pid=9338) INFO 07-08 14:39:34 [importing.py:16] Triton not installed or not compatible; certain GPU-related functions will not be available.
-(pid=9338) WARNING 07-08 14:39:34 [importing.py:28] Triton is not installed. Using dummy decorators. Install it via `pip install triton` to enable kernel compilation.
-(pid=9338) INFO 07-08 14:39:34 [importing.py:16] Triton not installed or not compatible; certain GPU-related functions will not be available.
-(pid=9338) WARNING 07-08 14:39:34 [importing.py:28] Triton is not installed. Using dummy decorators. Install it via `pip install triton` to enable kernel compilation.
-(pid=9338) INFO 07-08 14:39:34 [__init__.py:31] Available plugins for group vllm.platform_plugins:
-(pid=9338) INFO 07-08 14:39:34 [__init__.py:33] - ascend -> vllm_ascend:register
-(pid=9338) INFO 07-08 14:39:34 [__init__.py:36] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
-(pid=9338) INFO 07-08 14:39:34 [__init__.py:234] Platform plugin ascend is activated
-(pid=9338) INFO 07-08 14:39:34 [__init__.py:31] Available plugins for group vllm.platform_plugins:
-(pid=9338) INFO 07-08 14:39:34 [__init__.py:33] - ascend -> vllm_ascend:register
-(pid=9338) INFO 07-08 14:39:34 [__init__.py:36] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
-(pid=9338) INFO 07-08 14:39:34 [__init__.py:234] Platform plugin ascend is activated
-(pid=9338) WARNING 07-08 14:39:37 [_custom_ops.py:21] Failed to import from vllm._C with ImportError('/usr/local/python3.10.16/lib/python3.10/site-packages/vllm/_C.abi3.so: undefined symbol: _ZN3c108ListType3getERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEENS_4Type24SingletonOrSharedTypePtrIS9_EE')
-(pid=9338) WARNING 07-08 14:39:37 [_custom_ops.py:21] Failed to import from vllm._C with ImportError('/usr/local/python3.10.16/lib/python3.10/site-packages/vllm/_C.abi3.so: undefined symbol: _ZN3c108ListType3getERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEENS_4Type24SingletonOrSharedTypePtrIS9_EE')
 Error executing job with overrides: []
 Traceback (most recent call last):
   File "/data/jagan/MindSpeed-RL-master/cli/train_grpo.py", line 576, in <module>
@@ -107,18 +30,351 @@ Traceback (most recent call last):
     values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
   File "/usr/local/python3.10.16/lib/python3.10/site-packages/ray/_private/worker.py", line 919, in get_objects
     raise value.as_instanceof_cause()
-ray.exceptions.RayTaskError(ValueError): ray::train() (pid=9338, ip=71.72.2.231)
-  File "/data/jagan/MindSpeed-RL-master/cli/train_grpo.py", line 60, in train
-    tokenizer = get_tokenizer(tokenizer_model=actor_config.tokenizer_name_or_path,
-  File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/utils/tokenizer.py", line 49, in get_tokenizer
-    tokenizer = _HuggingFaceTokenizer(tokenizer_model)
-  File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/utils/tokenizer.py", line 237, in __init__
-    self.tokenizer = transformers.AutoTokenizer.from_pretrained(pretrained_model_name_or_path=pretrained_model_name_or_path)
-  File "/usr/local/python3.10.16/lib/python3.10/site-packages/transformers/models/auto/tokenization_auto.py", line 970, in from_pretrained
-    config = AutoConfig.from_pretrained(
-  File "/usr/local/python3.10.16/lib/python3.10/site-packages/transformers/models/auto/configuration_auto.py", line 1190, in from_pretrained
-    raise ValueError(
-ValueError: Unrecognized model in /data/models/Qwen2.5_math_7B. Should have a `model_type` key in its config.json, or contain one of the following strings in its name: albert, align, altclip, aria, aria_text, audio-spectrogram-transformer, autoformer, aya_vision, bamba, bark, bart, beit, bert, bert-generation, big_bird, bigbird_pegasus, biogpt, bit, bitnet, blenderbot, blenderbot-small, blip, blip-2, blip_2_qformer, bloom, bridgetower, bros, camembert, canine, chameleon, chinese_clip, chinese_clip_vision_model, clap, clip, clip_text_model, clip_vision_model, clipseg, clvp, code_llama, codegen, cohere, cohere2, colpali, conditional_detr, convbert, convnext, convnextv2, cpmant, csm, ctrl, cvt, d_fine, dab-detr, dac, data2vec-audio, data2vec-text, data2vec-vision, dbrx, deberta, deberta-v2, decision_transformer, deepseek_v3, deformable_detr, deit, depth_anything, depth_pro, deta, detr, diffllama, dinat, dinov2, dinov2_with_registers, distilbert, donut-swin, dpr, dpt, efficientformer, efficientnet, electra, emu3, encodec, encoder-decoder, ernie, ernie_m, esm, falcon, falcon_mamba, fastspeech2_conformer, flaubert, flava, fnet, focalnet, fsmt, funnel, fuyu, gemma, gemma2, gemma3, gemma3_text, git, glm, glm4, glpn, got_ocr2, gpt-sw3, gpt2, gpt_bigcode, gpt_neo, gpt_neox, gpt_neox_japanese, gptj, gptsan-japanese, granite, granite_speech, granitemoe, granitemoehybrid, granitemoeshared, granitevision, graphormer, grounding-dino, groupvit, helium, hgnet_v2, hiera, hubert, ibert, idefics, idefics2, idefics3, idefics3_vision, ijepa, imagegpt, informer, instructblip, instructblipvideo, internvl, internvl_vision, jamba, janus, jetmoe, jukebox, kosmos-2, layoutlm, layoutlmv2, layoutlmv3, led, levit, lilt, llama, llama4, llama4_text, llava, llava_next, llava_next_video, llava_onevision, longformer, longt5, luke, lxmert, m2m_100, mamba, mamba2, marian, markuplm, mask2former, maskformer, maskformer-swin, mbart, mctct, mega, megatron-bert, mgp-str, mimi, mistral, mistral3, mixtral, mlcd, mllama, mobilebert, mobilenet_v1, mobilenet_v2, mobilevit, mobilevitv2, modernbert, moonshine, moshi, mpnet, mpt, mra, mt5, musicgen, musicgen_melody, mvp, nat, nemotron, nezha, nllb-moe, nougat, nystromformer, olmo, olmo2, olmoe, omdet-turbo, oneformer, open-llama, openai-gpt, opt, owlv2, owlvit, paligemma, patchtsmixer, patchtst, pegasus, pegasus_x, perceiver, persimmon, phi, phi3, phi4_multimodal, phimoe, pix2struct, pixtral, plbart, poolformer, pop2piano, prompt_depth_anything, prophetnet, pvt, pvt_v2, qdqbert, qwen2, qwen2_5_omni, qwen2_5_vl, qwen2_5_vl_text, qwen2_audio, qwen2_audio_encoder, qwen2_moe, qwen2_vl, qwen2_vl_text, qwen3, qwen3_moe, rag, realm, recurrent_gemma, reformer, regnet, rembert, resnet, retribert, roberta, roberta-prelayernorm, roc_bert, roformer, rt_detr, rt_detr_resnet, rt_detr_v2, rwkv, sam, sam_hq, sam_hq_vision_model, sam_vision_model, seamless_m4t, seamless_m4t_v2, segformer, seggpt, sew, sew-d, shieldgemma2, siglip, siglip2, siglip_vision_model, smolvlm, smolvlm_vision, speech-encoder-decoder, speech_to_text, speech_to_text_2, speecht5, splinter, squeezebert, stablelm, starcoder2, superglue, superpoint, swiftformer, swin, swin2sr, swinv2, switch_transformers, t5, table-transformer, tapas, textnet, time_series_transformer, timesfm, timesformer, timm_backbone, timm_wrapper, trajectory_transformer, transfo-xl, trocr, tvlt, tvp, udop, umt5, unispeech, unispeech-sat, univnet, upernet, van, video_llava, videomae, vilt, vipllava, vision-encoder-decoder, vision-text-dual-encoder, visual_bert, vit, vit_hybrid, vit_mae, vit_msn, vitdet, vitmatte, vitpose, vitpose_backbone, vits, vivit, wav2vec2, wav2vec2-bert, wav2vec2-conformer, wavlm, whisper, xclip, xglm, xlm, xlm-prophetnet, xlm-roberta, xlm-roberta-xl, xlnet, xmod, yolos, yoso, zamba, zamba2, zoedepth, aimv2, siglip_visual_tokenizer, aimv2_visual_tokenizer
-/usr/local/python3.10.16/lib/python3.10/tempfile.py:869: ResourceWarning: Implicitly cleaning up <TemporaryDirectory '/tmp/tmpc79r3o72'>
+ray.exceptions.RayTaskError(RuntimeError): ray::train() (pid=23066, ip=71.72.2.231)
+  File "/data/jagan/MindSpeed-RL-master/cli/train_grpo.py", line 160, in train
+    actor_worker.wait_all_ref_objs_run_over()
+  File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/scheduler/launcher.py", line 268, in wait_all_ref_objs_run_over
+    ray.get(self.temp_actor_ref_objs)
+ray.exceptions.RayTaskError(RuntimeError): ray::IntegratedWorker.initialize() (pid=23605, ip=71.72.2.231, actor_id=4264fbae24d45c39a3c82e1329000000, repr=<mindspeed_rl.workers.integrated_worker.IntegratedWorker object at 0xffd07d94d840>)
+  File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/integrated_worker.py", line 84, in initialize
+    ActorHybridWorkerBase.initialize(self)
+  File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/actor_hybrid_worker.py", line 88, in initialize
+    self.model, self.optimizer, self.opt_param_scheduler = self._build_model_optimizer()
+  File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/actor_hybrid_worker.py", line 445, in _build_model_optimizer
+    actor_module, optimizer, opt_param_scheduler = self.setup_model_and_optimizer(
+  File "/data/jagan/MindSpeed-RL-master/megatron/training/training.py", line 535, in setup_model_and_optimizer
+    model = get_model(model_provider_func, model_type)
+  File "/data/jagan/MindSpeed-RL-master/mindspeed_llm/training/training.py", line 149, in wrapper
+    model = fn(model_provider_func, model_type, wrap_with_ddp)
+  File "/data/jagan/MindSpeed-RL-master/megatron/training/training.py", line 453, in get_model
+    model = [DDP(config,
+  File "/data/jagan/MindSpeed-RL-master/megatron/training/training.py", line 453, in <listcomp>
+    model = [DDP(config,
+  File "/data/jagan/MindSpeed-RL-master/mindspeed/core/data_parallel/distributed_data_parallel.py", line 419, in distributed_data_parallel_init_with_cp
+    self.buffers = allocate_buffers_for_parameters(
+  File "/data/jagan/MindSpeed-RL-master/mindspeed/core/data_parallel/distributed_data_parallel.py", line 386, in allocate_buffers_for_parameters
+    ParamAndGradBuffer(
+  File "/data/jagan/MindSpeed-RL-master/megatron/core/distributed/param_and_grad_buffer.py", line 366, in __init__
+    self.grad_data = torch.zeros(
+  File "/usr/local/python3.10.16/lib/python3.10/site-packages/torch_npu/contrib/transfer_to_npu.py", line 153, in decorated
+    return fn(*args, **kwargs)
+RuntimeError: NPU out of memory. Tried to allocate 7.09 GiB (NPU 1; 60.96 GiB total capacity; 7.09 GiB already allocated; 7.09 GiB current active; 69.22 MiB free; 7.11 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.
+(train pid=23066) Unhandled error (suppress with 'RAY_IGNORE_UNHANDLED_ERRORS=1'): ray::IntegratedWorker.initialize() (pid=23745, ip=71.72.2.231, actor_id=c84c93bc3c6bff3dac197ed529000000, repr=<mindspeed_rl.workers.integrated_worker.IntegratedWorker object at 0xffd0a64815d0>)
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/integrated_worker.py", line 84, in initialize
+(train pid=23066)     ActorHybridWorkerBase.initialize(self)
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/actor_hybrid_worker.py", line 88, in initialize
+(train pid=23066)     self.model, self.optimizer, self.opt_param_scheduler = self._build_model_optimizer()
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/actor_hybrid_worker.py", line 445, in _build_model_optimizer
+(train pid=23066)     actor_module, optimizer, opt_param_scheduler = self.setup_model_and_optimizer(
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/megatron/training/training.py", line 535, in setup_model_and_optimizer
+(train pid=23066)     model = get_model(model_provider_func, model_type)
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed_llm/training/training.py", line 149, in wrapper
+(train pid=23066)     model = fn(model_provider_func, model_type, wrap_with_ddp)
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/megatron/training/training.py", line 453, in get_model
+(train pid=23066)     model = [DDP(config,
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/megatron/training/training.py", line 453, in <listcomp>
+(train pid=23066)     model = [DDP(config,
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed/core/data_parallel/distributed_data_parallel.py", line 419, in distributed_data_parallel_init_with_cp
+(train pid=23066)     self.buffers = allocate_buffers_for_parameters(
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed/core/data_parallel/distributed_data_parallel.py", line 386, in allocate_buffers_for_parameters
+(train pid=23066)     ParamAndGradBuffer(
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/megatron/core/distributed/param_and_grad_buffer.py", line 366, in __init__
+(train pid=23066)     self.grad_data = torch.zeros(
+(train pid=23066)   File "/usr/local/python3.10.16/lib/python3.10/site-packages/torch_npu/contrib/transfer_to_npu.py", line 153, in decorated
+(train pid=23066)     return fn(*args, **kwargs)
+(train pid=23066) RuntimeError: NPU out of memory. Tried to allocate 7.09 GiB (NPU 3; 60.96 GiB total capacity; 7.09 GiB already allocated; 7.09 GiB current active; 67.70 MiB free; 7.11 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.
+/usr/local/python3.10.16/lib/python3.10/tempfile.py:869: ResourceWarning: Implicitly cleaning up <TemporaryDirectory '/tmp/tmp7wmovhwc'>
   _warnings.warn(warn_message, ResourceWarning)
-[ERROR] 2025-07-08-14:39:39 (PID:9138, Device:-1, RankID:-1) ERR99999 UNKNOWN applicaiton exception
+(train pid=23066) Unhandled error (suppress with 'RAY_IGNORE_UNHANDLED_ERRORS=1'): ray::IntegratedWorker.initialize() (pid=23745, ip=71.72.2.231, actor_id=c84c93bc3c6bff3dac197ed529000000, repr=<mindspeed_rl.workers.integrated_worker.IntegratedWorker object at 0xffd0a64815d0>)
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/integrated_worker.py", line 84, in initialize
+(train pid=23066)     ActorHybridWorkerBase.initialize(self)
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/actor_hybrid_worker.py", line 88, in initialize
+(train pid=23066)     self.model, self.optimizer, self.opt_param_scheduler = self._build_model_optimizer()
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/actor_hybrid_worker.py", line 445, in _build_model_optimizer
+(train pid=23066)     actor_module, optimizer, opt_param_scheduler = self.setup_model_and_optimizer(
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/megatron/training/training.py", line 535, in setup_model_and_optimizer
+(train pid=23066)     model = get_model(model_provider_func, model_type)
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed_llm/training/training.py", line 149, in wrapper
+(train pid=23066)     model = fn(model_provider_func, model_type, wrap_with_ddp)
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/megatron/training/training.py", line 453, in get_model
+(train pid=23066)     model = [DDP(config,
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/megatron/training/training.py", line 453, in <listcomp>
+(train pid=23066)     model = [DDP(config,
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed/core/data_parallel/distributed_data_parallel.py", line 419, in distributed_data_parallel_init_with_cp
+(train pid=23066)     self.buffers = allocate_buffers_for_parameters(
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed/core/data_parallel/distributed_data_parallel.py", line 386, in allocate_buffers_for_parameters
+(train pid=23066)     ParamAndGradBuffer(
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/megatron/core/distributed/param_and_grad_buffer.py", line 366, in __init__
+(train pid=23066)     self.grad_data = torch.zeros(
+(train pid=23066)   File "/usr/local/python3.10.16/lib/python3.10/site-packages/torch_npu/contrib/transfer_to_npu.py", line 153, in decorated
+(train pid=23066)     return fn(*args, **kwargs)
+(train pid=23066) RuntimeError: NPU out of memory. Tried to allocate 7.09 GiB (NPU 3; 60.96 GiB total capacity; 7.09 GiB already allocated; 7.09 GiB current active; 67.70 MiB free; 7.11 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.
+(train pid=23066) Unhandled error (suppress with 'RAY_IGNORE_UNHANDLED_ERRORS=1'): ray::IntegratedWorker.initialize() (pid=23745, ip=71.72.2.231, actor_id=c84c93bc3c6bff3dac197ed529000000, repr=<mindspeed_rl.workers.integrated_worker.IntegratedWorker object at 0xffd0a64815d0>)
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/integrated_worker.py", line 84, in initialize
+(train pid=23066)     ActorHybridWorkerBase.initialize(self)
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/actor_hybrid_worker.py", line 88, in initialize
+(train pid=23066)     self.model, self.optimizer, self.opt_param_scheduler = self._build_model_optimizer()
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/actor_hybrid_worker.py", line 445, in _build_model_optimizer
+(train pid=23066)     actor_module, optimizer, opt_param_scheduler = self.setup_model_and_optimizer(
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/megatron/training/training.py", line 535, in setup_model_and_optimizer
+(train pid=23066)     model = get_model(model_provider_func, model_type)
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed_llm/training/training.py", line 149, in wrapper
+(train pid=23066)     model = fn(model_provider_func, model_type, wrap_with_ddp)
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/megatron/training/training.py", line 453, in get_model
+(train pid=23066)     model = [DDP(config,
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/megatron/training/training.py", line 453, in <listcomp>
+(train pid=23066)     model = [DDP(config,
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed/core/data_parallel/distributed_data_parallel.py", line 419, in distributed_data_parallel_init_with_cp
+(train pid=23066)     self.buffers = allocate_buffers_for_parameters(
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed/core/data_parallel/distributed_data_parallel.py", line 386, in allocate_buffers_for_parameters
+(train pid=23066)     ParamAndGradBuffer(
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/megatron/core/distributed/param_and_grad_buffer.py", line 366, in __init__
+(train pid=23066)     self.grad_data = torch.zeros(
+(train pid=23066)   File "/usr/local/python3.10.16/lib/python3.10/site-packages/torch_npu/contrib/transfer_to_npu.py", line 153, in decorated
+(train pid=23066)     return fn(*args, **kwargs)
+(train pid=23066) RuntimeError: NPU out of memory. Tried to allocate 7.09 GiB (NPU 3; 60.96 GiB total capacity; 7.09 GiB already allocated; 7.09 GiB current active; 67.70 MiB free; 7.11 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.
+(train pid=23066) Unhandled error (suppress with 'RAY_IGNORE_UNHANDLED_ERRORS=1'): ray::IntegratedWorker.initialize() (pid=23759, ip=71.72.2.231, actor_id=c5177efe70196af28639821d29000000, repr=<mindspeed_rl.workers.integrated_worker.IntegratedWorker object at 0xffd0860ad690>)
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/integrated_worker.py", line 84, in initialize
+(train pid=23066)     ActorHybridWorkerBase.initialize(self)
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/actor_hybrid_worker.py", line 88, in initialize
+(train pid=23066)     self.model, self.optimizer, self.opt_param_scheduler = self._build_model_optimizer()
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/actor_hybrid_worker.py", line 445, in _build_model_optimizer
+(train pid=23066)     actor_module, optimizer, opt_param_scheduler = self.setup_model_and_optimizer(
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/megatron/training/training.py", line 535, in setup_model_and_optimizer
+(train pid=23066)     model = get_model(model_provider_func, model_type)
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed_llm/training/training.py", line 149, in wrapper
+(train pid=23066)     model = fn(model_provider_func, model_type, wrap_with_ddp)
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/megatron/training/training.py", line 453, in get_model
+(train pid=23066)     model = [DDP(config,
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/megatron/training/training.py", line 453, in <listcomp>
+(train pid=23066)     model = [DDP(config,
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed/core/data_parallel/distributed_data_parallel.py", line 419, in distributed_data_parallel_init_with_cp
+(train pid=23066)     self.buffers = allocate_buffers_for_parameters(
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed/core/data_parallel/distributed_data_parallel.py", line 386, in allocate_buffers_for_parameters
+(train pid=23066)     ParamAndGradBuffer(
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/megatron/core/distributed/param_and_grad_buffer.py", line 366, in __init__
+(train pid=23066)     self.grad_data = torch.zeros(
+(train pid=23066)   File "/usr/local/python3.10.16/lib/python3.10/site-packages/torch_npu/contrib/transfer_to_npu.py", line 153, in decorated
+(train pid=23066)     return fn(*args, **kwargs)
+(train pid=23066) RuntimeError: NPU out of memory. Tried to allocate 7.09 GiB (NPU 7; 60.96 GiB total capacity; 7.09 GiB already allocated; 7.09 GiB current active; 213.65 MiB free; 7.11 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.
+(train pid=23066) Unhandled error (suppress with 'RAY_IGNORE_UNHANDLED_ERRORS=1'): ray::IntegratedWorker.initialize() (pid=23750, ip=71.72.2.231, actor_id=5ef95231409e43a313feb4b129000000, repr=<mindspeed_rl.workers.integrated_worker.IntegratedWorker object at 0xffd090111600>)
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/integrated_worker.py", line 84, in initialize
+(train pid=23066)     ActorHybridWorkerBase.initialize(self)
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/actor_hybrid_worker.py", line 88, in initialize
+(train pid=23066)     self.model, self.optimizer, self.opt_param_scheduler = self._build_model_optimizer()
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/actor_hybrid_worker.py", line 445, in _build_model_optimizer
+(train pid=23066)     actor_module, optimizer, opt_param_scheduler = self.setup_model_and_optimizer(
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/megatron/training/training.py", line 535, in setup_model_and_optimizer
+(train pid=23066)     model = get_model(model_provider_func, model_type)
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed_llm/training/training.py", line 149, in wrapper
+(train pid=23066)     model = fn(model_provider_func, model_type, wrap_with_ddp)
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/megatron/training/training.py", line 453, in get_model
+(train pid=23066)     model = [DDP(config,
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/megatron/training/training.py", line 453, in <listcomp>
+(train pid=23066)     model = [DDP(config,
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed/core/data_parallel/distributed_data_parallel.py", line 419, in distributed_data_parallel_init_with_cp
+(train pid=23066)     self.buffers = allocate_buffers_for_parameters(
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed/core/data_parallel/distributed_data_parallel.py", line 386, in allocate_buffers_for_parameters
+(train pid=23066)     ParamAndGradBuffer(
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/megatron/core/distributed/param_and_grad_buffer.py", line 366, in __init__
+(train pid=23066)     self.grad_data = torch.zeros(
+(train pid=23066)   File "/usr/local/python3.10.16/lib/python3.10/site-packages/torch_npu/contrib/transfer_to_npu.py", line 153, in decorated
+(train pid=23066)     return fn(*args, **kwargs)
+(train pid=23066) RuntimeError: NPU out of memory. Tried to allocate 7.09 GiB (NPU 5; 60.96 GiB total capacity; 7.09 GiB already allocated; 7.09 GiB current active; 213.60 MiB free; 7.11 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.
+(train pid=23066) Unhandled error (suppress with 'RAY_IGNORE_UNHANDLED_ERRORS=1'): ray::IntegratedWorker.initialize() (pid=23745, ip=71.72.2.231, actor_id=c84c93bc3c6bff3dac197ed529000000, repr=<mindspeed_rl.workers.integrated_worker.IntegratedWorker object at 0xffd0a64815d0>)
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/integrated_worker.py", line 84, in initialize
+(train pid=23066)     ActorHybridWorkerBase.initialize(self)
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/actor_hybrid_worker.py", line 88, in initialize
+(train pid=23066)     self.model, self.optimizer, self.opt_param_scheduler = self._build_model_optimizer()
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/actor_hybrid_worker.py", line 445, in _build_model_optimizer
+(train pid=23066)     actor_module, optimizer, opt_param_scheduler = self.setup_model_and_optimizer(
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/megatron/training/training.py", line 535, in setup_model_and_optimizer
+(train pid=23066)     model = get_model(model_provider_func, model_type)
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed_llm/training/training.py", line 149, in wrapper
+(train pid=23066)     model = fn(model_provider_func, model_type, wrap_with_ddp)
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/megatron/training/training.py", line 453, in get_model
+(train pid=23066)     model = [DDP(config,
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/megatron/training/training.py", line 453, in <listcomp>
+(train pid=23066)     model = [DDP(config,
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed/core/data_parallel/distributed_data_parallel.py", line 419, in distributed_data_parallel_init_with_cp
+(train pid=23066)     self.buffers = allocate_buffers_for_parameters(
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed/core/data_parallel/distributed_data_parallel.py", line 386, in allocate_buffers_for_parameters
+(train pid=23066)     ParamAndGradBuffer(
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/megatron/core/distributed/param_and_grad_buffer.py", line 366, in __init__
+(train pid=23066)     self.grad_data = torch.zeros(
+(train pid=23066)   File "/usr/local/python3.10.16/lib/python3.10/site-packages/torch_npu/contrib/transfer_to_npu.py", line 153, in decorated
+(train pid=23066)     return fn(*args, **kwargs)
+(train pid=23066) RuntimeError: NPU out of memory. Tried to allocate 7.09 GiB (NPU 3; 60.96 GiB total capacity; 7.09 GiB already allocated; 7.09 GiB current active; 67.70 MiB free; 7.11 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.
+(train pid=23066) Unhandled error (suppress with 'RAY_IGNORE_UNHANDLED_ERRORS=1'): ray::IntegratedWorker.initialize() (pid=23759, ip=71.72.2.231, actor_id=c5177efe70196af28639821d29000000, repr=<mindspeed_rl.workers.integrated_worker.IntegratedWorker object at 0xffd0860ad690>)
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/integrated_worker.py", line 84, in initialize
+(train pid=23066)     ActorHybridWorkerBase.initialize(self)
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/actor_hybrid_worker.py", line 88, in initialize
+(train pid=23066)     self.model, self.optimizer, self.opt_param_scheduler = self._build_model_optimizer()
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/actor_hybrid_worker.py", line 445, in _build_model_optimizer
+(train pid=23066)     actor_module, optimizer, opt_param_scheduler = self.setup_model_and_optimizer(
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/megatron/training/training.py", line 535, in setup_model_and_optimizer
+(train pid=23066)     model = get_model(model_provider_func, model_type)
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed_llm/training/training.py", line 149, in wrapper
+(train pid=23066)     model = fn(model_provider_func, model_type, wrap_with_ddp)
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/megatron/training/training.py", line 453, in get_model
+(train pid=23066)     model = [DDP(config,
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/megatron/training/training.py", line 453, in <listcomp>
+(train pid=23066)     model = [DDP(config,
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed/core/data_parallel/distributed_data_parallel.py", line 419, in distributed_data_parallel_init_with_cp
+(train pid=23066)     self.buffers = allocate_buffers_for_parameters(
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed/core/data_parallel/distributed_data_parallel.py", line 386, in allocate_buffers_for_parameters
+(train pid=23066)     ParamAndGradBuffer(
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/megatron/core/distributed/param_and_grad_buffer.py", line 366, in __init__
+(train pid=23066)     self.grad_data = torch.zeros(
+(train pid=23066)   File "/usr/local/python3.10.16/lib/python3.10/site-packages/torch_npu/contrib/transfer_to_npu.py", line 153, in decorated
+(train pid=23066)     return fn(*args, **kwargs)
+(train pid=23066) RuntimeError: NPU out of memory. Tried to allocate 7.09 GiB (NPU 7; 60.96 GiB total capacity; 7.09 GiB already allocated; 7.09 GiB current active; 213.65 MiB free; 7.11 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.
+(train pid=23066) Unhandled error (suppress with 'RAY_IGNORE_UNHANDLED_ERRORS=1'): ray::IntegratedWorker.initialize() (pid=23750, ip=71.72.2.231, actor_id=5ef95231409e43a313feb4b129000000, repr=<mindspeed_rl.workers.integrated_worker.IntegratedWorker object at 0xffd090111600>)
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/integrated_worker.py", line 84, in initialize
+(train pid=23066)     ActorHybridWorkerBase.initialize(self)
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/actor_hybrid_worker.py", line 88, in initialize
+(train pid=23066)     self.model, self.optimizer, self.opt_param_scheduler = self._build_model_optimizer()
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/actor_hybrid_worker.py", line 445, in _build_model_optimizer
+(train pid=23066)     actor_module, optimizer, opt_param_scheduler = self.setup_model_and_optimizer(
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/megatron/training/training.py", line 535, in setup_model_and_optimizer
+(train pid=23066)     model = get_model(model_provider_func, model_type)
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed_llm/training/training.py", line 149, in wrapper
+(train pid=23066)     model = fn(model_provider_func, model_type, wrap_with_ddp)
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/megatron/training/training.py", line 453, in get_model
+(train pid=23066)     model = [DDP(config,
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/megatron/training/training.py", line 453, in <listcomp>
+(train pid=23066)     model = [DDP(config,
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed/core/data_parallel/distributed_data_parallel.py", line 419, in distributed_data_parallel_init_with_cp
+(train pid=23066)     self.buffers = allocate_buffers_for_parameters(
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed/core/data_parallel/distributed_data_parallel.py", line 386, in allocate_buffers_for_parameters
+(train pid=23066)     ParamAndGradBuffer(
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/megatron/core/distributed/param_and_grad_buffer.py", line 366, in __init__
+(train pid=23066)     self.grad_data = torch.zeros(
+(train pid=23066)   File "/usr/local/python3.10.16/lib/python3.10/site-packages/torch_npu/contrib/transfer_to_npu.py", line 153, in decorated
+(train pid=23066)     return fn(*args, **kwargs)
+(train pid=23066) RuntimeError: NPU out of memory. Tried to allocate 7.09 GiB (NPU 5; 60.96 GiB total capacity; 7.09 GiB already allocated; 7.09 GiB current active; 213.60 MiB free; 7.11 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.
+(train pid=23066) Unhandled error (suppress with 'RAY_IGNORE_UNHANDLED_ERRORS=1'): ray::IntegratedWorker.initialize() (pid=23759, ip=71.72.2.231, actor_id=c5177efe70196af28639821d29000000, repr=<mindspeed_rl.workers.integrated_worker.IntegratedWorker object at 0xffd0860ad690>)
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/integrated_worker.py", line 84, in initialize
+(train pid=23066)     ActorHybridWorkerBase.initialize(self)
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/actor_hybrid_worker.py", line 88, in initialize
+(train pid=23066)     self.model, self.optimizer, self.opt_param_scheduler = self._build_model_optimizer()
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/actor_hybrid_worker.py", line 445, in _build_model_optimizer
+(train pid=23066)     actor_module, optimizer, opt_param_scheduler = self.setup_model_and_optimizer(
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/megatron/training/training.py", line 535, in setup_model_and_optimizer
+(train pid=23066)     model = get_model(model_provider_func, model_type)
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed_llm/training/training.py", line 149, in wrapper
+(train pid=23066)     model = fn(model_provider_func, model_type, wrap_with_ddp)
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/megatron/training/training.py", line 453, in get_model
+(train pid=23066)     model = [DDP(config,
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/megatron/training/training.py", line 453, in <listcomp>
+(train pid=23066)     model = [DDP(config,
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed/core/data_parallel/distributed_data_parallel.py", line 419, in distributed_data_parallel_init_with_cp
+(train pid=23066)     self.buffers = allocate_buffers_for_parameters(
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed/core/data_parallel/distributed_data_parallel.py", line 386, in allocate_buffers_for_parameters
+(train pid=23066)     ParamAndGradBuffer(
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/megatron/core/distributed/param_and_grad_buffer.py", line 366, in __init__
+(train pid=23066)     self.grad_data = torch.zeros(
+(train pid=23066)   File "/usr/local/python3.10.16/lib/python3.10/site-packages/torch_npu/contrib/transfer_to_npu.py", line 153, in decorated
+(train pid=23066)     return fn(*args, **kwargs)
+(train pid=23066) RuntimeError: NPU out of memory. Tried to allocate 7.09 GiB (NPU 7; 60.96 GiB total capacity; 7.09 GiB already allocated; 7.09 GiB current active; 213.65 MiB free; 7.11 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.
+(train pid=23066) Unhandled error (suppress with 'RAY_IGNORE_UNHANDLED_ERRORS=1'): ray::IntegratedWorker.initialize() (pid=23750, ip=71.72.2.231, actor_id=5ef95231409e43a313feb4b129000000, repr=<mindspeed_rl.workers.integrated_worker.IntegratedWorker object at 0xffd090111600>)
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/integrated_worker.py", line 84, in initialize
+(train pid=23066)     ActorHybridWorkerBase.initialize(self)
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/actor_hybrid_worker.py", line 88, in initialize
+(train pid=23066)     self.model, self.optimizer, self.opt_param_scheduler = self._build_model_optimizer()
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/actor_hybrid_worker.py", line 445, in _build_model_optimizer
+(train pid=23066)     actor_module, optimizer, opt_param_scheduler = self.setup_model_and_optimizer(
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/megatron/training/training.py", line 535, in setup_model_and_optimizer
+(train pid=23066)     model = get_model(model_provider_func, model_type)
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed_llm/training/training.py", line 149, in wrapper
+(train pid=23066)     model = fn(model_provider_func, model_type, wrap_with_ddp)
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/megatron/training/training.py", line 453, in get_model
+(train pid=23066)     model = [DDP(config,
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/megatron/training/training.py", line 453, in <listcomp>
+(train pid=23066)     model = [DDP(config,
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed/core/data_parallel/distributed_data_parallel.py", line 419, in distributed_data_parallel_init_with_cp
+(train pid=23066)     self.buffers = allocate_buffers_for_parameters(
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed/core/data_parallel/distributed_data_parallel.py", line 386, in allocate_buffers_for_parameters
+(train pid=23066)     ParamAndGradBuffer(
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/megatron/core/distributed/param_and_grad_buffer.py", line 366, in __init__
+(train pid=23066)     self.grad_data = torch.zeros(
+(train pid=23066)   File "/usr/local/python3.10.16/lib/python3.10/site-packages/torch_npu/contrib/transfer_to_npu.py", line 153, in decorated
+(train pid=23066)     return fn(*args, **kwargs)
+(train pid=23066) RuntimeError: NPU out of memory. Tried to allocate 7.09 GiB (NPU 5; 60.96 GiB total capacity; 7.09 GiB already allocated; 7.09 GiB current active; 213.60 MiB free; 7.11 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.
+(IntegratedWorker pid=23605) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
+(IntegratedWorker pid=23605) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
+(IntegratedWorker pid=23605) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
+(IntegratedWorker pid=23605) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
+(IntegratedWorker pid=23605) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
+(IntegratedWorker pid=23605) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
+(IntegratedWorker pid=23605) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
+(IntegratedWorker pid=23605) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared!
+(train pid=23066) Unhandled error (suppress with 'RAY_IGNORE_UNHANDLED_ERRORS=1'): ray::IntegratedWorker.initialize() (pid=23759, ip=71.72.2.231, actor_id=c5177efe70196af28639821d29000000, repr=<mindspeed_rl.workers.integrated_worker.IntegratedWorker object at 0xffd0860ad690>)
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/integrated_worker.py", line 84, in initialize
+(train pid=23066)     ActorHybridWorkerBase.initialize(self)
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/actor_hybrid_worker.py", line 88, in initialize
+(train pid=23066)     self.model, self.optimizer, self.opt_param_scheduler = self._build_model_optimizer()
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/actor_hybrid_worker.py", line 445, in _build_model_optimizer
+(train pid=23066)     actor_module, optimizer, opt_param_scheduler = self.setup_model_and_optimizer(
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/megatron/training/training.py", line 535, in setup_model_and_optimizer
+(train pid=23066)     model = get_model(model_provider_func, model_type)
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed_llm/training/training.py", line 149, in wrapper
+(train pid=23066)     model = fn(model_provider_func, model_type, wrap_with_ddp)
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/megatron/training/training.py", line 453, in get_model
+(train pid=23066)     model = [DDP(config,
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/megatron/training/training.py", line 453, in <listcomp>
+(train pid=23066)     model = [DDP(config,
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed/core/data_parallel/distributed_data_parallel.py", line 419, in distributed_data_parallel_init_with_cp
+(train pid=23066)     self.buffers = allocate_buffers_for_parameters(
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed/core/data_parallel/distributed_data_parallel.py", line 386, in allocate_buffers_for_parameters
+(train pid=23066)     ParamAndGradBuffer(
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/megatron/core/distributed/param_and_grad_buffer.py", line 366, in __init__
+(train pid=23066)     self.grad_data = torch.zeros(
+(train pid=23066)   File "/usr/local/python3.10.16/lib/python3.10/site-packages/torch_npu/contrib/transfer_to_npu.py", line 153, in decorated
+(train pid=23066)     return fn(*args, **kwargs)
+(train pid=23066) RuntimeError: NPU out of memory. Tried to allocate 7.09 GiB (NPU 7; 60.96 GiB total capacity; 7.09 GiB already allocated; 7.09 GiB current active; 213.65 MiB free; 7.11 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.
+(train pid=23066) Unhandled error (suppress with 'RAY_IGNORE_UNHANDLED_ERRORS=1'): ray::IntegratedWorker.initialize() (pid=23750, ip=71.72.2.231, actor_id=5ef95231409e43a313feb4b129000000, repr=<mindspeed_rl.workers.integrated_worker.IntegratedWorker object at 0xffd090111600>)
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/integrated_worker.py", line 84, in initialize
+(train pid=23066)     ActorHybridWorkerBase.initialize(self)
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/actor_hybrid_worker.py", line 88, in initialize
+(train pid=23066)     self.model, self.optimizer, self.opt_param_scheduler = self._build_model_optimizer()
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed_rl/workers/actor_hybrid_worker.py", line 445, in _build_model_optimizer
+(train pid=23066)     actor_module, optimizer, opt_param_scheduler = self.setup_model_and_optimizer(
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/megatron/training/training.py", line 535, in setup_model_and_optimizer
+(train pid=23066)     model = get_model(model_provider_func, model_type)
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed_llm/training/training.py", line 149, in wrapper
+(train pid=23066)     model = fn(model_provider_func, model_type, wrap_with_ddp)
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/megatron/training/training.py", line 453, in get_model
+(train pid=23066)     model = [DDP(config,
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/megatron/training/training.py", line 453, in <listcomp>
+(train pid=23066)     model = [DDP(config,
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed/core/data_parallel/distributed_data_parallel.py", line 419, in distributed_data_parallel_init_with_cp
+(train pid=23066)     self.buffers = allocate_buffers_for_parameters(
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/mindspeed/core/data_parallel/distributed_data_parallel.py", line 386, in allocate_buffers_for_parameters
+(train pid=23066)     ParamAndGradBuffer(
+(train pid=23066)   File "/data/jagan/MindSpeed-RL-master/megatron/core/distributed/param_and_grad_buffer.py", line 366, in __init__
+(train pid=23066)     self.grad_data = torch.zeros(
+(train pid=23066)   File "/usr/local/python3.10.16/lib/python3.10/site-packages/torch_npu/contrib/transfer_to_npu.py", line 153, in decorated
+(train pid=23066)     return fn(*args, **kwargs)
+(train pid=23066) RuntimeError: NPU out of memory. Tried to allocate 7.09 GiB (NPU 5; 60.96 GiB total capacity; 7.09 GiB already allocated; 7.09 GiB current active; 213.60 MiB free; 7.11 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.
+(IntegratedWorker pid=23605) Process ForkServerProcess-10:
+(IntegratedWorker pid=23605) Traceback (most recent call last):
+(IntegratedWorker pid=23605)   File "/usr/local/python3.10.16/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+(IntegratedWorker pid=23605)     self.run()
+(IntegratedWorker pid=23605)   File "/usr/local/python3.10.16/lib/python3.10/multiprocessing/process.py", line 108, in run
+(IntegratedWorker pid=23605)     self._target(*self._args, **self._kwargs)
+(IntegratedWorker pid=23605)   File "/usr/local/Ascend/ascend-toolkit/latest/python/site-packages/tbe/common/repository_manager/utils/common.py", line 110, in daemon_process
+(IntegratedWorker pid=23605)     os.kill(mgr_pid, signal.SIGKILL)
+(IntegratedWorker pid=23605) ProcessLookupError: [Errno 3] No such process
+(IntegratedWorker pid=23605) Process ForkServerProcess-10:
+(IntegratedWorker pid=23605) Traceback (most recent call last):
+(IntegratedWorker pid=23605)   File "/usr/local/python3.10.16/lib/python3.10/multiprocessing/process.py", line 314, in _bootstrap
+(IntegratedWorker pid=23605)     self.run()
+(IntegratedWorker pid=23605)   File "/usr/local/python3.10.16/lib/python3.10/multiprocessing/process.py", line 108, in run
+(IntegratedWorker pid=23605)     self._target(*self._args, **self._kwargs)
+(IntegratedWorker pid=23605)   File "/usr/local/Ascend/ascend-toolkit/latest/python/site-packages/tbe/common/repository_manager/utils/common.py", line 110, in daemon_process
+(IntegratedWorker pid=23605)     os.kill(mgr_pid, signal.SIGKILL)
+(IntegratedWorker pid=23605) ProcessLookupError: [Errno 3] No such process
+(IntegratedWorker pid=23750) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared! [repeated 120x across cluster]
+[ERROR] 2025-07-09-14:16:52 (PID:22866, Device:-1, RankID:-1) ERR99999 UNKNOWN applicaiton exception
+(IntegratedWorker pid=23819)  > number of parameters on (tensor, pipeline) model parallel rank (0, 1): 1903956992 [repeated 4x across cluster]
