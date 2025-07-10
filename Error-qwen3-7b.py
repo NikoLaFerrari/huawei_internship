@@ -30,28 +30,28 @@ Traceback (most recent call last):
     values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
   File "/usr/local/python3.10.16/lib/python3.10/site-packages/ray/_private/worker.py", line 919, in get_objects
     raise value.as_instanceof_cause()
-ray.exceptions.RayTaskError(ValueError): ray::train() (pid=34140, ip=172.16.4.104)
-  File "/models/k50048751/MindSpeed-RL-master/cli/train_grpo.py", line 159, in train
-    actor_worker.wait_all_ref_objs_run_over()
-  File "/models/k50048751/MindSpeed-RL-master/mindspeed_rl/workers/scheduler/launcher.py", line 268, in wait_all_ref_objs_run_over
-    ray.get(self.temp_actor_ref_objs)
-ray.exceptions.RayTaskError(ValueError): ray::IntegratedWorker.initialize() (pid=34769, ip=172.16.4.104, actor_id=7ff4c23b1ff0a604e4da7e890f000000, repr=<mindspeed_rl.workers.integrated_worker.IntegratedWorker object at 0xffd06d075d20>)
-  File "/models/k50048751/MindSpeed-RL-master/mindspeed_rl/workers/integrated_worker.py", line 84, in initialize
-    ActorHybridWorkerBase.initialize(self)
-  File "/models/k50048751/MindSpeed-RL-master/mindspeed_rl/workers/actor_hybrid_worker.py", line 98, in initialize
-    self.inference_model = self._build_rollout()
-  File "/models/k50048751/MindSpeed-RL-master/mindspeed_rl/workers/actor_hybrid_worker.py", line 460, in _build_rollout
-    rollout = VLLMInferEngine(
-  File "/models/k50048751/MindSpeed-RL-master/mindspeed_rl/models/rollout/vllm_engine.py", line 157, in __init__
-    initialize_parallel_state(
-  File "/models/k50048751/MindSpeed-RL-master/mindspeed_rl/models/rollout/vllm_adapter/vllm_parallel_state.py", line 89, in initialize_parallel_state
-    initialize_model_parallel_for_vllm(
-  File "/models/k50048751/MindSpeed-RL-master/mindspeed_rl/models/rollout/vllm_adapter/vllm_parallel_state.py", line 201, in initialize_model_parallel_for_vllm
-    tp_group_ranks = get_tp_group_ranks()
-  File "/models/k50048751/MindSpeed-RL-master/mindspeed_rl/models/rollout/vllm_adapter/vllm_parallel_state.py", line 194, in get_tp_group_ranks
-    tp_group_ranks = get_split_tp_group_ranks()
-  File "/models/k50048751/MindSpeed-RL-master/mindspeed_rl/models/rollout/vllm_adapter/vllm_parallel_state.py", line 154, in get_split_tp_group_ranks
-    raise ValueError(
-ValueError: Can't split train tp size 4 to infer tp size 8 with train dp size 1.
-/usr/local/python3.10.16/lib/python3.10/tempfile.py:869: ResourceWarning: Implicitly cleaning up <TemporaryDirectory '/tmp/tmp88oooon8'>
+ray.exceptions.RayTaskError(TypeError): ray::train() (pid=43617, ip=172.16.4.104)
+  File "/models/k50048751/MindSpeed-RL-master/cli/train_grpo.py", line 163, in train
+    data_loader = SkyLadder(
+TypeError: SkyLadder.__init__() takes 3 positional arguments but 7 were given
+/usr/local/python3.10.16/lib/python3.10/tempfile.py:869: ResourceWarning: Implicitly cleaning up <TemporaryDirectory '/tmp/tmpm_wohb_m'>
   _warnings.warn(warn_message, ResourceWarning)
+
+
+    data_loader = SkyLadder(
+        train_ds, actor_config.global_batch_size, actor_config.num_workers, actor_config.seed,
+        actor_config.dataset_additional_keys, actor_config.no_shuffle
+    )
+    '''
+    data_loader = PromptDataLoader(
+        train_ds, actor_config.global_batch_size,
+        actor_config.num_workers, actor_config.seed, actor_config.dataset_additional_keys,
+        actor_config.no_shuffle
+    )
+    '''
+
+
+
+
+
+
