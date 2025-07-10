@@ -30,7 +30,7 @@ Traceback (most recent call last):
     values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
   File "/usr/local/python3.10.16/lib/python3.10/site-packages/ray/_private/worker.py", line 919, in get_objects
     raise value.as_instanceof_cause()
-ray.exceptions.RayTaskError(KeyError): ray::train() (pid=9084, ip=172.16.4.104)
+ray.exceptions.RayTaskError(KeyError): ray::train() (pid=11155, ip=172.16.4.104)
   File "/models/k50048751/MindSpeed-RL-master/cli/train_grpo.py", line 146, in train
     train_ds, _, _ = build_train_valid_test_datasets(
   File "/models/k50048751/MindSpeed-RL-master/mindspeed_rl/datasets/build_dataset.py", line 70, in build_train_valid_test_datasets
@@ -40,5 +40,13 @@ ray.exceptions.RayTaskError(KeyError): ray::train() (pid=9084, ip=172.16.4.104)
   File "/models/k50048751/MindSpeed-RL-master/mindspeed_rl/datasets/indexed_dataset.py", line 39, in get_packed_indexed_dataset
     filter_mask = packed_dataset['input_ids'].get_filter_mask()
 KeyError: 'input_ids'
-/usr/local/python3.10.16/lib/python3.10/tempfile.py:869: ResourceWarning: Implicitly cleaning up <TemporaryDirectory '/tmp/tmpdcjcymo4'>
+/usr/local/python3.10.16/lib/python3.10/tempfile.py:869: ResourceWarning: Implicitly cleaning up <TemporaryDirectory '/tmp/tmp3ea0fiba'>
   _warnings.warn(warn_message, ResourceWarning)
+(train pid=11155) 2025-07-10 09:48:11,385 - INFO - [2025-07-10 01:48:11] INFO  > datasets target sizes (minimum size):
+(train pid=11155) 2025-07-10 09:48:11,385 - INFO - [2025-07-10 01:48:11] INFO     train:      8000
+(train pid=11155) 2025-07-10 09:48:11,385 - INFO - [2025-07-10 01:48:11] INFO     validation: 0
+(train pid=11155) 2025-07-10 09:48:11,385 - INFO - [2025-07-10 01:48:11] INFO     test:       0
+(train pid=11155) 2025-07-10 09:48:11,385 - INFO - [2025-07-10 01:48:11] INFO  > datasets target sizes (minimum size):
+(train pid=11155) 2025-07-10 09:48:11,385 - INFO - [2025-07-10 01:48:11] INFO     train:      8000
+(train pid=11155) 2025-07-10 09:48:11,385 - INFO - [2025-07-10 01:48:11] INFO     validation: 0
+(train pid=11155) 2025-07-10 09:48:11,385 - INFO - [2025-07-10 01:48:11] INFO     test:       0
