@@ -30,33 +30,22 @@ Traceback (most recent call last):
     values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
   File "/usr/local/python3.10.16/lib/python3.10/site-packages/ray/_private/worker.py", line 919, in get_objects
     raise value.as_instanceof_cause()
-ray.exceptions.RayTaskError(RuntimeError): ray::train() (pid=48659, ip=172.16.4.104)
+ray.exceptions.RayTaskError(KeyError): ray::train() (pid=60911, ip=172.16.4.104)
   File "/models/k50048751/MindSpeed-RL-master/cli/train_grpo.py", line 197, in train
     trainer.fit(data_iters)
-  File "/models/k50048751/MindSpeed-RL-master/mindspeed_rl/trainer/grpo_trainer_hybrid.py", line 137, in fit
-    batch = next(data_iters)
-  File "/models/k50048751/MindSpeed-RL-master/mindspeed_rl/datasets/dataloader.py", line 229, in __iter__
-    for batch in super().__iter__():
-  File "/usr/local/python3.10.16/lib/python3.10/site-packages/torch_npu/profiler/_add_mstx_patch.py", line 28, in wrapper
-    out = func(*args, **kwargs)
-  File "/usr/local/python3.10.16/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 701, in __next__
-    data = self._next_data()
-  File "/usr/local/python3.10.16/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 1465, in _next_data
-    return self._process_data(data)
-  File "/usr/local/python3.10.16/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 1491, in _process_data
-    data.reraise()
-  File "/usr/local/python3.10.16/lib/python3.10/site-packages/torch/_utils.py", line 715, in reraise
-    raise exception
-RuntimeError: Caught RuntimeError in DataLoader worker process 0.
-Original Traceback (most recent call last):
-  File "/usr/local/python3.10.16/lib/python3.10/site-packages/torch/utils/data/_utils/worker.py", line 351, in _worker_loop
-    data = fetcher.fetch(index)  # type: ignore[possibly-undefined]
-  File "/usr/local/python3.10.16/lib/python3.10/site-packages/torch/utils/data/_utils/fetch.py", line 55, in fetch
-    return self.collate_fn(data)
-  File "/models/k50048751/MindSpeed-RL-master/mindspeed_rl/datasets/dataloader.py", line 248, in _collate
-    "labels": _slice_stack("labels"),
-  File "/models/k50048751/MindSpeed-RL-master/mindspeed_rl/datasets/dataloader.py", line 243, in _slice_stack
-    return torch.stack([torch.as_tensor(r[key])[:ctx] for r in rows])
-RuntimeError: stack expects each tensor to be equal size, but got [163] at entry 0 and [187] at entry 3
-/usr/local/python3.10.16/lib/python3.10/tempfile.py:869: ResourceWarning: Implicitly cleaning up <TemporaryDirectory '/tmp/tmp4zhzqp8w'>
+  File "/models/k50048751/MindSpeed-RL-master/mindspeed_rl/trainer/grpo_trainer_hybrid.py", line 138, in fit
+    ray.get(self.transfer_dock.put_prompts_experience.remote(batch, self.dataset_additional_keys))
+ray.exceptions.RayTaskError(KeyError): ray::GRPOTransferDock.put_prompts_experience() (pid=445, ip=172.16.4.104, actor_id=82f3a5dba2eb4b618d27ecac14000000, repr=<mindspeed_rl.trainer.utils.transfer_dock.GRPOTransferDock object at 0xffd046e1d9c0>)
+  File "/models/k50048751/MindSpeed-RL-master/mindspeed_rl/trainer/utils/transfer_dock.py", line 480, in put_prompts_experience
+    prompts = batch["prompts"]
+KeyError: 'prompts'
+/usr/local/python3.10.16/lib/python3.10/tempfile.py:869: ResourceWarning: Implicitly cleaning up <TemporaryDirectory '/tmp/tmp6fkb6y64'>
   _warnings.warn(warn_message, ResourceWarning)
+(IntegratedWorker pid=61540) [ERROR] TBE Subprocess[task_distribute] raise error[], main process disappeared! [repeated 120x across cluster]
+[ERROR] 2025-07-10-10:59:49 (PID:60711, Device:-1, RankID:-1) ERR99999 UNKNOWN applicaiton exception
+[root@train-qwen3-235btest4n2-v11-task-2 MindSpeed-RL-master]# 
+
+
+
+
+
