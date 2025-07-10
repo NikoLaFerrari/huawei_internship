@@ -1,84 +1,131 @@
-I thought the skyladder only re-arrange the tokens, but the result seems like it also change the data? You can print out the output of skyladder loader and check. If you think the skyladder modify the data too much, making the process stuck and hard to handle, we can discuss with Zeng Li tomorrow and see if we need to skip it and try next techniqueI thought the skyladder only re-arrange the tokens, but the result seems like it also change the data? You can print out the output of skyladder loader and check. If you think the skyladder modify the data too much, making the process stuck and hard to handle, we can discuss with Zeng Li tomorrow and see if we need to skip it and try next technique                                                        
-def context_decorator(ctx, func):
+# skyladder_minimal.py
+from __future__ import annotations
+from typing import List, Dict, Optional, Union
+import math
+import torch
+from torch.utils.data import DataLoader, Dataset, RandomSampler, SequentialSampler
+
+class SkyLadder(DataLoader):
+    """A _tiny_ SkyLadder curriculum DataLoader.
+
+    • Starts at `min_ctx_len`, grows to `max_ctx_len` over `total_steps`.
+    • Keeps token-budget ~constant by shrinking the batch each step.
+    • Works with any Dataset that yields dicts containing
+      'input_ids' (and optionally 'attention_mask', 'labels', …).
+
+    Parameters
+    ----------
+    dataset : str | Dataset
+        A torch Dataset instance **or** a string path to torch.load-able file.
+    global_batch_size : int
+        Desired batch when ctx == min_ctx_len.
+    min_ctx_len / max_ctx_len : int
+        Curriculum range in tokens.
+    warmup_steps : int
+        Flat phase before growth starts.
+    total_steps : int
+        Step at which ctx_len == max_ctx_len.
+    schedule : {"linear","cosine"}
+        Shape of the growth curve.
+    safety : float
+        0-1 factor to avoid running out of memory at long contexts.
+    shuffle : bool
+        Use RandomSampler if True.
     """
-    Like contextlib.ContextDecorator.
 
-    But with the following differences:
-    1. Is done by wrapping, rather than inheritance, so it works with context
-       managers that are implemented from C and thus cannot easily inherit from
-       Python classes
-    2. Wraps generators in the intuitive way (c.f. https://bugs.python.org/issue37743)
-    3. Errors out if you try to wrap a class, because it is ambiguous whether
-       or not you intended to wrap only the constructor
+    def __init__(
+        self,
+        dataset: Union[str, Dataset],
+        global_batch_size: int,
+        *,
+        min_ctx_len: int = 512,
+        max_ctx_len: int = 8_192,
+        warmup_steps: int = 1_000,
+        total_steps: int = 10_000,
+        schedule: str = "cosine",
+        safety: float = 0.8,
+        shuffle: bool = True,
+        seed: int = 42,
+        **dl_kwargs,
+    ):
+        # --------------------------------------------------
+        # Dataset
+        # --------------------------------------------------
+        if isinstance(dataset, str):
+            dataset = torch.load(dataset)
+        self.dataset = dataset
 
-    The input argument can either be a context manager (in which case it must
-    be a multi-shot context manager that can be directly invoked multiple times)
-    or a callable that produces a context manager.
-    """
-    assert not (callable(ctx) and hasattr(ctx, '__enter__')), (
-        f"Passed in {ctx} is both callable and also a valid context manager "
-        "(has __enter__), making it ambiguous which interface to use.  If you "
-        "intended to pass a context manager factory, rewrite your call as "
-        "context_decorator(lambda: ctx()); if you intended to pass a context "
-        "manager directly, rewrite your call as context_decorator(lambda: ctx)"
-    )
+        # --------------------------------------------------
+        # Curriculum hyper-parameters
+        # --------------------------------------------------
+        self.min_ctx = min_ctx_len
+        self.max_ctx = max_ctx_len
+        self.warmup = warmup_steps
+        self.total = total_steps
+        self.schedule = schedule
+        self.global_bs = global_batch_size
+        self.safety = safety
+        self.step = 0  # keeps track of iterations
 
-    if not callable(ctx):
-        def ctx_factory():
-            return ctx
-    else:
-        ctx_factory = ctx
-
-    if inspect.isclass(func):
-        raise RuntimeError(
-            "Cannot decorate classes; it is ambiguous whether or not only the "
-            "constructor or all methods should have the context manager applied; "
-            "additionally, decorating a class at definition-site will prevent "
-            "use of the identifier as a conventional type.  "
-            "To specify which methods to decorate, decorate each of them "
-            "individually."
+        # --------------------------------------------------
+        # Sampler
+        # --------------------------------------------------
+        sampler_cls = RandomSampler if shuffle else SequentialSampler
+        sampler = sampler_cls(
+            dataset,
+            generator=torch.Generator().manual_seed(seed) if shuffle else None,
         )
 
-    if inspect.isgeneratorfunction(func):
-        return _wrap_generator(ctx_factory, func)
+        super().__init__(
+            dataset,
+            batch_size=self._calc_batch_size(),
+            sampler=sampler,
+            collate_fn=self._collate,
+            drop_last=True,
+            pin_memory=True,
+            **dl_kwargs,
+        )
 
-    @functools.wraps(func)
-    def decorate_context(*args, **kwargs):
-        with ctx_factory():
-            return func(*args, **kwargs)
+    # ---------- curriculum -------------------------------------------------
+    def _ctx_len(self, step: int) -> int:
+        if step < self.warmup:
+            return self.min_ctx
 
-    return decorate_context
-==============================================================================================
+        p = min(1.0, (step - self.warmup) / max(1, self.total - self.warmup))
+        if self.schedule == "linear":
+            ctx = self.min_ctx + (self.max_ctx - self.min_ctx) * p
+        else:  # cosine
+            ctx = self.min_ctx + 0.5 * (self.max_ctx - self.min_ctx) * (1 - math.cos(math.pi * p))
+        return int(ctx)
 
-(pid=21628)     *************************************************************************************************************
-(pid=21628)     
-(pid=21628)   warnings.warn(msg, ImportWarning)
-(pid=21628) /usr/local/python3.10.16/lib/python3.10/site-packages/torch_npu/contrib/transfer_to_npu.py:247: RuntimeWarning: torch.jit.script and torch.jit.script_method will be disabled by transfer_to_npu, which currently does not support them, if you need to enable them, please do not use transfer_to_npu.
-(pid=21628)   warnings.warn(msg, RuntimeWarning)
-(pid=21628) /usr/local/python3.10.16/lib/python3.10/site-packages/torch_npu/dynamo/torchair/__init__.py:8: DeprecationWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html
-(pid=21628)   import pkg_resources
-(pid=21628) /usr/local/python3.10.16/lib/python3.10/site-packages/torch_npu/dynamo/torchair/__init__.py:8: DeprecationWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html
-(pid=21628)   import pkg_resources
-(pid=21628) Initialized ProcessPoolExecutor with 16 workers
-(pid=21628) Initialized ProcessPoolExecutor with 16 workers
-(train pid=16615) /usr/local/python3.10.16/lib/python3.10/site-packages/torch_npu/contrib/transfer_to_npu.py:153: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:206.)
-(train pid=16615)   return fn(*args, **kwargs)
-(train pid=16615) /usr/local/python3.10.16/lib/python3.10/site-packages/torch_npu/contrib/transfer_to_npu.py:153: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:206.)
-(train pid=16615)   return fn(*args, **kwargs)
-(train pid=16615) /usr/local/python3.10.16/lib/python3.10/site-packages/torch_npu/contrib/transfer_to_npu.py:153: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:206.)
-(train pid=16615)   return fn(*args, **kwargs)
-(train pid=16615) /usr/local/python3.10.16/lib/python3.10/site-packages/torch_npu/contrib/transfer_to_npu.py:153: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:206.)
-(train pid=16615)   return fn(*args, **kwargs)
-(GRPOTransferDock pid=21628) /usr/local/python3.10.16/lib/python3.10/site-packages/torch_npu/utils/storage.py:38: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
-(GRPOTransferDock pid=21628)   if self.device.type != 'cpu':
-(GRPOTransferDock pid=21628) /usr/local/python3.10.16/lib/python3.10/site-packages/torch_npu/utils/storage.py:38: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
-(GRPOTransferDock pid=21628)   if self.device.type != 'cpu':
-(GRPOTransferDock pid=21628) /usr/local/python3.10.16/lib/python3.10/site-packages/torch_npu/contrib/transfer_to_npu.py:153: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
-(GRPOTransferDock pid=21628) /usr/local/python3.10.16/lib/python3.10/site-packages/torch_npu/contrib/transfer_to_npu.py:153: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
-(IntegratedWorker pid=17236) /usr/local/python3.10.16/lib/python3.10/site-packages/torch/utils/_contextlib.py:116: DeprecationWarning: The keyword arguments {'prompt_token_ids'} are deprecated and will be removed in a future update. Please use the 'prompts' parameter instead.
-(IntegratedWorker pid=17236)   return func(*args, **kwargs)
-(IntegratedWorker pid=17236) /usr/local/python3.10.16/lib/python3.10/site-packages/torch/utils/_contextlib.py:116: DeprecationWarning: The keyword arguments {'prompt_token_ids'} are deprecated and will be removed in a future update. Please use the 'prompts' parameter instead.
-(IntegratedWorker pid=17236)   return func(*args, **kwargs)
+    def _calc_batch_size(self) -> int:
+        ctx = self._ctx_len(self.step)
+        scale = self.min_ctx / ctx
+        return max(1, int(self.global_bs * scale * self.safety))
 
-====================================================================================================
-It is stuck forever at "return func(*args, **kwargs)" and its getting annoying. This is the 15th consecutive time I am dealing with this. What the fuck is the problem and how the fuck do we deal with this crap?
+    # ---------- DataLoader hooks -------------------------------------------
+    def __iter__(self):
+        for batch in super().__iter__():
+            yield batch
+            self.step += 1
+            # update next batch-size (works because PyTorch keeps a reference)
+            if hasattr(self.batch_sampler, "batch_size"):
+                self.batch_sampler.batch_size = self._calc_batch_size()
+
+    # ---------- collate ----------------------------------------------------
+    def _collate(self, rows: List[Dict]) -> Dict[str, torch.Tensor]:
+        ctx = self._ctx_len(self.step)
+
+        def pad_and_stack(key: str):
+            ts = [torch.as_tensor(r[key]) for r in rows]
+            ts = [t[:ctx] for t in ts]                     # slice
+            ts = [torch.nn.functional.pad(t, (0, ctx - t.size(0))) for t in ts]
+            return torch.stack(ts)
+
+        batch = {"input_ids": pad_and_stack("input_ids")}
+
+        for extra_key in ("attention_mask", "labels"):
+            if extra_key in rows[0]:
+                batch[extra_key] = pad_and_stack(extra_key)
+
+        return batch
