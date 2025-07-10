@@ -47,5 +47,14 @@ KeyError: 'prompts'
 
 
 
+class SkyLadderPromptAdapter:
+    def __init__(self, *args, **kw):
+        self.sl = SkyLadder(*args, **kw)
+    def __iter__(self):
+        for batch in self.sl:
+            batch["prompts"] = batch["input_ids"]
+            yield batch
+    def __len__(self):                # passthrough
+        return len(self.sl)
 
 
