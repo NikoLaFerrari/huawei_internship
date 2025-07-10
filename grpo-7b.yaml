@@ -3,21 +3,6 @@ defaults:
       - qwen25_7b
 
 megatron_training:
-  # Required recompute parameters
-  recompute_granularity: "full"
-  recompute_method: "block"
-  recompute_num_layers: 1
-  recompute_activation_function: True
-  accumulate_allreduce_grads_in_fp32: True
-  overlap_param_gather: True
-  overlap_grad_reduce: True
-  #overlop_param_reduce: True
-  #overlap_p2p_comm: False 
-  
-  # Existing parameters...
-  use_ascend_coc: True
-  coc_fused_kernel: True
-  coc_parallel_num: 2
   model: qwen25_7b
   use_fused_rmsnorm: true
   use_mcore_models: true
@@ -25,14 +10,14 @@ megatron_training:
   use_flash_attn: true
   no_masked_softmax_fusion: true
   attention_softmax_in_fp32: true
-  no_gradient_accumulation_fusion: true
+  no_gradient_accumulation_fusion: false
   use_fused_swiglu: true
   use_fused_rotary_pos_emb: true
   bf16: true
   use_distributed_optimizer: true
   tokenizer_type: PretrainedFromHF
-  tokenizer_name_or_path: /data/models/Qwen2.5-7B-Instruct
-  global_batch_size: 16
+  tokenizer_name_or_path: /models/l00649956/models/Qwen2.5-7B-Instruct
+  global_batch_size: 32
   seq_length: 2048
   save_interval: 100
   train_iters: 500
@@ -43,23 +28,16 @@ megatron_training:
   distributed_backend: nccl
   no_shared_storage: true
   dataset_additional_keys: ['labels',]
-  data_path: /data/jagan/qwen3_32b_dataset/qwen3_32b/shutong
+  data_path: /models/k50048751/qwen3_32b_dataset/qwen3_32b/shutong
   split: 100,0,0
   no_shuffle: false
   full_shuffle_instruction_dataset: false
-  seed: 1
+
 
 actor_config:
-  # Memory optimization
-  micro_batch_size: 1
-  #gradient_accumulation_steps: 8
-  #activation_checkpoint_interval: 1
-  #distribute_checkpointed_activations: True
-  #checkpoint_in_cpu: True  # Offload to CPU
-  
-  # Existing parameters...
   model: qwen25_7b
-  tensor_model_parallel_size: 2
+  micro_batch_size: 2
+  tensor_model_parallel_size: 4
   pipeline_model_parallel_size: 2
   lr: 1e-6
   lr_decay_style: constant
@@ -70,12 +48,13 @@ actor_config:
   adam_beta1: 0.9
   adam_beta2: 0.95
   finetune: true
-  load: ./ckpt
-  save: ./ckpt
+  load: ./ckpt_test
+  save: ./ckpt_test
   no_load_optim: true
   no_load_rng: true
 
 rl_config:
+  #responses_log_path: ./save_ckpts/qwen25_7b/response_log
   guarantee_order: false
   use_integrated_worker: true
   blocking: true
@@ -87,35 +66,41 @@ rl_config:
   kl_penalty: low_var_kl
   kl_ctrl_type: fixed
   init_kl_coef: 0.001
-  mini_batch_size: 16
-  max_prompt_length: 2048
+  mini_batch_size: 32
+  max_prompt_length: 8192
   epochs: 1
   clip_ratio: 0.2
   entropy_coeff: 0.0
-  shuffle_mini_batch: false
+  #shuffle_minibatch: false
   n_samples_per_prompt: 8
   rule_reward: true
-  verifier_function: ["math_17k_acc"]
+  verifier_function: ["base_acc"]
   verifier_weight: [1.0]
   num_cpus_for_local_task: 1.0
   use_tensorboard: true
   actor_resource:
-    num_npus: 16
+    num_npus: 8
 
 generate_config:
   enforce_eager: True
   trust_remote_code: true
-  offload_train_optimizer: true  
+  offload_train_optimizer: true
   offload_train_grad: true
   offload_train_param: true
-  infer_tensor_parallel_size: 1 
+
+  # Parallel configuration during inference
+  infer_tensor_parallel_size: 4
   infer_pipeline_parallel_size: 1
   infer_expert_parallel_size: 1
+
+  # vllm 模型相关设置
   max_num_seqs: 1024
   max_model_len: 4096
   max_num_batched_tokens: 8192
   dtype: "bfloat16"
   gpu_memory_utilization: 0.4
+
+# 采样配置
   sampling_config:
     logprobs: 1
     max_tokens: 2048
@@ -124,3 +109,5 @@ generate_config:
     min_p: 0.0
     temperature: 1.0
     detokenize: false
+
+
