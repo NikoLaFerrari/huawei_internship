@@ -1,121 +1,150 @@
 defaults:
   - model:
-      - qwen25_7b
+      - qwen25_7b            # ← points to megatron-core model-config file
 
+# ──────────────────────────────────────────────────────────────────────
+#  Megatron-training hyper-parameters
+# ──────────────────────────────────────────────────────────────────────
 megatron_training:
-  # Required recompute parameters
+  # ---------- activation recompute ----------
   recompute_granularity: "full"
   recompute_method: "block"
-  recompute_num_layers: 1
-  recompute_activation_function: True
-  #accumulate_allreduce_grads_in_fp32: True
-  overlap_param_gather: True
-  overlap_grad_reduce: True
-  #overlop_param_reduce: True
-  #overlap_p2p_comm: False 
-  
-  # Existing parameters...
-  use_ascend_coc: True
-  coc_fused_kernel: True
+  recompute_num_layers: 1          # = recompute every transformer block
+  recompute_activation_function: true
+
+  # ---------- overlap kernels ----------
+  # overlap kernels require ZeRO / distributed optimizer, so keep them
+  overlap_param_gather: true
+  overlap_grad_reduce:  true
+
+  # ---------- kernels & precision ----------
+  use_ascend_coc: true             # Ascend fused-kernel bundle
+  coc_fused_kernel: true
   coc_parallel_num: 2
-  model: qwen25_7b
   use_fused_rmsnorm: true
-  use_mcore_models: true
+  use_mcore_models:  true
   sequence_parallel: true
-  use_flash_attn: true
+  use_flash_attn:   true
   no_masked_softmax_fusion: true
   attention_softmax_in_fp32: true
   no_gradient_accumulation_fusion: true
   use_fused_swiglu: true
   use_fused_rotary_pos_emb: true
-  bf16: true
-  #use_distributed_optimizer: true
+  bf16: true                       # BF16 weights & activations
+
+  # ---------- optimizer ----------
+  use_distributed_optimizer: true  # ZeRO-style sharded Adam
+  accumulate_allreduce_grads_in_fp32: false   # keep grads in BF16 to save RAM
+  offload_train_optimizer: true                # ➜ optimizer states to host
+  offload_train_grad:       true
+  offload_train_param:      true
+
+  # ---------- tokenizer / data ----------
   tokenizer_type: PretrainedFromHF
   tokenizer_name_or_path: /data/models/Qwen2.5-7B-Instruct
-  global_batch_size: 16
-  seq_length: 2048
-  save_interval: 100
-  train_iters: 500
-  stage: ray_grpo
-  attention_dropout: 0.0
-  init_method_std: 0.01
-  hidden_dropout: 0.0
-  distributed_backend: nccl
-  no_shared_storage: true
-  dataset_additional_keys: ['labels',]
   data_path: /data/jagan/qwen3_32b_dataset/qwen3_32b/shutong
-  split: 100,0,0
-  no_shuffle: false
-  full_shuffle_instruction_dataset: false
+  split: "100,0,0"                 # keep as string
+  seq_length: 2048
+
+  # ---------- training schedule ----------
+  global_batch_size: 16            # DP × MB × gradient_accum
+  save_interval: 100
+  train_iters: 500                 # short test run
+  stage: ray_grpo
   seed: 1
 
+  # ---------- dropout / init ----------
+  attention_dropout: 0.0
+  hidden_dropout:    0.0
+  init_method_std:   0.01
+
+  # ---------- misc ----------
+  distributed_backend: nccl        # Ascend NCCL shim
+  no_shared_storage: true
+  dataset_additional_keys: ["labels"]
+  no_shuffle: false
+  full_shuffle_instruction_dataset: false
+
+# ──────────────────────────────────────────────────────────────────────
+#  Actor-worker (training) parallel settings
+# ──────────────────────────────────────────────────────────────────────
 actor_config:
-  # Memory optimization
-  micro_batch_size: 1
-  #gradient_accumulation_steps: 8
-  #activation_checkpoint_interval: 1
-  #distribute_checkpointed_activations: True
-  #checkpoint_in_cpu: True  # Offload to CPU
-  
-  # Existing parameters...
-  model: qwen25_7b
+  micro_batch_size: 1              # MB (per pipeline stage)
   tensor_model_parallel_size: 2
-  pipeline_model_parallel_size: 2
+  pipeline_model_parallel_size: 2  # → each actor uses 4 NPUs
+  # world-size (16) / (TP×PP = 4) ==> data_parallel = 4
+
   lr: 1e-6
   lr_decay_style: constant
+  lr_warmup_fraction: 0.0
   min_lr: 0
   weight_decay: 0.01
-  lr_warmup_fraction: 0.0
   clip_grad: 1.0
   adam_beta1: 0.9
   adam_beta2: 0.95
+
   finetune: true
   load: ./ckpt
   save: ./ckpt
   no_load_optim: true
-  no_load_rng: true
+  no_load_rng:   true
 
+# ──────────────────────────────────────────────────────────────────────
+#  RL (GRPO) settings
+# ──────────────────────────────────────────────────────────────────────
 rl_config:
-  guarantee_order: false
   use_integrated_worker: true
   blocking: true
+  guarantee_order: false
   gamma: 1.0
   lam: 0.95
+
   actor_forward_micro_batch_size: 2
-  ref_forward_micro_batch_size: 2
+  ref_forward_micro_batch_size:   2
+
   adv_estimator: group_norm
-  kl_penalty: low_var_kl
+  kl_penalty:  low_var_kl
   kl_ctrl_type: fixed
   init_kl_coef: 0.001
-  mini_batch_size: 16
-  max_prompt_length: 2048
+
+  mini_batch_size:    16
+  max_prompt_length:  2048
   epochs: 1
   clip_ratio: 0.2
   entropy_coeff: 0.0
   shuffle_mini_batch: false
   n_samples_per_prompt: 8
+
   rule_reward: true
   verifier_function: ["math_17k_acc"]
   verifier_weight: [1.0]
+
   num_cpus_for_local_task: 1.0
   use_tensorboard: true
-  actor_resource:
-    num_npus: 16
 
+  actor_resource:
+    num_npus: 16                   # 4 actors × 4 NPUs/actor
+
+# ──────────────────────────────────────────────────────────────────────
+#  vLLM inference-engine settings (for roll-outs)
+# ──────────────────────────────────────────────────────────────────────
 generate_config:
-  enforce_eager: True
+  enforce_eager: true
   trust_remote_code: true
-  offload_train_optimizer: true  
-  offload_train_grad: true
-  offload_train_param: true
-  infer_tensor_parallel_size: 1 
+
+  # offload flags above already cover training;
+  # vLLM will allocate its own memory arena.
+
+  infer_tensor_parallel_size:   2   # == training TP
   infer_pipeline_parallel_size: 1
-  infer_expert_parallel_size: 1
-  max_num_seqs: 1024
-  max_model_len: 4096
+  infer_expert_parallel_size:   1
+
+  max_num_seqs:          1024
+  max_model_len:         4096
   max_num_batched_tokens: 8192
-  dtype: "bfloat16"
+  dtype: bfloat16
   gpu_memory_utilization: 0.4
+
   sampling_config:
     logprobs: 1
     max_tokens: 2048
