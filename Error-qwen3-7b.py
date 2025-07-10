@@ -1,46 +1,84 @@
-Error executing job with overrides: []
-Traceback (most recent call last):
-  File "/models/k50048751/MindSpeed-RL-master/cli/train_grpo.py", line 574, in <module>
-    main()
-  File "/usr/local/python3.10.16/lib/python3.10/site-packages/hydra/main.py", line 94, in decorated_main
-    _run_hydra(
-  File "/usr/local/python3.10.16/lib/python3.10/site-packages/hydra/_internal/utils.py", line 394, in _run_hydra
-    _run_app(
-  File "/usr/local/python3.10.16/lib/python3.10/site-packages/hydra/_internal/utils.py", line 457, in _run_app
-    run_and_report(
-  File "/usr/local/python3.10.16/lib/python3.10/site-packages/hydra/_internal/utils.py", line 223, in run_and_report
-    raise ex
-  File "/usr/local/python3.10.16/lib/python3.10/site-packages/hydra/_internal/utils.py", line 220, in run_and_report
-    return func()
-  File "/usr/local/python3.10.16/lib/python3.10/site-packages/hydra/_internal/utils.py", line 458, in <lambda>
-    lambda: hydra.run(
-  File "/usr/local/python3.10.16/lib/python3.10/site-packages/hydra/_internal/hydra.py", line 132, in run
-    _ = ret.return_value
-  File "/usr/local/python3.10.16/lib/python3.10/site-packages/hydra/core/utils.py", line 260, in return_value
-    raise self._return_value
-  File "/usr/local/python3.10.16/lib/python3.10/site-packages/hydra/core/utils.py", line 186, in run_job
-    ret.return_value = task_function(task_cfg)
-  File "/models/k50048751/MindSpeed-RL-master/cli/train_grpo.py", line 570, in main
-    ray.get(train.remote(config))
-  File "/usr/local/python3.10.16/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
-    return fn(*args, **kwargs)
-  File "/usr/local/python3.10.16/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
-    return func(*args, **kwargs)
-  File "/usr/local/python3.10.16/lib/python3.10/site-packages/ray/_private/worker.py", line 2772, in get
-    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
-  File "/usr/local/python3.10.16/lib/python3.10/site-packages/ray/_private/worker.py", line 919, in get_objects
-    raise value.as_instanceof_cause()
-ray.exceptions.RayTaskError(ValueError): ray::train() (pid=17658, ip=172.16.4.104)
-  File "/models/k50048751/MindSpeed-RL-master/cli/train_grpo.py", line 44, in train
-    actor_config, ref_config, reward_config, rl_config, generate_config, profiler_config, msprobe_config = parse_training_config(config).values()
-  File "/models/k50048751/MindSpeed-RL-master/cli/train_grpo.py", line 208, in parse_training_config
-    actor_config = MegatronConfig({**config.get("megatron_training"), **config.get("actor_config")},
-  File "/models/k50048751/MindSpeed-RL-master/mindspeed_rl/config_cls/megatron_config.py", line 382, in __init__
-    self.update(training_config, model_config)
-  File "/models/k50048751/MindSpeed-RL-master/mindspeed_rl/config_cls/base_config.py", line 32, in update
-    raise ValueError(f"The key: {key} is missing, causing the setup to fail. Please check."
-ValueError: The key: offload_train_optimizer is missing, causing the setup to fail. Please check. If necessary, register it in the config file.
-/usr/local/python3.10.16/lib/python3.10/tempfile.py:869: ResourceWarning: Implicitly cleaning up <TemporaryDirectory '/tmp/tmpgwxqz85m'>
-  _warnings.warn(warn_message, ResourceWarning)
-[ERROR] 2025-07-10-14:22:34 (PID:17430, Device:-1, RankID:-1) ERR99999 UNKNOWN applicaiton exception
-[root@train-qwen3-235btest4n2-v11-task-2 MindSpeed-RL-master]# 
+
+def context_decorator(ctx, func):
+    """
+    Like contextlib.ContextDecorator.
+
+    But with the following differences:
+    1. Is done by wrapping, rather than inheritance, so it works with context
+       managers that are implemented from C and thus cannot easily inherit from
+       Python classes
+    2. Wraps generators in the intuitive way (c.f. https://bugs.python.org/issue37743)
+    3. Errors out if you try to wrap a class, because it is ambiguous whether
+       or not you intended to wrap only the constructor
+
+    The input argument can either be a context manager (in which case it must
+    be a multi-shot context manager that can be directly invoked multiple times)
+    or a callable that produces a context manager.
+    """
+    assert not (callable(ctx) and hasattr(ctx, '__enter__')), (
+        f"Passed in {ctx} is both callable and also a valid context manager "
+        "(has __enter__), making it ambiguous which interface to use.  If you "
+        "intended to pass a context manager factory, rewrite your call as "
+        "context_decorator(lambda: ctx()); if you intended to pass a context "
+        "manager directly, rewrite your call as context_decorator(lambda: ctx)"
+    )
+
+    if not callable(ctx):
+        def ctx_factory():
+            return ctx
+    else:
+        ctx_factory = ctx
+
+    if inspect.isclass(func):
+        raise RuntimeError(
+            "Cannot decorate classes; it is ambiguous whether or not only the "
+            "constructor or all methods should have the context manager applied; "
+            "additionally, decorating a class at definition-site will prevent "
+            "use of the identifier as a conventional type.  "
+            "To specify which methods to decorate, decorate each of them "
+            "individually."
+        )
+
+    if inspect.isgeneratorfunction(func):
+        return _wrap_generator(ctx_factory, func)
+
+    @functools.wraps(func)
+    def decorate_context(*args, **kwargs):
+        with ctx_factory():
+            return func(*args, **kwargs)
+
+    return decorate_context
+==============================================================================================
+
+(pid=21628)     *************************************************************************************************************
+(pid=21628)     
+(pid=21628)   warnings.warn(msg, ImportWarning)
+(pid=21628) /usr/local/python3.10.16/lib/python3.10/site-packages/torch_npu/contrib/transfer_to_npu.py:247: RuntimeWarning: torch.jit.script and torch.jit.script_method will be disabled by transfer_to_npu, which currently does not support them, if you need to enable them, please do not use transfer_to_npu.
+(pid=21628)   warnings.warn(msg, RuntimeWarning)
+(pid=21628) /usr/local/python3.10.16/lib/python3.10/site-packages/torch_npu/dynamo/torchair/__init__.py:8: DeprecationWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html
+(pid=21628)   import pkg_resources
+(pid=21628) /usr/local/python3.10.16/lib/python3.10/site-packages/torch_npu/dynamo/torchair/__init__.py:8: DeprecationWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html
+(pid=21628)   import pkg_resources
+(pid=21628) Initialized ProcessPoolExecutor with 16 workers
+(pid=21628) Initialized ProcessPoolExecutor with 16 workers
+(train pid=16615) /usr/local/python3.10.16/lib/python3.10/site-packages/torch_npu/contrib/transfer_to_npu.py:153: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:206.)
+(train pid=16615)   return fn(*args, **kwargs)
+(train pid=16615) /usr/local/python3.10.16/lib/python3.10/site-packages/torch_npu/contrib/transfer_to_npu.py:153: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:206.)
+(train pid=16615)   return fn(*args, **kwargs)
+(train pid=16615) /usr/local/python3.10.16/lib/python3.10/site-packages/torch_npu/contrib/transfer_to_npu.py:153: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:206.)
+(train pid=16615)   return fn(*args, **kwargs)
+(train pid=16615) /usr/local/python3.10.16/lib/python3.10/site-packages/torch_npu/contrib/transfer_to_npu.py:153: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:206.)
+(train pid=16615)   return fn(*args, **kwargs)
+(GRPOTransferDock pid=21628) /usr/local/python3.10.16/lib/python3.10/site-packages/torch_npu/utils/storage.py:38: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+(GRPOTransferDock pid=21628)   if self.device.type != 'cpu':
+(GRPOTransferDock pid=21628) /usr/local/python3.10.16/lib/python3.10/site-packages/torch_npu/utils/storage.py:38: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+(GRPOTransferDock pid=21628)   if self.device.type != 'cpu':
+(GRPOTransferDock pid=21628) /usr/local/python3.10.16/lib/python3.10/site-packages/torch_npu/contrib/transfer_to_npu.py:153: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+(GRPOTransferDock pid=21628) /usr/local/python3.10.16/lib/python3.10/site-packages/torch_npu/contrib/transfer_to_npu.py:153: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+(IntegratedWorker pid=17236) /usr/local/python3.10.16/lib/python3.10/site-packages/torch/utils/_contextlib.py:116: DeprecationWarning: The keyword arguments {'prompt_token_ids'} are deprecated and will be removed in a future update. Please use the 'prompts' parameter instead.
+(IntegratedWorker pid=17236)   return func(*args, **kwargs)
+(IntegratedWorker pid=17236) /usr/local/python3.10.16/lib/python3.10/site-packages/torch/utils/_contextlib.py:116: DeprecationWarning: The keyword arguments {'prompt_token_ids'} are deprecated and will be removed in a future update. Please use the 'prompts' parameter instead.
+(IntegratedWorker pid=17236)   return func(*args, **kwargs)
+
+====================================================================================================
+It is stuck forever at "return func(*args, **kwargs)" and its getting annoying. This is the 15th consecutive time I am dealing with this. What the fuck is the problem and how the fuck do we deal with this crap?
