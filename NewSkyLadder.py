@@ -1,3 +1,5 @@
+# coding=utf-8
+# Copyright (c) 2025, HUAMEI CORPORATION. All rights reserved.
 from datasketch import MinHash, MinHashLSH
 from dataclasses import dataclass
 from typing import Union, Dict, Sequence, Dict, Any, List, Optional
@@ -9,6 +11,83 @@ import math
 import time
 from functools import wraps
 
+
+__all__ = [
+    'PromptDataLoader',
+    'PackedBinaryDataset',
+    'SkyLadder',
+    'MultiModalDataLoader'
+]
+
+
+
+class PromptDataLoader(DataLoader):
+    """PromptDataLoader.
+
+    Args:
+        dataset: An Prompt Implementation of BaseDataset
+        consumed_samples: the number of consumed samples for continue training
+        global_batch_size: global batch size for loader
+        num_workers: workers of dataloader
+        seed: random seed
+        dataset_additional_keys: extra keys for data loading
+    """
+    def __init__(self,
+                 dataset,
+                 global_batch_size,
+                 num_workers,
+                 seed,
+                 dataset_additional_keys,
+                 no_shuffle):
+        def collator(features, return_tensors=None):
+            features_dict = {}
+
+            features_dict["prompts"] = [torch.tensor(value['input_ids']) for value in features]
+
+            for add_key in dataset_additional_keys:
+                features_dict[add_key] = [torch.tensor(value[add_key]) for value in features]
+
+            return features_dict
+
+        if not no_shuffle:
+            train_dataloader_generator = torch.Generator()
+            train_dataloader_generator.manual_seed(seed)
+            sampler = RandomSampler(data_source=dataset, generator=train_dataloader_generator)
+        else:
+            sampler = SequentialSampler(data_source=dataset)
+
+        super().__init__(dataset,
+                        num_workers=num_workers,
+                        generator=torch.Generator().manual_seed(seed),
+                        collate_fn=collator,
+                        pin_memory=True,
+                        sampler=sampler,
+                        batch_size=global_batch_size,
+                        drop_last=True)
+
+
+
+
+class PackedBinaryDataset(Dataset):
+    def __init__(self, base_path: str, index_map_path: Optional[str] = None):
+        self.input_ids = np.memmap(f"{base_path}_input_ids_document.bin", dtype=np.int32, mode='r')
+        self.attention_mask = np.memmap(f"{base_path}_attention_mask_document.bin", dtype=np.int32, mode='r')
+        self.labels = np.memmap(f"{base_path}_labels_document.bin", dtype=np.int32, mode='r')
+        self.index_map = np.load(index_map_path) if index_map_path else None
+
+    def __len__(self):
+        return len(self.input_ids)
+
+    def __getitem__(self, idx):
+        if self.index_map is not None:
+            safe_idx = idx % len(self.index_map)
+            idx = self.index_map[safe_idx]
+        
+        return {
+            'input_ids': torch.as_tensor(self.input_ids[idx],dtype=torch.long),
+            'attention_mask': torch.tensor(self.attention_mask[idx]),
+            'labels': torch.tensor(self.labels[idx])
+        }
 
 class SkyLadderConfig:
     """Configuration for SkyLadder training"""
@@ -67,16 +146,10 @@ class SkyLadder(DataLoader):
                  **kwargs):
         
         # Initialize dataset
-        '''
         if isinstance(dataset, str):
             self.dataset = PackedBinaryDataset(dataset)
         else:
             self.dataset = dataset
-        '''
-        #Temporary fix of data_path=None:
-        dataset = '/data/jagan/qwen3_32b_dataset/qwen3_32b/shutong_packed'
-        self.dataset = PackedBinaryDataset(dataset)
-        print(f'WARNING: Using hardcoded dataset path: {dataset}')
 
         # Internal config
         self.config = self.Config()
@@ -123,4 +196,3 @@ class SkyLadder(DataLoader):
         for batch in super().__iter__():
             yield batch
             self.current_step += 1
-
