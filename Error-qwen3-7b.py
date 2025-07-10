@@ -30,15 +30,15 @@ Traceback (most recent call last):
     values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
   File "/usr/local/python3.10.16/lib/python3.10/site-packages/ray/_private/worker.py", line 919, in get_objects
     raise value.as_instanceof_cause()
-ray.exceptions.RayTaskError(FileNotFoundError): ray::train() (pid=12842, ip=172.16.4.104)
+ray.exceptions.RayTaskError(ValueError): ray::train() (pid=26101, ip=172.16.4.104)
   File "/models/k50048751/MindSpeed-RL-master/cli/train_grpo.py", line 146, in train
     train_ds, _, _ = build_train_valid_test_datasets(
   File "/models/k50048751/MindSpeed-RL-master/mindspeed_rl/datasets/build_dataset.py", line 70, in build_train_valid_test_datasets
     all_train_datasets, all_valid_datasets, all_test_datasets = _build_train_valid_test_datasets(
   File "/models/k50048751/MindSpeed-RL-master/mindspeed_rl/datasets/build_dataset.py", line 116, in _build_train_valid_test_datasets
     packed_indexed_dataset = get_packed_indexed_dataset(data_prefix=data_prefix,
-  File "/models/k50048751/MindSpeed-RL-master/mindspeed_rl/datasets/indexed_dataset.py", line 52, in get_packed_indexed_dataset
-    raise FileNotFoundError(
-FileNotFoundError: No packed shards match '/models/k0050048751/qwen3_32b_dataset/qwen3_32b/shutong_packed_*_document*'. Check `data_path` or run the packing script first.
-/usr/local/python3.10.16/lib/python3.10/tempfile.py:869: ResourceWarning: Implicitly cleaning up <TemporaryDirectory '/tmp/tmp7hatbpva'>
+  File "/models/k50048751/MindSpeed-RL-master/mindspeed_rl/datasets/indexed_dataset.py", line 87, in get_packed_indexed_dataset
+    raise ValueError(
+ValueError: All samples were filtered out by `filter_length=2048` for prefix '/models/k50048751/qwen3_32b_dataset/qwen3_32b/shutong'. Reduce filter_length or repack.
+/usr/local/python3.10.16/lib/python3.10/tempfile.py:869: ResourceWarning: Implicitly cleaning up <TemporaryDirectory '/tmp/tmp6b8ye5at'>
   _warnings.warn(warn_message, ResourceWarning)
