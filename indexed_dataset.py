@@ -1,40 +1,74 @@
-import os
-import shutil
-import struct                                                                                                                                
-import glob
-import re
-from enum import Enum                                                                                                                        
-from functools import lru_cache                                                                                                              
-from abc import ABC, abstractmethod                                                                                                          
-from itertools import accumulate
-from types import TracebackType                                                                                                              
-from typing import Optional, Tuple, Type, Union, List                                                                                        
+# ----------------------------------------------------------------------
+# Robust replacement for get_packed_indexed_dataset
+# ----------------------------------------------------------------------
+def get_packed_indexed_dataset(data_prefix: str,
+                               filter_length: Optional[int] = None):
+    """
+    Build a CombinedDataset from packed binary shards.
 
-import torch
-import numpy
-    
-_INDEX_HEADER = b"MMIDIDX\x00\x00"                                                                                                           
+    Expected files:
+        {data_prefix}_packed_<field>_document.bin
+        {data_prefix}_packed_<field>_document.idx
+    where <field> includes at least "input_ids".
 
-                                                                                                                                             
-def get_packed_indexed_dataset(data_prefix: str, filter_length: Optional[int] = None):                                                       
-    index_dataset_name = f"{data_prefix}_packed_*_document*"                                                                                 
-    names = glob.glob(index_dataset_name)                                                                                                    
-    template = f"{data_prefix}_packed_(.*)_document(.*)"                                                                                     
-    all_field = set()                                                                                                                        
-    for name in names:                                                                                                                       
-        fields = re.match(template, name)
-        all_field.add(fields.group(1))
-    packed_dataset = dict()
+    Parameters
+    ----------
+    data_prefix : str
+        Path prefix up to (and including) the dataset name, *without* the
+        "_packed_<field>_document" suffix.
+    filter_length : Optional[int]
+        If given, samples whose `input_ids` length > filter_length are removed
+        (same mask applied to every field).
 
-    for field in all_field:                                                                                                                  
-        # We only do filter for input_ids when filter_length is specified                                                                    
-        max_len = filter_length if filter_length and field == 'input_ids' else None                                                          
-        packed_dataset[field] = IndexedDataset(f"{data_prefix}_packed_{field}_document", max_len=max_len)                                    
-                 
+    Raises
+    ------
+    FileNotFoundError
+        If no packed files are found, or the required *input_ids* field is
+        missing.
+    ValueError
+        If filtering removes every sample in the dataset.
+    """
+    pattern_glob = f"{data_prefix}_packed_*_document*"
+    paths = glob.glob(pattern_glob)
+    if not paths:
+        raise FileNotFoundError(
+            f"No packed shards match '{pattern_glob}'. "
+            "Check `data_path` or run the packing script first."
+        )
+
+    # Regex that works on *base names* so directories don't break the match.
+    rex = re.compile(rf"{re.escape(os.path.basename(data_prefix))}_packed_(.*?)_document")
+    fields: set[str] = set()
+
+    for p in paths:
+        m = rex.search(os.path.basename(p))
+        if m:
+            fields.add(m.group(1))
+
+    if "input_ids" not in fields:
+        raise FileNotFoundError(
+            "Required shard '*_packed_input_ids_document.*' is missing for "
+            f"prefix '{data_prefix}'. Found fields: {', '.join(sorted(fields)) or 'NONE'}"
+        )
+
+    packed_dataset: dict[str, IndexedDataset] = {}
+    for field in sorted(fields):
+        max_len = filter_length if (filter_length and field == "input_ids") else None
+        packed_dataset[field] = IndexedDataset(
+            f"{data_prefix}_packed_{field}_document",
+            max_len=max_len,
+        )
+
+    # Optional length-based filter
     if filter_length:
-        filter_mask = packed_dataset['input_ids'].get_filter_mask()                                                                          
-        for field in packed_dataset:                                                                                                         
-            packed_dataset[field].do_filter(filter_mask)                                                                                     
-                 
-    combine_dataset = CombinedDataset(packed_dataset)                                                                                        
-    return combine_dataset
+        mask = packed_dataset["input_ids"].get_filter_mask()
+        for ds in packed_dataset.values():
+            ds.do_filter(mask)
+
+        if len(packed_dataset["input_ids"]) == 0:
+            raise ValueError(
+                f"All samples were filtered out by `filter_length={filter_length}` "
+                f"for prefix '{data_prefix}'. Reduce filter_length or repack."
+            )
+
+    return CombinedDataset(packed_dataset)
