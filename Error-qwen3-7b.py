@@ -30,23 +30,15 @@ Traceback (most recent call last):
     values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
   File "/usr/local/python3.10.16/lib/python3.10/site-packages/ray/_private/worker.py", line 919, in get_objects
     raise value.as_instanceof_cause()
-ray.exceptions.RayTaskError(KeyError): ray::train() (pid=11155, ip=172.16.4.104)
+ray.exceptions.RayTaskError(FileNotFoundError): ray::train() (pid=12842, ip=172.16.4.104)
   File "/models/k50048751/MindSpeed-RL-master/cli/train_grpo.py", line 146, in train
     train_ds, _, _ = build_train_valid_test_datasets(
   File "/models/k50048751/MindSpeed-RL-master/mindspeed_rl/datasets/build_dataset.py", line 70, in build_train_valid_test_datasets
     all_train_datasets, all_valid_datasets, all_test_datasets = _build_train_valid_test_datasets(
   File "/models/k50048751/MindSpeed-RL-master/mindspeed_rl/datasets/build_dataset.py", line 116, in _build_train_valid_test_datasets
     packed_indexed_dataset = get_packed_indexed_dataset(data_prefix=data_prefix,
-  File "/models/k50048751/MindSpeed-RL-master/mindspeed_rl/datasets/indexed_dataset.py", line 39, in get_packed_indexed_dataset
-    filter_mask = packed_dataset['input_ids'].get_filter_mask()
-KeyError: 'input_ids'
-/usr/local/python3.10.16/lib/python3.10/tempfile.py:869: ResourceWarning: Implicitly cleaning up <TemporaryDirectory '/tmp/tmp3ea0fiba'>
+  File "/models/k50048751/MindSpeed-RL-master/mindspeed_rl/datasets/indexed_dataset.py", line 52, in get_packed_indexed_dataset
+    raise FileNotFoundError(
+FileNotFoundError: No packed shards match '/models/k0050048751/qwen3_32b_dataset/qwen3_32b/shutong_packed_*_document*'. Check `data_path` or run the packing script first.
+/usr/local/python3.10.16/lib/python3.10/tempfile.py:869: ResourceWarning: Implicitly cleaning up <TemporaryDirectory '/tmp/tmp7hatbpva'>
   _warnings.warn(warn_message, ResourceWarning)
-(train pid=11155) 2025-07-10 09:48:11,385 - INFO - [2025-07-10 01:48:11] INFO  > datasets target sizes (minimum size):
-(train pid=11155) 2025-07-10 09:48:11,385 - INFO - [2025-07-10 01:48:11] INFO     train:      8000
-(train pid=11155) 2025-07-10 09:48:11,385 - INFO - [2025-07-10 01:48:11] INFO     validation: 0
-(train pid=11155) 2025-07-10 09:48:11,385 - INFO - [2025-07-10 01:48:11] INFO     test:       0
-(train pid=11155) 2025-07-10 09:48:11,385 - INFO - [2025-07-10 01:48:11] INFO  > datasets target sizes (minimum size):
-(train pid=11155) 2025-07-10 09:48:11,385 - INFO - [2025-07-10 01:48:11] INFO     train:      8000
-(train pid=11155) 2025-07-10 09:48:11,385 - INFO - [2025-07-10 01:48:11] INFO     validation: 0
-(train pid=11155) 2025-07-10 09:48:11,385 - INFO - [2025-07-10 01:48:11] INFO     test:       0
