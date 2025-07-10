@@ -1,4 +1,4 @@
-
+I thought the skyladder only re-arrange the tokens, but the result seems like it also change the data? You can print out the output of skyladder loader and check. If you think the skyladder modify the data too much, making the process stuck and hard to handle, we can discuss with Zeng Li tomorrow and see if we need to skip it and try next techniqueI thought the skyladder only re-arrange the tokens, but the result seems like it also change the data? You can print out the output of skyladder loader and check. If you think the skyladder modify the data too much, making the process stuck and hard to handle, we can discuss with Zeng Li tomorrow and see if we need to skip it and try next technique                                                        
 def context_decorator(ctx, func):
     """
     Like contextlib.ContextDecorator.
