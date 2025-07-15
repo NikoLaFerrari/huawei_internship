@@ -37,12 +37,12 @@ class ContextWindowScheduler:
           
         # Map schedule types to methods  
         self.schedule_methods = {  
-            'linear': self.calculate_mask_length_linear_schedule,  
-            'cosine': self.calculate_mask_length_cosine_schedule,  
-            'sin': self.calculate_mask_length_sin_schedule,  
-            'exp': self.calculate_mask_length_exp_schedule,  
-            'log': self.calculate_mask_length_log_schedule,  
-            'inv': self.calculate_mask_length_inverse_linear_schedule  
+            'linear': self.linear,  
+            'cosine': self.cosine,  
+            'sin': self.sine,  
+            'exp': self.exp,  
+            'log': self.log,  
+            'inv': self.inv_linear  
         }  
   
     def __call__(self, step: int) -> int:  
@@ -62,65 +62,28 @@ class ContextWindowScheduler:
         ctx = self.cfg.min_ctx_len + 0.5 * (self.cfg.max_ctx_len - self.cfg.min_ctx_len) * (1 - math.cos(math.pi * prog))  
         return int(ctx)  
   
-    def calculate_mask_length_linear_schedule(self, curr_iter_num: int) -> int:  
-        """Linear scheduling from original SkyLadder"""  
-        if curr_iter_num >= self.changing_point:  
-            return self.final_mask_length  
-        else:  
-            curr_mask_length = self.init_mask_length + int(  
-                (self.final_mask_length - self.init_mask_length) * (curr_iter_num / self.changing_point))  
-            return curr_mask_length  
-  
-    def calculate_mask_length_cosine_schedule(self, curr_iter_num: int) -> int:  
-        """Cosine scheduling"""  
-        if curr_iter_num >= self.changing_point:  
-            return self.final_mask_length  
-        else:  
-            progress = curr_iter_num / self.changing_point  
-            curr_mask_length = self.init_mask_length + int(  
-                (self.final_mask_length - self.init_mask_length) * (1 - math.cos(math.pi * progress)))  
-            return curr_mask_length  
-  
-    def calculate_mask_length_sin_schedule(self, curr_iter_num: int) -> int:  
-        """Sinusoidal scheduling"""  
-        if curr_iter_num >= self.changing_point:  
-            return self.final_mask_length  
-        else:  
-            curr_mask_length = self.init_mask_length + int((self.final_mask_length - self.init_mask_length) * np.sin(  
-                (np.pi / 2) * (curr_iter_num / self.changing_point)))  
-            return curr_mask_length  
-  
-    def calculate_mask_length_exp_schedule(self, curr_iter_num: int) -> int:  
-        """Exponential scheduling"""  
-        if curr_iter_num >= self.changing_point:  
-            return self.final_mask_length  
-        else:  
-            curr_mask_length = int(self.init_mask_length * (self.final_mask_length / self.init_mask_length) ** (  
-                        curr_iter_num / self.changing_point))  
-            return curr_mask_length  
-  
-    def calculate_mask_length_log_schedule(self, curr_iter_num: int) -> int:  
-        """Logarithmic scheduling"""  
-        if curr_iter_num >= self.changing_point:  
-            return self.final_mask_length  
-        else:  
-            curr_mask_length = int(self.init_mask_length * (self.final_mask_length / self.init_mask_length) ** (  
-                        np.log(1 + curr_iter_num) / np.log(1 + self.changing_point)))  
-            return curr_mask_length  
-  
-    def calculate_mask_length_inverse_linear_schedule(self, curr_iter_num: int) -> int:  
-        """Inverse linear scheduling"""  
-        if curr_iter_num >= self.changing_point:  
-            return self.final_mask_length  
-        else:  
-            linear_curr_mask_length = self.calculate_linear_schedule(curr_iter_num)  
-            curr_mask_length = self.final_mask_length + self.init_mask_length - linear_curr_mask_length  
-            return curr_mask_length  
-  
-    def calculate_linear_schedule(self, curr_iter_num: int) -> int:  
-        """Basic linear schedule helper"""  
-        curr_mask_length = self.init_mask_length + (curr_iter_num // 1)  
-        return curr_mask_length  
+    def cosine(self, step: int) -> int:
+        """Cosine schedule for gradually increasing context length"""
+        theta = np.pi * step / self.total_steps  # From 0 to π
+        cos_val = np.cos(theta)
+        return int((1 - cos_val) * self.total_steps / 2)
+
+    def linear(self, step: int) -> int:
+        """Linear schedule for context length"""
+        return int(self.min_ctx_len + (self.max_ctx_len - self.min_ctx_len) * step / self.total_steps)
+
+    def inv_linear(self, step: int) -> int:
+        """Inverse linear schedule for context length"""
+        return int(self.max_ctx_len - (self.max_ctx_len - self.min_ctx_len) * step / self.total_steps)
+
+    def log(self, step: int) -> int:
+        """Logarithmic schedule for context length"""
+        return int(self.min_ctx_len + (self.max_ctx_len - self.min_ctx_len) * np.log(1 + step) / np.log(1 + self.total_steps))
+
+    def exp(self, step: int) -> int:
+        """Exponential schedule for context length"""
+        return int(self.min_ctx_len + (self.max_ctx_len - self.min_ctx_len) * (np.exp(step / self.total_steps) - 1) / (np.exp(1) - 1))
+
   
 # --------------------------------------------------------------------  
 # 3. SkyLadder DataLoader with Cached Scheduling  
