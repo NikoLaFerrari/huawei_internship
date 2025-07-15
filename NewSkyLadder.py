@@ -68,6 +68,11 @@ class ContextWindowScheduler:
         cos_val = np.cos(theta)
         return int((1 - cos_val) * self.total_steps / 2)
 
+    def sine(self, step):
+        """Sine schedule for context length"""
+        sine_val = np.sin(np.pi * step / self.total_steps)  # Sine wave from 0 to π
+        return int((1 - sine_val) * self.total_steps / 2)
+      
     def linear(self, step: int) -> int:
         """Linear schedule for context length"""
         return int(self.min_ctx_len + (self.max_ctx_len - self.min_ctx_len) * step / self.total_steps)
