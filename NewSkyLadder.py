@@ -1,5 +1,6 @@
 # coding=utf-8
-# Copyright (c) 2025, HUAMEI CORPORATION. All rights reserved.
+# Copyright (c) 2025, HUAWEI CORPORATION. All rights reserved.
+
 
 from __future__ import annotations
 #from datasketch import MinHash, MinHashLSH
@@ -15,16 +16,8 @@ from functools import wraps
 from .skyladder_mask_cache import get_causal_mask
 
 
-__all__ = [
-    'PromptDataLoader',
-    'PackedBinaryDataset',
-    'SkyLadder',
-    'MultiModalDataLoader'
-]
 
-
-
-class PromptDataLoader(DataLoader):
+class PromptDataLoader(torch.utils.data.DataLoader):
     """PromptDataLoader.
 
     Args:
@@ -69,33 +62,44 @@ class PromptDataLoader(DataLoader):
                         drop_last=True)
 
 
+class MultiModalDataLoader(torch.utils.data.DataLoader):
+    def __init__(self,
+                 dataset,
+                 global_batch_size,
+                 num_workers,
+                 seed,
+                 dataset_additional_keys,
+                 no_shuffle):
+
+        def collate_fn(features: List[Dict[str, Any]]) -> Dict[str, Any]:
+            batch_dict = defaultdict(list)
+            for feature in features:
+                for key, value in feature.items():
+                    batch_dict[key].append(value)
+
+            batch_dict['prompts'] = [torch.tensor(i) for i in batch_dict['input_ids']]
+
+            return batch_dict
+
+        if not no_shuffle:
+            train_dataloader_generator = torch.Generator()
+            train_dataloader_generator.manual_seed(seed)
+            sampler = RandomSampler(data_source=dataset, generator=train_dataloader_generator)
+        else:
+            sampler = SequentialSampler(data_source=dataset)
+
+        super().__init__(dataset,
+                        num_workers=num_workers,
+                        generator=torch.Generator().manual_seed(seed),
+                        collate_fn=collate_fn,
+                        pin_memory=True,
+                        sampler=sampler,
+                        batch_size=global_batch_size,
+                        drop_last=True)
 
 
-class PackedBinaryDataset(Dataset):
-    def __init__(self, base_path: str, index_map_path: Optional[str] = None):
-        self.input_ids = np.memmap(f"{base_path}_input_ids_document.bin", dtype=np.int32, mode='r')
-        self.attention_mask = np.memmap(f"{base_path}_attention_mask_document.bin", dtype=np.int32, mode='r')
-        self.labels = np.memmap(f"{base_path}_labels_document.bin", dtype=np.int32, mode='r')
-        self.index_map = np.load(index_map_path) if index_map_path else None
 
-    def __len__(self):
-        return len(self.input_ids)
-
-    def __getitem__(self, idx):
-        if self.index_map is not None:
-            safe_idx = idx % len(self.index_map)
-            idx = self.index_map[safe_idx]
-        
-        return {
-            'input_ids': torch.tensor(self.input_ids[idx],dtype=torch.long),
-            'attention_mask': torch.tensor(self.attention_mask[idx]),
-            'labels': torch.tensor(self.labels[idx])
-        }
-
-
-
-#=============================================================================================================================
-
+#===========================================================================================
 
 
 # --------------------------------------------------------------------
@@ -110,7 +114,7 @@ class SkyLadderCfg:
     schedule_type: str = "cosine"           # "linear" | "cosine" | "sin" | "exp" | "log" | "inv"
     memory_safety_factor: float = 0.8       # multiply batch-size by this
     alpha: int = 1                          # 1/alpha is the rate for some schedules
-    changing_point: Optional[int] = 10      # Override automatic calculation
+    changing_point = 10      # Override automatic calculation
 
 # --------------------------------------------------------------------
 # 2. Scheduler
@@ -457,152 +461,3 @@ class SkyLadder(DataLoader):
             "cache_hit": self._cached_step == self._step  # Shows if cache was used
         }
 
-
-
-
-
-
-'''
-@dataclass
-class SkyLadderCfg:
-    min_ctx_len: int = 64
-    max_ctx_len: int = 8192
-    warmup_steps: int = 10
-    total_steps: int = 10000
-    schedule_type: str = "linear"
-    memory_safety_factor: float = 0.80
-    alpha: int = 1
-    changing_point: Optional[int] = None
-
-class ContextWindowScheduler:
-    def __init__(self, cfg: SkyLadderCfg):
-        self.cfg = cfg
-        self.init_mask_length = cfg.min_ctx_len
-        self.final_mask_length = cfg.max_ctx_len
-        self.changing_point = cfg.changing_point if cfg.changing_point is not None else self.final_mask_length * cfg.alpha
-
-    def __call__(self, step: int) -> int:
-        if step < self.cfg.warmup_steps:
-            return self.cfg.min_ctx_len
-
-        curr_iter_num = step - self.cfg.warmup_steps
-        if curr_iter_num >= self.changing_point:
-            return self.final_mask_length
-        else:
-            curr_mask_length = self.init_mask_length + int(
-                (self.final_mask_length - self.init_mask_length) * (curr_iter_num / self.changing_point))
-            return curr_mask_length
-
-class SkyLadder(DataLoader):
-    """SkyLadder DataLoader with NO PADDING - returns variable-length tensors"""
-
-    def __init__(
-        self,
-        dataset: Union[torch.utils.data.Dataset, str],
-        global_batch_size: int,
-        num_workers: int,
-        seed: int,
-        dataset_additional_keys: Sequence[str],
-        no_shuffle: bool,
-    ):
-        self.dataset = dataset
-        self.cfg = SkyLadderCfg()
-        self._schedule = ContextWindowScheduler(self.cfg)
-        self._global_bs = global_batch_size
-        self._step = 0
-        self._extra_keys = list(dataset_additional_keys or [])
-
-        sampler = (
-            SequentialSampler(self.dataset)
-            if no_shuffle
-            else RandomSampler(self.dataset, generator=torch.Generator().manual_seed(seed))
-        )
-
-        super().__init__(
-            dataset=self.dataset,
-            batch_size=global_batch_size,
-            sampler=sampler,
-            num_workers=num_workers,
-            collate_fn=self._collate_no_padding,
-            pin_memory=True,
-            drop_last=True,
-        )
-
-    def _collate_no_padding(self, rows: List[Dict]) -> Dict[str, Any]:
-        """Collate function with NO PADDING - returns lists of variable-length tensors"""
-        current_ctx = self._schedule(self._step)
-
-        def _slice_to_current_no_padding(tensors: List[torch.Tensor]) -> List[torch.Tensor]:
-            """Slice tensors to current context length WITHOUT padding"""
-            out = []
-            for t in tensors:
-                t = t[:current_ctx]  # Only slice to current context
-                out.append(t)
-            return out  # Return list instead of stacked tensor
-
-        # Handle both "input_ids" and "prompts" keys
-        input_key = "prompts" if "prompts" in rows[0] else "input_ids"
-
-        # Process input tensors with dynamic sizing, NO PADDING
-        input_ids_list = _slice_to_current_no_padding([torch.as_tensor(r[input_key]) for r in rows])
-        labels_list = _slice_to_current_no_padding([torch.as_tensor(r["labels"]) for r in rows])
-
-        # Create attention masks for each sequence individually (no padding)
-        attention_masks = []
-        for input_ids in input_ids_list:
-            seq_len = len(input_ids)
-            # Create causal mask for this specific sequence length
-            mask = torch.tril(torch.ones(seq_len, seq_len, dtype=torch.bool))
-            attention_masks.append(mask)
-
-        batch: Dict[str, Any] = {
-            "prompts": input_ids_list,  # List of tensors with different lengths
-            "attention_mask": attention_masks,  # List of 2D masks
-            "labels": labels_list,  # List of tensors with different lengths
-            "current_ctx_len": torch.tensor(current_ctx, dtype=torch.int32),
-            "orig_ctx_len": torch.tensor([len(ids) for ids in input_ids_list], dtype=torch.int32),
-        }
-
-        # Handle additional keys without padding
-        for k in self._extra_keys:
-            if k not in rows[0]:
-                continue
-            try:
-                batch[k] = _slice_to_current_no_padding([torch.as_tensor(r[k]) for r in rows])
-            except Exception:
-                batch[k] = [r[k] for r in rows]
-
-        return batch
-
-    def __iter__(self):
-        """Independent iterator implementation"""
-        self._step = 0
-
-        if hasattr(self.sampler, '__iter__'):
-            indices = iter(self.sampler)
-        else:
-            indices = iter(range(len(self.dataset)))
-
-        batch = []
-        for idx in indices:
-            try:
-                sample = self.dataset[idx]
-                batch.append(sample)
-
-                if len(batch) >= self._global_bs:
-                    processed_batch = self._collate_no_padding(batch)
-                    yield processed_batch
-                    self._step += 1
-                    batch = []
-
-            except (StopIteration, IndexError):
-                break
-
-        if batch:
-            processed_batch = self._collate_no_padding(batch)
-            yield processed_batch
-            self._step += 1
-
-    def get_current_context_length(self) -> int:
-        return self._schedule(self._step)
-'''
